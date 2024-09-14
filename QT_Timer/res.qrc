@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>fig/pause.png</file>
+        <file>fig/pause.svg</file>
+        <file>fig/start.png</file>
+        <file>fig/start.svg</file>
+        <file>fig/stop.png</file>
+        <file>fig/stop.svg</file>
+        <file>fig/record.svg</file>
+    </qresource>
+</RCC>
