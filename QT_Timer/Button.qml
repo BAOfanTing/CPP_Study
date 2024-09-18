@@ -12,15 +12,16 @@ import QtQuick 2.15
 
 Rectangle{
     id: root
-    border.width: 0.5
-    border.color: "gray"
+    border.width: 1
+    border.color: "#dcdfe6"
     radius: 10
     property alias source:img.source
     signal clicked
 
     Image {
         id:img
-        anchors.fill:parent
+        width:30;height: 30
+        anchors.centerIn: parent
     }
     MouseArea{
         anchors.fill:parent

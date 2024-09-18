@@ -7,7 +7,7 @@ Window {
     width: 300
     height: 480
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("QML-计时器")
 
     //时间显示
     Text{
@@ -15,6 +15,7 @@ Window {
         x:parent.width/2-timerDisplay.width/2
         y:parent.height/2-timerDisplay.width/2
         font.pixelSize: 36
+        font.family: "SimHei"
         text: "00:00:00"
 
     }
@@ -26,7 +27,7 @@ Window {
         id:start_pause
         x:parent.width/2-start_pause.width/2
         y:parent.height/2+150
-        width:40;height:40
+        width:60;height:40
         source:"fig/start.svg"
 
         //当在button里已经定义了click时,外部就不需要mouseArea了,直接监听click型号
@@ -45,6 +46,7 @@ Window {
             else{
                 myTimer.start()
                 start_pause.source = "fig/pause.svg"
+                start_pause.width = 40
                 console.log("开始计时")
 
                 //将暂停图标替换为终止
@@ -92,9 +94,12 @@ Window {
                 myTimer.stop()
                 timerDisplay.text = "00:00:00"
                 start_pause.source = "fig/start.svg"
+                start_pause.width = 60
                 start_pause_anim2.start()
                 stop_record_anim2.start()
-                timerDisplay_anim2.start()
+
+                //判断记录模型是否为空执行动画
+                if(recordlistmodel.count != 0) {timerDisplay_anim2.start()}
                 timerDisplay_anim_once = true
                 stop_record.visible = false
                 stop_record.source = "fig/record.svg"
@@ -102,6 +107,10 @@ Window {
                 index = 0
                 firstclick = false
                 recordlistmodel.clear()
+
+                totaltime = 0 //清除计时
+
+
 
             }
         }
@@ -112,10 +121,10 @@ Window {
         id:listrect
         width:200;height:300
         x:(root.width-listrect.width)/2;y:45
-        border.color: "#48D1CC"
+        border.color:  "#dcdfe6"
         border.width: 2
         visible: false
-        radius: 8
+        radius: 15
 
         ListView{
             id:list1
@@ -138,6 +147,8 @@ Window {
                 Text {
                     anchors.centerIn: parent
                     text: model.text
+                    color:"gray"
+                    font.family: "SimHei"
                 }
             }
         }
@@ -170,6 +181,7 @@ Window {
         return (minute<10 ? '0':'') + minute+':'+
                 (second<10 ? '0':'') + second + ':'+
                 (millisecond<10 ? '0':'')+millisecond
+
 
     }
 
