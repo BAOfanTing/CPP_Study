@@ -1,6 +1,16 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
-
+import com.timerthread 1.0
+/******************************************************************************
+ *
+ * @file       main.qml
+ * @brief      主窗口
+ *
+ * @author     纯真丁一郎
+ * @date       2024/09/18
+ * @Blog       https://www.relxdingyilang.cn/
+ * @history
+ *****************************************************************************/
 
 Window {
     id:root
@@ -21,6 +31,8 @@ Window {
     }
     property bool timerDisplay_anim_once: true
     property  bool firstclick:false
+    property bool isrunning: false
+    property string totaltime: ""
 
     //开始暂停按钮
     Button{
@@ -32,9 +44,8 @@ Window {
 
         //当在button里已经定义了click时,外部就不需要mouseArea了,直接监听click型号
         onClicked: {
-
-            if(myTimer.running){
-                myTimer.stop()
+            if(isrunning){
+                timerThread.stop()
                 start_pause.source = "fig/start.svg"
                 console.log("暂停计时")
 
@@ -44,7 +55,7 @@ Window {
                 }
             }
             else{
-                myTimer.start()
+                timerThread.start()
                 start_pause.source = "fig/pause.svg"
                 start_pause.width = 40
                 console.log("开始计时")
@@ -61,8 +72,25 @@ Window {
                 firstclick = !firstclick
             }
         }
-
     }
+
+    TimerThread{
+        id:timerThread
+    }
+    Connections{
+        target:timerThread
+        // 使用传递过来的 totaltime 参数,信号传递出来的参数在connect内部可以直接使用,在外部不行
+        onTimeUpdated:{
+            timerDisplay.text = totaltimestr
+            totaltime = totaltimestr
+            //console.log(totaltime)
+        }
+        onSig_isRunning:{
+            isrunning = isRunning
+            console.log(isRunning)
+        }
+    }
+
 
     property int index: 0
     //终止_记录按钮
@@ -84,14 +112,14 @@ Window {
 
                 //把记录加入list模型
 
-                //recordlistmodel.append({"text": index.toString() +"   "+caculatetime(totaltime)})
-                recordlistmodel.insert(0,{"text": index.toString() +"   "+caculatetime(totaltime)})
+
+                recordlistmodel.insert(0,{"text": index.toString() +"   "+totaltime})
                 index += 1
             }
             else{
                 //终止按钮
                 console.log("终止")
-                myTimer.stop()
+                timerThread.stop()
                 timerDisplay.text = "00:00:00"
                 start_pause.source = "fig/start.svg"
                 start_pause.width = 60
@@ -107,11 +135,6 @@ Window {
                 index = 0
                 firstclick = false
                 recordlistmodel.clear()
-
-                totaltime = 0 //清除计时
-
-
-
             }
         }
 
@@ -155,35 +178,16 @@ Window {
     }
 
 
+    // function caculatetime(time){
+    //     var millisecond =time % 1000
+    //     millisecond = Math.floor(millisecond/10)
+    //     var second = Math.floor(time /1000)%60
+    //     var minute = Math.floor(time/1000 /60) %60
 
-    property int totaltime: 0
-    //启动计时器
-    Timer{
-        id:myTimer
-        interval: 1//每隔1毫秒触发
-        running:false
-        repeat: true //会重复运行,不加只运行一次
-
-        onTriggered: {
-            totaltime +=1
-            timerDisplay.text = caculatetime(totaltime)
-            //console.log("timer")
-        }
-    }
-
-
-    function caculatetime(time){
-        var millisecond =time % 1000
-        millisecond = Math.floor(millisecond/10)
-        var second = Math.floor(time /1000)%60
-        var minute = Math.floor(time/1000 /60) %60
-
-        return (minute<10 ? '0':'') + minute+':'+
-                (second<10 ? '0':'') + second + ':'+
-                (millisecond<10 ? '0':'')+millisecond
-
-
-    }
+    //     return (minute<10 ? '0':'') + minute+':'+
+    //             (second<10 ? '0':'') + second + ':'+
+    //             (millisecond<10 ? '0':'')+millisecond
+    // }
 
     NumberAnimation{
         id:start_pause_anim1

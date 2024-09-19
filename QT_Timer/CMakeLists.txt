@@ -37,6 +37,7 @@ else()
         add_executable(QT_Timer
           ${PROJECT_SOURCES}
           res.qrc
+          timerthread.h timerthread.cpp
         )
     endif()
 endif()
