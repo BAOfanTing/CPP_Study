@@ -1,4 +1,5 @@
 import QtQuick 2.15
+import QtGraphicalEffects 1.13
 /******************************************************************************
  *
  * @file       Button.qml
@@ -35,4 +36,13 @@ Rectangle{
             root.color = "white"
         }
     }
+    // DropShadow{
+    //     anchors.fill:root
+    //     color: "black"
+    //     horizontalOffset: 2
+    //     verticalOffset: 2
+    //     radius:1
+    //     samples: 16
+    //     source: root
+    // }
 }

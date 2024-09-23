@@ -13,6 +13,7 @@ void TimerThread::start(){
     timer->start(1);
     isRunning = true;
     emit sig_isRunning(isRunning);
+
 }
 
 void TimerThread::pause(){
@@ -32,6 +33,7 @@ void TimerThread::onTimeout(){
     //计时
     m_totaltime += 1;
     emit timeUpdated(caculateTime(m_totaltime));
+    // this->getid();
 }
 
 QString TimerThread::caculateTime(int totaltime){
@@ -46,4 +48,8 @@ QString TimerThread::caculateTime(int totaltime){
                      (millisecond<10 ? "0":"")+QString::number(millisecond);
 
     return result;
+}
+
+void TimerThread::getid(){
+    qDebug() <<"定时器线程ID: "<< QThread::currentThreadId();
 }
