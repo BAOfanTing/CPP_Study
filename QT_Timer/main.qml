@@ -141,7 +141,7 @@ Window {
                 listrect.visible = false
                 index = 0
                 firstclick = false
-                TimeListModel.clear()
+                m_TimeListModel.clear()
             }
         }
 
@@ -164,7 +164,6 @@ Window {
             model:m_TimeListModel
             delegate: recordlist
             spacing: 5
-
         }
 
         Component{
