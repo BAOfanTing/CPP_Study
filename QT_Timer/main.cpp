@@ -8,6 +8,7 @@
 #include <QtQml>
 #include <QDebug>
 #include "timelistmodel.h"
+#include "timerthread_test2.h"
 
 int main(int argc, char *argv[])
 {
@@ -24,17 +25,19 @@ int main(int argc, char *argv[])
     // QThread workerThread;
     // timerThread.moveToThread(&workerThread);
 
-    // //启动工作线程
+    //启动工作线程
     // workerThread.start();
 
     QQmlApplicationEngine engine;
 
-    qmlRegisterType<TimerThread>("com.timerthread",1,0,"TimerThread");
+    // engine.rootContext()->setContextProperty("TimerThread",&timerThread);
+    qmlRegisterType<TimerInterface>("tool",1,0,"TimerThread_test");
+
+    // qmlRegisterType<TimerThread>("com.timerthread",1,0,"TimerThread");
 
     //把写好的list模型注册到qml中
     TimeListModel listmodel;
     engine.rootContext()->setContextProperty("m_TimeListModel",&listmodel);
-
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(

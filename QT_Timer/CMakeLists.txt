@@ -39,6 +39,8 @@ else()
           res.qrc
           timerthread.h timerthread.cpp
           timelistmodel.h timelistmodel.cpp
+          timerthread_test.h timerthread_test.cpp
+          timerthread_test2.h timerthread_test2.cpp
         )
     endif()
 endif()
