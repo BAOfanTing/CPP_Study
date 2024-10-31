@@ -3,6 +3,8 @@
 
 麻了,之前瞎提交把仓库搞没了,还好有复制,家人们一定要先拉在提交
 
-QT_FaceID:人脸考勤系统
+QT_FaceID:人脸考勤系统  [文章](https://www.relxdingyilang.cn/index.php/2024/03/13/qt-%e5%9f%ba%e4%ba%8eqt%e7%9a%84%e4%ba%ba%e8%84%b8%e8%80%83%e5%8b%a4%e7%b3%bb%e7%bb%9f/)
 
 QT-Timer:基于QML的计时器
+
+listModelDemo :自己测试优化gridview和listmodel
