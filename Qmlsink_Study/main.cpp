@@ -5,6 +5,8 @@
 #include <QRunnable>
 #include <gst/gst.h>
 #include <QTimer>
+#include <QDebug>
+#include <QQmlContext>
 
 class SetPlaying : public QRunnable
 {
@@ -34,6 +36,19 @@ SetPlaying::run ()
 {
     if (this->pipeline_)
         gst_element_set_state (this->pipeline_, GST_STATE_PLAYING);
+}
+
+
+
+void printChildren(QQuickItem *item, int depth = 0) {
+    // 打印当前项的名称
+    QString indent = QString(" ").repeated(depth * 2);
+    qDebug() << indent + item->objectName();
+
+    // 递归遍历所有子项
+    for (QQuickItem *child : item->childItems()) {
+        printChildren(child, depth + 1);
+    }
 }
 
 void createPipeline(GstElement **pipeline, GstElement **src, GstElement **glupload, GstElement **sink) {
@@ -68,15 +83,22 @@ int main(int argc, char *argv[])
         engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
         QQuickWindow *rootObject = static_cast<QQuickWindow *>(engine.rootObjects().first());
+        printChildren(rootObject->contentItem());
+
         QQuickItem* videoItem1 = rootObject->findChild<QQuickItem*>("videoItem1");
-        QQuickItem* videoItem2 = rootObject->findChild<QQuickItem*>("videoItem2");
+
 
         g_object_set(sink1, "widget", videoItem1, nullptr);
-        g_object_set(sink2, "widget", videoItem2, nullptr);
+
         rootObject->scheduleRenderJob(new SetPlaying(pipeline1), QQuickWindow::BeforeSynchronizingStage);
-        rootObject->scheduleRenderJob(new SetPlaying(pipeline2), QQuickWindow::BeforeSynchronizingStage);
 
-
+        QTimer::singleShot(10000, [&engine,&sink2,&pipeline2](){
+            QQuickWindow *rootObject = static_cast<QQuickWindow *>(engine.rootObjects().first());
+            printChildren(rootObject->contentItem());
+            QQuickItem* videoItem2 = rootObject->findChild<QQuickItem*>("videoItem2");
+            g_object_set(sink2, "widget", videoItem2, nullptr);
+            rootObject->scheduleRenderJob(new SetPlaying(pipeline2), QQuickWindow::BeforeSynchronizingStage);
+        });
         ret = app.exec();
 
         gst_element_set_state(pipeline1, GST_STATE_NULL);
@@ -84,6 +106,8 @@ int main(int argc, char *argv[])
 
         gst_object_unref(pipeline1);
         gst_object_unref(pipeline2);
+
+
     }
 
     gst_deinit ();
