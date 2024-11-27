@@ -7,7 +7,7 @@ import "./Common/config"
 Window {
     id:mainWindow
     width: 700
-    height: 720
+    height: 730
     visible: true
     color: "#f5f5f5"
     flags:Qt.FramelessWindowHint //去掉原始标题栏
@@ -15,13 +15,25 @@ Window {
     ColorConfig {
         id: colorConfig
     }
-    TitleItem{
-        window: mainWindow
+    Column{
+        TitleItem{
+            window: mainWindow
+        }
+
+        TextShowItem{
+
+        }
+
+        ToolItem{
+
+        }
+
+        InputItem{
+
+        }
     }
 
-    ToolItem{
-        y:400
-    }
+
 }
 
 
