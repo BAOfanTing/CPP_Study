@@ -7,7 +7,7 @@ QT += quick
 SOURCES += \
         main.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += qml.qrc res.qrc
 
 QMAKE_PROJECT_DEPTH = 0
 
