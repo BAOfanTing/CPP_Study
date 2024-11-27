@@ -5,17 +5,18 @@ import "./qml"
 import "./Common/config"
 
 Window {
-    id:window
+    id:mainWindow
     width: 700
     height: 720
     visible: true
     color: "#f5f5f5"
-    flags:Qt.FramelessWindowHint
+    flags:Qt.FramelessWindowHint //去掉原始标题栏
+
     ColorConfig {
         id: colorConfig
     }
     TitleItem{
-
+        window: mainWindow
     }
 }
 
