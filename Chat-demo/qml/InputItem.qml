@@ -33,13 +33,14 @@ Rectangle{
         anchors.right: parent.right;
         anchors.rightMargin: 30;
 
-        width:80;
+        width:120;
         height:40;
         color: "#e9e9e9"
+        radius: 5
 
         Text {
             anchors.centerIn: parent
-            color:colorConfig.green;
+            color:"#07c160";
             text: qsTr("发送")
             font.pixelSize: 20;
             font.family: colorConfig.strTextFont
