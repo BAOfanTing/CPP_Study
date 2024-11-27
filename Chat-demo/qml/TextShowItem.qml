@@ -1,8 +1,8 @@
 import QtQuick 2.13
 
-Item{
+Rectangle{
     width:700
-    height:150
+    height:460
     TextInput{
         color:"#f5f5f5"
     }
