@@ -1,5 +1,5 @@
 import QtQuick 2.13
-import "../Common/config"
+import "../../Common/config"
 
 Rectangle{
     width:700;

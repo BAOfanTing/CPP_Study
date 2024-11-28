@@ -1,8 +1,19 @@
 #include "talklistmodel.h"
 
+TalkListModel* TalkListModel::instance = nullptr;
+
 TalkListModel::TalkListModel()
 {
 
+}
+
+TalkListModel *TalkListModel::getInstance()
+{
+    if(instance == nullptr)
+    {
+        instance = new TalkListModel();
+    }
+    return instance;
 }
 
 int TalkListModel::rowCount(const QModelIndex &parent) const

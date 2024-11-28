@@ -1,8 +1,10 @@
 import QtQuick 2.13
 import QtQuick.Window 2.13
 import QtQuick.Controls 2.13
-import "./qml"
+import "./qml/UI"
+import "./qml/TalkItem"
 import "./Common/config"
+import TalkModel 1.0
 
 Window {
     id:mainWindow
@@ -21,6 +23,17 @@ Window {
         }
 
         ChatContentItem{
+            SplitView{
+                anchors.fill:parent
+                anchors.margins: 10;
+                orientation:Qt.Vertical;
+
+                TalkListView{
+                    id:talk_view
+                    anchors.fill:parent
+                    model:talkListModel
+                }
+            }
 
         }
 
