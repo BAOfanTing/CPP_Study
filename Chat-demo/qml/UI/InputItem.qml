@@ -1,11 +1,14 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.12
 import TalkModel 1.0
+import "../../Common"
+
 Rectangle{
     color: colorConfig.weChatDefult;
     width:700;
     height:150;
-
+    property int selectedStart: 0
+    property int selectedEnd: 0
     //添加文字滚动效果
     ScrollView{
         id:view
@@ -27,9 +30,25 @@ Rectangle{
             selectByMouse: true;
             selectionColor: "#3399ff";
             selectedTextColor: "#ffffff";
+            persistentSelection: true  //点击右键不会取消文本选中 5.15才有?
 
             text: "132132131313131321321a3sdfasdfasd32f13213213212"
         }
+
+        //连接复制粘贴的信号
+        Connections{
+            target: pasteBtn
+            onSigPaste:{
+                textArea.paste();
+            }
+            onSigCopy:{
+                textArea.copy();
+            }
+        }
+    }
+
+    CopyPaste{
+        id:pasteBtn
     }
 
     //发送按钮
@@ -57,9 +76,9 @@ Rectangle{
             anchors.fill:parent;
             hoverEnabled: true; //启用鼠标悬浮检测
             onClicked: {
-                console.log("send");
+                // console.log("send");
                 talkListModel.appendText("A","A",textArea.text)
-                console.log(textArea.text)
+                // console.log(textArea.text)
             }
             onEntered: {
                 sendBtn.color = "#d2d2d2";

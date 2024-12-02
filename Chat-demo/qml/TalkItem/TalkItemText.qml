@@ -1,5 +1,5 @@
 import QtQuick 2.13
-
+import "../../Common"
 //文本信息delegate
 TalkItemBase{
     id:talkItemText
@@ -29,6 +29,7 @@ TalkItemBase{
                 text:model.text;
                 width:Math.min(talkItemText.contentWidth,textItem.implicitWidth);
             }
+            CopyPaste{}
         }
     }
 
