@@ -8,27 +8,44 @@ import TalkModel 1.0
 ListView{
     id:listView
 
-    clip:true;
+    clip:true
 
-    headerPositioning: ListView.OverlayHeader
-    footerPositioning: ListView.OverlayFooter
-    boundsBehavior: Flickable.StopAtBounds
-    highlightFollowsCurrentItem: true
-    highlightMoveDuration: 0
-    highlightResizeDuration: 0
+    headerPositioning: ListView.OverlayHeader   // 头部显示方式：覆盖式（可以与内容重叠）
+    footerPositioning: ListView.OverlayFooter   // 底部显示方式：覆盖式（可以与内容重叠）
+    boundsBehavior: Flickable.StopAtBounds      // 内容超出时，停止在边界处
+    // highlightFollowsCurrentItem: true           // 高亮项跟随当前项
+    // highlightMoveDuration: 0
+    // highlightResizeDuration: 0
     spacing:10
 
+    //消息滚动到最新
+    Timer{
+        id:timer
+        interval:10;
+        running: false;
+        repeat:false;
+        onTriggered:positionViewAtEnd();
+    }
+    onCountChanged:{
+        if(count > 0)
+        {
+            timer.restart();
+        }
+    }
+
+
+    // 委托：加载不同类型的组件，基于 `model.type` 的值选择合适的组件
     delegate: Loader{
         sourceComponent: {
             switch(model.type){
             case TalkData.Text:
-                return text_comp;
+                return textComp;
             }
-            return null_comp;
+            return nullComp;
         }
 
         Component{
-            id:text_comp
+            id:textComp
             TalkItemText{}
         }
     }
@@ -55,6 +72,4 @@ ListView{
             }
         }
     }
-
-
 }

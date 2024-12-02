@@ -20,7 +20,7 @@ TextEdit{
     selectionColor: "#3399ff";
     selectedTextColor: "#ffffff";
 
-    wrapMode: TextEdit.WrapAnywhere
+    wrapMode: TextEdit.Wrap
 
 }
 

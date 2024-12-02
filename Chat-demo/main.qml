@@ -22,18 +22,12 @@ Window {
             window: mainWindow
         }
 
-        ChatContentItem{
-            SplitView{
-                anchors.fill:parent
-                anchors.margins: 10;
-                orientation:Qt.Vertical;
-
+        ChatContentItem{   
                 TalkListView{
                     id:talk_view
                     anchors.fill:parent
                     model:talkListModel
                 }
-            }
 
         }
 

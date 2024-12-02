@@ -8,10 +8,10 @@ TalkItemBase{
         width: talkItemText.contentWidth
         layoutDirection: talkItemText.isUser ? Qt.RightToLeft : Qt.LeftToRight
         Rectangle{
-            id:wrap_item
+            id:wrapItem
             radius:4
-            width:text_item.width
-            height:text_item.height
+            width:textItem.width
+            height:textItem.height
             color: talkItemText.messageBoxColor
 
             //指向发言人的小三角
@@ -25,9 +25,9 @@ TalkItemBase{
             }
 
             TalkLabel{
-                id:text_item;
-                text:model.text_text;
-                width:Math.min(talkItemText.contentWidth,text_item.implicitWidth);
+                id:textItem;
+                text:model.text;
+                width:Math.min(talkItemText.contentWidth,textItem.implicitWidth);
             }
         }
     }
@@ -38,7 +38,12 @@ TalkItemBase{
         TalkLabel{
             text:model.datetime
             padding:0
+            font{
+                pixelSize: 14
+            }
         }
-
     }
+
+
+
 }

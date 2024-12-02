@@ -28,7 +28,7 @@ Rectangle{
             selectionColor: "#3399ff";
             selectedTextColor: "#ffffff";
 
-            text: "132132131313131321321a3sdfasdfasd32f132132132132132132132132132132132132132132132132132132132131321321312"
+            text: "132132131313131321321a3sdfasdfasd32f13213213212"
         }
     }
 
@@ -58,8 +58,47 @@ Rectangle{
             hoverEnabled: true; //启用鼠标悬浮检测
             onClicked: {
                 console.log("send");
-                talkListModel.appendText("B","A",textArea.text)
+                talkListModel.appendText("A","A",textArea.text)
                 console.log(textArea.text)
+            }
+            onEntered: {
+                sendBtn.color = "#d2d2d2";
+            }
+            onExited: {
+                sendBtn.color = "#e9e9e9";
+            }
+
+        }
+    }
+
+    //发送按钮
+    Rectangle{
+        id:sendBtn2
+        anchors.bottom: parent.bottom;
+        anchors.bottomMargin: 10;
+        anchors.left: parent.left;
+        anchors.leftMargin: 30;
+
+        width:120;
+        height:40;
+        color: "#e9e9e9"
+        radius: 5
+
+        Text {
+            anchors.centerIn: parent
+            color:"#07c160";
+            text: qsTr("发送")
+            font.pixelSize: 20;
+            font.family: colorConfig.strTextFont
+        }
+
+        MouseArea{
+            anchors.fill:parent;
+            hoverEnabled: true; //启用鼠标悬浮检测
+            onClicked: {
+                // console.log("send");
+                talkListModel.appendText("B","A",textArea.text)
+                // console.log(textArea.text)
             }
             onEntered: {
                 sendBtn.color = "#d2d2d2";

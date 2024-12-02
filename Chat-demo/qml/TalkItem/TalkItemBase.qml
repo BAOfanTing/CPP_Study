@@ -3,8 +3,8 @@ import QtQuick.Layouts 1.12
 
 Item {
     id:talkItemBase;
-    width: parent.width;
-    height: parent.height;
+    width: parent.ListView.view.width;
+    height: Math.max(profilePictureHeight,contentItem.height);
 
     //
     property int profilePictureHeight: 48;  //头像
@@ -15,6 +15,9 @@ Item {
     property int contentWidth:Math.max(10,talkItemBase.width-talkItemBase.leftWidth-talkItemBase.rightWidth);
     property bool isUser: (model.user === model.sender);
     property color messageBoxColor: talkItemBase.isUser ? "#98E982" : "#FFFFFF";
+
+    //让继承的子qml的内容能够被放入content_Item,从而获取内容的高度
+    default property alias contentItems: contentItem.children
 
     //左侧头像
     Item {
@@ -29,14 +32,23 @@ Item {
             source: "qrc:/icon/profile_48_gray.png";
         }
     }
+    //消息展示区域
+    Column{
+        id:contentItem
+        width:talkItemBase.contentWidth
+        x:talkItemBase.leftWidth
+        spacing: 6
+    }
+
 
     //右侧头像
     Item {
         id: rightItem;
         width:talkItemBase.rightWidth;
         height:talkItemBase.height;
+        anchors.right: parent.right
         Image{
-            visible: !talkItemBase.isUser;
+            visible: talkItemBase.isUser;
             width:talkItemBase.profilePictureHeight;
             height:talkItemBase.profilePictureHeight;
             anchors.horizontalCenter: parent.horizontalCenter;
@@ -44,13 +56,6 @@ Item {
         }
     }
 
-    //消息展示区域
-    Column{
-        id:contentItem
-        height:talkItemBase.contentWidth
-        x:talkItemBase.leftWidth
-        spacing: 6
-    }
 
 
 }
