@@ -27,10 +27,22 @@ TalkItemBase{
             TalkLabel{
                 id:textItem;
                 text:model.text;
+                persistentSelection: true  //点击右键不会取消文本选中 5.15才有?
                 width:Math.min(talkItemText.contentWidth,textItem.implicitWidth);
             }
-            CopyPaste{}
+            CopyPaste{
+                id:pasteBtn
+            }
+            //聊天记录只有复制信号
+            Connections{
+                target: pasteBtn
+                onSigCopy:{
+                    textItem.copy();
+                }
+            }
+
         }
+
     }
 
     Row{
