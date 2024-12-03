@@ -1,10 +1,17 @@
 <RCC>
     <qresource prefix="/">
-        <file>icon/ic_close.png</file>
-        <file>icon/ic_camera.png</file>
-        <file>icon/ic_expression.png</file>
-        <file>icon/ic_file.png</file>
-        <file>icon/ic_record.png</file>
         <file>icon/profile_48_gray.png</file>
+        <file>icon/camera_dark.png</file>
+        <file>icon/camera_light.png</file>
+        <file>icon/close_dark.png</file>
+        <file>icon/close_light.png</file>
+        <file>icon/expression_dark.png</file>
+        <file>icon/expression_light.png</file>
+        <file>icon/file_dark.png</file>
+        <file>icon/file_light.png</file>
+        <file>icon/record_dark.png</file>
+        <file>icon/record_light.png</file>
+        <file>icon/skin_dark.png</file>
+        <file>icon/skin_light.png</file>
     </qresource>
 </RCC>

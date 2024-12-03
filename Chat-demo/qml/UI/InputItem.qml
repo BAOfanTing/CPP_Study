@@ -3,12 +3,12 @@ import QtQuick.Controls 2.12
 import TalkModel 1.0
 import "../../Common"
 
+
+//最小 520*150
 Rectangle{
-    color: colorConfig.weChatDefult;
+    color: colorConfig.strBackgroundColor;
     width:700;
     height:150;
-    property int selectedStart: 0
-    property int selectedEnd: 0
     //添加文字滚动效果
     ScrollView{
         id:view
@@ -23,6 +23,8 @@ Rectangle{
             width: parent.width;
             font.pixelSize: 20;
             font.family: colorConfig.strTextFont;
+
+            color:colorConfig.strTextColor
             readOnly: false // 根据需要设置是否只读
             wrapMode: TextEdit.Wrap //开启换行
 
@@ -50,7 +52,7 @@ Rectangle{
     CopyPaste{
         id:pasteBtn
     }
-
+    property bool bHover: false  //鼠标是否选中按钮
     //发送按钮
     Rectangle{
         id:sendBtn
@@ -61,12 +63,12 @@ Rectangle{
 
         width:120;
         height:40;
-        color: "#e9e9e9"
+        color: bHover ? colorConfig.strSendBtnSelectedColor :colorConfig.strSendBtnColor
         radius: 5
 
         Text {
             anchors.centerIn: parent
-            color:"#07c160";
+            color:colorConfig.strSendBtnTextColor;
             text: qsTr("发送")
             font.pixelSize: 20;
             font.family: colorConfig.strTextFont
@@ -76,15 +78,16 @@ Rectangle{
             anchors.fill:parent;
             hoverEnabled: true; //启用鼠标悬浮检测
             onClicked: {
-                // console.log("send");
-                talkListModel.appendText("A","A",textArea.text)
+                // 清理文本末尾的空白字符（包括空格、换行符）
+                var trimmedText = textArea.text.replace(/\s+$/, ""); // 正则表达式匹配末尾空白字符
+                talkListModel.appendText("A","A",trimmedText)
                 // console.log(textArea.text)
             }
             onEntered: {
-                sendBtn.color = "#d2d2d2";
+                bHover = true;
             }
             onExited: {
-                sendBtn.color = "#e9e9e9";
+                bHover = false;
             }
 
         }
@@ -100,12 +103,12 @@ Rectangle{
 
         width:120;
         height:40;
-        color: "#e9e9e9"
+        color: bHover ? colorConfig.strSendBtnSelectedColor :colorConfig.strSendBtnColor
         radius: 5
 
         Text {
             anchors.centerIn: parent
-            color:"#07c160";
+            color:colorConfig.strSendBtnTextColor;
             text: qsTr("发送")
             font.pixelSize: 20;
             font.family: colorConfig.strTextFont
@@ -116,14 +119,15 @@ Rectangle{
             hoverEnabled: true; //启用鼠标悬浮检测
             onClicked: {
                 // console.log("send");
-                talkListModel.appendText("B","A",textArea.text)
+                var trimmedText = textArea.text.replace(/\s+$/, ""); // 正则表达式匹配末尾空白字符
+                talkListModel.appendText("B","A",trimmedText)
                 // console.log(textArea.text)
             }
             onEntered: {
-                sendBtn.color = "#d2d2d2";
+                bHover = true;
             }
             onExited: {
-                sendBtn.color = "#e9e9e9";
+                bHover = false;
             }
 
         }

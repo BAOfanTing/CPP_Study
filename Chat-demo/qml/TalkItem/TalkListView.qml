@@ -67,7 +67,7 @@ ListView{
                 width:parent.width
                 radius: 4;
                 height: parent.height > 20 ? parent.height : 20
-                color: (scroll_vertical.hovered || scroll_vertical.pressed) ? "#bababa" : "#d2d2d2"
+                color: (scroll_vertical.hovered || scroll_vertical.pressed) ? "#2c2c2d" : "#929292"
 
             }
         }

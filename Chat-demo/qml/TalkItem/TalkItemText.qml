@@ -12,7 +12,7 @@ TalkItemBase{
             radius:4
             width:textItem.width
             height:textItem.height
-            color: talkItemText.messageBoxColor
+            color: talkItemText.isUser ? colorConfig.strUserBubbleBackgroundColor : colorConfig.strSenderBubbleBackgroundColor  //气泡颜色
 
             //指向发言人的小三角
             Rectangle{
@@ -21,7 +21,7 @@ TalkItemBase{
                 y:talkItemText.messageHeight/2-10;
                 anchors.horizontalCenter: talkItemText.isUser ? parent.right :parent.left
                 rotation: 45
-                color:talkItemText.messageBoxColor
+                color:talkItemText.isUser ? colorConfig.strUserBubbleBackgroundColor : colorConfig.strSenderBubbleBackgroundColor  //气泡颜色
             }
 
             TalkLabel{
@@ -29,6 +29,7 @@ TalkItemBase{
                 text:model.text;
                 persistentSelection: true  //点击右键不会取消文本选中 5.15才有?
                 width:Math.min(talkItemText.contentWidth,textItem.implicitWidth);
+                color:talkItemText.isUser ? "#111111" :colorConfig.strTextColor ;
             }
             CopyPaste{
                 id:pasteBtn
@@ -54,6 +55,7 @@ TalkItemBase{
             font{
                 pixelSize: 14
             }
+            color: colorConfig.strTimeTextColor;
         }
     }
 

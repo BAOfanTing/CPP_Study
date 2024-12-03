@@ -10,11 +10,10 @@ Item {
     property int profilePictureHeight: 48;  //头像
     property int messageHeight: 48;
 
-    property int leftWidth: 110;
-    property int rightWidth: 110;
-    property int contentWidth:Math.max(10,talkItemBase.width-talkItemBase.leftWidth-talkItemBase.rightWidth);
+    property int leftWidth: 100;
+    property int rightWidth: 100;
+    property int contentWidth:Math.max(200,talkItemBase.width-talkItemBase.leftWidth-talkItemBase.rightWidth);
     property bool isUser: (model.user === model.sender);
-    property color messageBoxColor: talkItemBase.isUser ? "#98E982" : "#FFFFFF";
 
     //让继承的子qml的内容能够被放入content_Item,从而获取内容的高度
     default property alias contentItems: contentItem.children
