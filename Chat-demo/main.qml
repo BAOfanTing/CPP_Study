@@ -29,33 +29,40 @@ Window {
         id: colorConfig
     }
 
-    Column{
+    Rectangle{
         anchors.fill: parent
+        //标题栏
         TitleItem{
             id:titleItem
+            height: 80
+            anchors.top: parent.top
+            width: parent.width
             window: mainWindow
         }
-
+        //消息框
         ChatContentItem{
             id:chatContentItem
-            anchors.top:titleItem.bottom
+            width: parent.width
+            anchors.top: titleItem.bottom
+            anchors.bottom: toolItem.top
             TalkListView{
                 id:talk_view
                 anchors.fill:parent
                 model:talkListModel
             }
         }
-
+        //工具栏
         ToolItem{
             id:toolItem
-            anchors.top: chatContentItem.bottom
-
+            width: parent.width
+            anchors.bottom:inputItem.top
         }
-
+        //输入框
         InputItem{
             id:inputItem
+            height:150;
+            width: parent.width
             anchors.bottom: parent.bottom
-            anchors.top:toolItem.bottom
         }
     }
 
@@ -86,12 +93,6 @@ Window {
                 initialHeight = mainWindow.height;
                 initialMouseX = mouse.x
                 initialMouseY = mouse.y
-            }
-
-            onReleased: {
-                //更新窗口
-                initialWidth = mainWindow.width
-                initialHeight = mainWindow.height
             }
 
             onPositionChanged: {

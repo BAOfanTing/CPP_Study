@@ -4,8 +4,6 @@ import "../../Common"
 
 //标题栏,高度固定80
 Rectangle{
-    width:parent.width;
-    height:80;
     color: colorConfig.strBackgroundColor;
     property var window: null;
     property point dragStartPos: Qt.point(0, 0);
