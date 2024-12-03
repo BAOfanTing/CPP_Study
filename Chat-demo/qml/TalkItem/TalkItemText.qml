@@ -28,7 +28,8 @@ TalkItemBase{
                 id:textItem;
                 text:model.text;
                 persistentSelection: true  //点击右键不会取消文本选中 5.15才有?
-                width:Math.min(talkItemText.contentWidth,textItem.implicitWidth);
+                width:talkItemText.contentWidth < 400 ? Math.min(talkItemText.contentWidth,textItem.implicitWidth):
+                                                        Math.min(textItem.implicitWidth,Math.min(talkItemText.contentWidth/4*3,800)); //聊天记录的宽度
                 color:talkItemText.isUser ? "#111111" :colorConfig.strTextColor ;
             }
             CopyPaste{

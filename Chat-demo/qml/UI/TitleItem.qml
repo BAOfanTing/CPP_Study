@@ -2,8 +2,9 @@ import QtQuick 2.13
 import "../../Common/config"
 import "../../Common"
 
+//标题栏,高度固定80
 Rectangle{
-    width:700;
+    width:parent.width;
     height:80;
     color: colorConfig.strBackgroundColor;
     property var window: null;

@@ -4,11 +4,12 @@ import TalkModel 1.0
 import "../../Common"
 
 
-//最小 520*150
+//最小 550*150
 Rectangle{
     color: colorConfig.strBackgroundColor;
-    width:700;
+    width:parent.width;
     height:150;
+
     //添加文字滚动效果
     ScrollView{
         id:view
