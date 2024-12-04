@@ -18,7 +18,7 @@ TalkItemBase{
             Rectangle{
                 width:10;
                 height:10;
-                y:talkItemText.messageHeight/2-10;
+                y:talkConfig.nMessageHeight/2-10;
                 anchors.horizontalCenter: talkItemText.isUser ? parent.right :parent.left
                 rotation: 45
                 color:talkItemText.isUser ? colorConfig.strUserBubbleBackgroundColor : colorConfig.strSenderBubbleBackgroundColor  //气泡颜色
