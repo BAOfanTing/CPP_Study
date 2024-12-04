@@ -2,6 +2,7 @@
 #define TALKLISTDEFINE_H
 
 #include <QObject>
+#include <QUrl>
 
 //将枚举注册到QML
 class TalkData : public QObject
@@ -16,7 +17,8 @@ public:
         Text,   //文本
         Image,  //图片
         Audio,  //语音
-        Video   //视频
+        Video,   //视频
+        Other   //其他文件类型
     };
     Q_ENUM(DataType);
 
@@ -49,6 +51,12 @@ struct TalkDataBasic
 struct TalkDataText : public TalkDataBasic
 {
     QString text;//文本信息
+};
+
+//图片消息
+struct TalkDataImage : public TalkDataBasic
+{
+    QString imageUrl;//图片路径
 };
 
 #endif // TALKLISTDEFINE_H

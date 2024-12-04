@@ -35,7 +35,9 @@ QHash<int, QByteArray> TalkListModel::roleNames() const
         {Qt::UserRole+4,"type"},
         {Qt::UserRole+5,"status"},
         //文本
-        {Qt::UserRole+100,"text"}
+        {Qt::UserRole+100,"text"},
+        //图片
+        {Qt::UserRole+200,"imagePath"}
     };
 }
 
@@ -69,6 +71,12 @@ QVariant TalkListModel::data(const QModelIndex &index, int role) const
             TalkDataText *talk_text = static_cast<TalkDataText*>(item.get());
             return talk_text->text;
         }
+        case Qt::UserRole+200:
+        {
+            //图片
+            TalkDataImage *talk_image = static_cast<TalkDataImage*>(item.get());
+            return talk_image->imageUrl;
+        }
     }
 }
 
@@ -89,6 +97,26 @@ void TalkListModel::appendText(const QString &user, const QString &sender, const
     talk_data->type = TalkData::Text;
     talk_data->status = TalkData::ParseSuccess;
     talk_data->text = text;
+
+    //插入模型
+    beginInsertRows(QModelIndex(),talkList.count(),talkList.count());
+    talkList.push_back(QSharedPointer<TalkDataBasic>(talk_data));
+    endInsertRows();
+}
+
+//图片消息
+void TalkListModel::appendImage(const QString &user, const QString &sender, const QString &ImageUrl)
+{
+    TalkDataImage *talk_data = new TalkDataImage;
+    talk_data->id = 0;
+    talk_data->user = user;
+    talk_data->sender = sender;
+    talk_data->datetime = QDateTime::currentSecsSinceEpoch();
+    talk_data->type = TalkData::Image;
+    talk_data->status = TalkData::ParseSuccess;
+    talk_data->imageUrl = ImageUrl;
+    qDebug() << ImageUrl;
+    qDebug() << talk_data->imageUrl;
 
     //插入模型
     beginInsertRows(QModelIndex(),talkList.count(),talkList.count());

@@ -8,6 +8,7 @@ Rectangle{
     height:40;
     color: colorConfig.strBackgroundColor;
 
+    signal sigBtnClicked(string btnName);
 
     // 顶部灰色线条
     Rectangle {
@@ -30,6 +31,12 @@ Rectangle{
             delegate:IconButton{
                 imageSource: modelData
 
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        sigBtnClicked(modelData)
+                    }
+                }
             }
         }
 
