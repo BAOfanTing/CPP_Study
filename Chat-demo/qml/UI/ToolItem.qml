@@ -9,7 +9,6 @@ Rectangle{
     color: colorConfig.strBackgroundColor;
 
 
-
     // 顶部灰色线条
     Rectangle {
         height: 1; // 线条高度
@@ -30,6 +29,7 @@ Rectangle{
             model:colorConfig.leftModel.split(",");
             delegate:IconButton{
                 imageSource: modelData
+
             }
         }
 
