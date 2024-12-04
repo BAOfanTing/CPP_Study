@@ -11,5 +11,8 @@ QtObject{
     property int nLeftWidth: 90;
     property int nRightWidth: 90;
 
+    //发送图片高宽限制
+    property int nImageMaxWidth: 250;
+    property int nImageMaxHeight: 250;
 
 }
