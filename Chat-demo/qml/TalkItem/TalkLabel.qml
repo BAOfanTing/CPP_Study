@@ -11,8 +11,8 @@ TextEdit{
         pixelSize: 18;
     }
 
-    verticalAlignment: TextEdit.AlignVCenter;
-    horizontalAlignment: TextEdit.AlignLeft;
+    // verticalAlignment: TextEdit.AlignVCenter;
+    // horizontalAlignment: TextEdit.AlignLeft;
     readOnly: true;
 
     selectByMouse: true;

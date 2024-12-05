@@ -9,7 +9,7 @@ Item {
     property int contentWidth:Math.max(200,talkItemBase.width-talkConfig.nLeftWidth-talkConfig.nRightWidth);
     property bool isUser: (model.user === model.sender);
     property variant  lastShowTime: null;  //记录上次显示的时间
-    property bool bShowTime : model.datetime === "1970-01-01 08:00" ? false : true
+    property bool bShowTime : model.datetime === "08:00" ? false : true
 
     //让继承的子qml的内容能够被放入content_Item,从而获取内容的高度
     default property alias contentItems: contentItem.children

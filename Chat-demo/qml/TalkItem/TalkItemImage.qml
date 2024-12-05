@@ -5,24 +5,35 @@ import "../../Common"
 TalkItemBase{
     id:talkItemImage
 
-    //显示时间
-    TalkLabel{
-        id:timeItem
-        text:model.datetime
-        anchors.horizontalCenter: parent.horizontalCenter
-        padding:0
-        font{
-            pixelSize: 14
+    Rectangle{
+        width:40
+        height:20
+        color: colorConfig.strTimeBackgroundColor
+        radius:4
+        //显示时间
+        x:contentWidth/2-width/2
+        visible:bShowTime //控制时间显示
+        TalkLabel{
+            id:timeItem
+            text:model.datetime
+            padding:0
+            anchors.centerIn: parent
+            font{
+                pixelSize: 14
+            }
+            color: colorConfig.strTimeTextColor;
+            visible: bShowTime  //控制时间显示
         }
-        color: colorConfig.strTimeTextColor;
-        visible: bShowTime  //控制时间显示
     }
+
+
     Row{
         width: talkItemImage.contentWidth
         layoutDirection: talkItemImage.isUser ? Qt.RightToLeft : Qt.LeftToRight
         Image{
             id:chatImage
             source: model.imagePath;
+            smooth: true
             //判断是否需要缩放图像
             Component.onCompleted: {
                 if(chatImage.sourceSize.width > talkConfig.nImageMaxWidth || chatImage.sourceSize.height > talkConfig.nImageMaxHeight )

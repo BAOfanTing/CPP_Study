@@ -36,11 +36,14 @@ QHash<int, QByteArray> TalkListModel::roleNames() const
         {Qt::UserRole+5,"status"},
         {Qt::UserRole+6,"fileName"},
         {Qt::UserRole+7,"fileSize"},
-        {Qt::UserRole+6,"filePath"},
+        {Qt::UserRole+8,"filePath"},
+        {Qt::UserRole+9,"fileSuffix"}, //后缀
         //文本
         {Qt::UserRole+100,"text"},
         //图片
-        {Qt::UserRole+200,"imagePath"}
+        {Qt::UserRole+200,"imagePath"},
+
+
     };
 }
 
@@ -63,11 +66,19 @@ QVariant TalkListModel::data(const QModelIndex &index, int role) const
         case Qt::UserRole+2:
             return item->sender;
         case Qt::UserRole+3:
-            return QDateTime::fromSecsSinceEpoch(item->datetime).toString("yyyy-MM-dd hh:mm");
+            return QDateTime::fromSecsSinceEpoch(item->datetime).toString("hh:mm");
         case Qt::UserRole+4:
             return item->type;
         case Qt::UserRole+5:
             return item->status;
+        case Qt::UserRole+6:
+            return item->fileName;
+        case Qt::UserRole+7:
+            return item->fileSize;
+        case Qt::UserRole+8:
+            return item->filePath;
+        case Qt::UserRole+9:
+            return item->fileSuffix;
         case Qt::UserRole+100:
         {
             //文本
@@ -78,8 +89,9 @@ QVariant TalkListModel::data(const QModelIndex &index, int role) const
         {
             //图片
             TalkDataImage *talk_image = static_cast<TalkDataImage*>(item.get());
-            return talk_image->imageUrl;
+            return talk_image->imagePath;
         }
+
     }
 }
 
@@ -117,9 +129,30 @@ void TalkListModel::appendImage(const QString &user, const QString &sender, cons
     talk_data->datetime = caculateTime();
     talk_data->type = TalkData::Image;
     talk_data->status = TalkData::ParseSuccess;
-    talk_data->imageUrl = ImageUrl;
-    qDebug() << ImageUrl;
-    qDebug() << talk_data->imageUrl;
+    talk_data->imagePath = ImageUrl;
+    // qDebug() << ImageUrl;
+    // qDebug() << talk_data->imagePath;
+
+    //插入模型
+    beginInsertRows(QModelIndex(),talkList.count(),talkList.count());
+    talkList.push_back(QSharedPointer<TalkDataBasic>(talk_data));
+    endInsertRows();
+}
+
+void TalkListModel::appendOtherFile(const QString &user, const QString &sender, const QString &filePath, const QString &fileName, const QString &fileSize, const QString &fileSuffix)
+{
+    TalkDataOtherFile *talk_data = new TalkDataOtherFile;
+    talk_data->id = 0;
+    talk_data->user = user;
+    talk_data->sender = sender;
+    talk_data->datetime = caculateTime();
+    talk_data->type = TalkData::Other;
+    talk_data->status = TalkData::ParseSuccess;
+    talk_data->filePath = filePath;
+    talk_data->fileSize = fileSize;
+    talk_data->fileName = fileName;
+    talk_data->fileSuffix = fileSuffix;
+
 
     //插入模型
     beginInsertRows(QModelIndex(),talkList.count(),talkList.count());
@@ -146,7 +179,7 @@ qint64 TalkListModel::caculateTime()
 
         timeDiff = timeDiff / 30; //转换为分钟
 
-        qDebug() << "timeDiff" << timeDiff;
+        // qDebug() << "timeDiff" << timeDiff;
         if(timeDiff >= 1 )
         {
             lastShowTime = QDateTime::currentSecsSinceEpoch();

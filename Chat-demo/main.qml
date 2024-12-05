@@ -14,6 +14,7 @@ Window {
     property real initialMouseX: 0  // 定义初始鼠标X坐标
     property real initialMouseY: 0  // 定义初始鼠标Y坐标
     property url filePath: "";
+    property var fileInfo;
     id:mainWindow
     width: 900
     height: 730
@@ -83,16 +84,25 @@ Window {
             if(btnName === "qrc:/icon/file_dark.png" || btnName === "qrc:/icon/file_light.png")
             {
                 filePath = fileModel.getSelectedFileUrl();
+                fileInfo = fileModel.extractFileInfo(filePath)
                 count++
-                if(filePath !== "")
+                if(filePath.toString() !== "")
                 {
-                    if(count %2 === 0)
+                    switch(fileInfo.fileSuffix) {
+                    case "jpg" :
                     {
-                        talkListModel.appendImage("A","A",filePath.toString())
+                        console.log(1111)
+                        if(count %2 === 0)
+                        {
+                            talkListModel.appendImage("A","A",filePath.toString())
+                        }
+                        else{
+                            talkListModel.appendImage("B","A",filePath.toString())
+                        }
+                        return;
                     }
-                    else{
-                        talkListModel.appendImage("B","A",filePath.toString())
                     }
+
 
 
                 }

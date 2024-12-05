@@ -45,6 +45,10 @@ struct TalkDataBasic
     TalkData::DataType type = TalkData::Text;
     //处理状态
     TalkData::DataStatus status = TalkData::DataError;
+    QString fileName;   //名字
+    QString fileSize;   //大小
+    QString filePath;   //路径
+    QString fileSuffix; //后缀
 };
 
 //文本消息
@@ -56,7 +60,14 @@ struct TalkDataText : public TalkDataBasic
 //图片消息
 struct TalkDataImage : public TalkDataBasic
 {
-    QString imageUrl;//图片路径
+    QString imagePath;//图片路径
 };
+
+//其他发送文件消息
+struct TalkDataOtherFile : public TalkDataBasic
+{
+
+};
+
 
 #endif // TALKLISTDEFINE_H
