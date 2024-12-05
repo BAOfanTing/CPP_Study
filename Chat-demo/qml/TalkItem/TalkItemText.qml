@@ -4,6 +4,19 @@ import "../../Common"
 TalkItemBase{
     id:talkItemText
 
+    //显示时间
+    TalkLabel{
+        id:timeItem
+        text:model.datetime
+        anchors.horizontalCenter: parent.horizontalCenter
+        padding:0
+        font{
+            pixelSize: 14
+        }
+        color: colorConfig.strTimeTextColor;
+        visible: bShowTime  //控制时间显示
+    }
+
     Row{
         width: talkItemText.contentWidth
         layoutDirection: talkItemText.isUser ? Qt.RightToLeft : Qt.LeftToRight
@@ -47,18 +60,7 @@ TalkItemBase{
 
     }
 
-    Row{
-        width:talkItemText.contentWidth
-        layoutDirection: talkItemText.isUser ? Qt.RightToLeft : Qt.LeftToRight
-        TalkLabel{
-            text:model.datetime
-            padding:0
-            font{
-                pixelSize: 14
-            }
-            color: colorConfig.strTimeTextColor;
-        }
-    }
+
 
 
 

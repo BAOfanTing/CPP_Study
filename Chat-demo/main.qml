@@ -83,7 +83,6 @@ Window {
             if(btnName === "qrc:/icon/file_dark.png" || btnName === "qrc:/icon/file_light.png")
             {
                 filePath = fileModel.getSelectedFileUrl();
-                console.log(filePath);
                 count++
                 if(filePath !== "")
                 {

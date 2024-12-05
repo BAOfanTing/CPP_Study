@@ -5,6 +5,18 @@ import "../../Common"
 TalkItemBase{
     id:talkItemImage
 
+    //显示时间
+    TalkLabel{
+        id:timeItem
+        text:model.datetime
+        anchors.horizontalCenter: parent.horizontalCenter
+        padding:0
+        font{
+            pixelSize: 14
+        }
+        color: colorConfig.strTimeTextColor;
+        visible: bShowTime  //控制时间显示
+    }
     Row{
         width: talkItemImage.contentWidth
         layoutDirection: talkItemImage.isUser ? Qt.RightToLeft : Qt.LeftToRight
@@ -19,18 +31,6 @@ TalkItemBase{
                     chatImage.sourceSize = Qt.size(chatImage.sourceSize.width / ratio,chatImage.sourceSize.height / ratio )
                 }
             }
-        }
-    }
-    Row{
-        width:talkItemImage.contentWidth
-        layoutDirection: talkItemImage.isUser ? Qt.RightToLeft : Qt.LeftToRight
-        TalkLabel{
-            text:model.datetime
-            padding:0
-            font{
-                pixelSize: 14
-            }
-            color: colorConfig.strTimeTextColor;
         }
     }
 }

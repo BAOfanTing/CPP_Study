@@ -27,10 +27,12 @@ public:
     Q_INVOKABLE void appendText(const QString &user,
                                 const QString &sender,
                                 const QString &text);
+    //发送图片
     Q_INVOKABLE void appendImage(const QString &user,
                                  const QString &sender,
                                  const QString &ImageUrl);
 
+    qint64 caculateTime();
 private:
     //私有化构造
     TalkListModel();
@@ -42,6 +44,8 @@ private:
     static TalkListModel *instance;
 
     QList<QSharedPointer<TalkDataBasic>> talkList;
+
+    qint64 lastShowTime = 0;
 };
 
 #endif // TALKLISTMODEL_H

@@ -46,9 +46,8 @@ ListView{
             }
 
             return nullComp;
-            }
+            }   
         }
-
         Component{
             id:textComp
             TalkItemText{}
@@ -58,6 +57,7 @@ ListView{
             TalkItemImage{}
         }
     }
+
     header: Item{
         height:10;
     }
