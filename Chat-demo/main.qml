@@ -86,12 +86,11 @@ Window {
                 filePath = fileModel.getSelectedFileUrl();
                 fileInfo = fileModel.extractFileInfo(filePath)
                 count++
-                if(filePath.toString() !== "")
+                if(filePath.toString() !== "") //选择了一个文件
                 {
-                    switch(fileInfo.fileSuffix) {
-                    case "jpg" :
+                    //图片文件
+                    if(fileInfo.fileSuffix === "jpg" || fileInfo.fileSuffix === "jpeg" || fileInfo.fileSuffix === "png")
                     {
-                        console.log(1111)
                         if(count %2 === 0)
                         {
                             talkListModel.appendImage("A","A",filePath.toString())
@@ -99,12 +98,19 @@ Window {
                         else{
                             talkListModel.appendImage("B","A",filePath.toString())
                         }
-                        return;
                     }
+                    else   //其他文件类型
+                    {
+                        if(count %2 === 0)
+                        {
+                            talkListModel.appendOtherFile("A","A",filePath.toString(),fileInfo.fileName,fileInfo.fileSize,fileInfo.fileSuffix);
+                            console.log("222")
+                        }
+                        else{
+                            talkListModel.appendOtherFile("B","A",filePath.toString(),fileInfo.fileName,fileInfo.fileSize,fileInfo.fileSuffix);
+                            console.log("222")
+                        }
                     }
-
-
-
                 }
             }
         }

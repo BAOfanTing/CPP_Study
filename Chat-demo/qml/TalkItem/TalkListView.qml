@@ -44,6 +44,10 @@ ListView{
             {
                 return imageComp;
             }
+            case TalkData.Other:
+            {
+                return otherComp;
+            }
 
             return nullComp;
             }   
@@ -55,6 +59,10 @@ ListView{
         Component{
             id:imageComp
             TalkItemImage{}
+        }
+        Component{
+            id:otherComp
+            TalkItemOtherFile{}
         }
     }
 
