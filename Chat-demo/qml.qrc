@@ -15,5 +15,6 @@
         <file>Common/IconButton.qml</file>
         <file>qml/TalkItem/TalkItemImage.qml</file>
         <file>qml/TalkItem/TalkItemOtherFile.qml</file>
+        <file>qml/UI/EmojiItem.qml</file>
     </qresource>
 </RCC>

@@ -26,6 +26,9 @@ public:
     //格式化文件大小
     QString formatFileSize(qint64 size);
 
+    //获取表情模型
+    Q_INVOKABLE QStringList getEmojiName();
+
 private:
     //私有化构造
     FileModel();
