@@ -2,11 +2,11 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_mainwindow.h"
+#include <QRadioButton>
 #include <QDebug>
-#include <QDialog>
-#include <QMessageBox>
-#include <QColorDialog>
-#include <QFileDialog>
+#include <QGroupBox>
+#include <QCheckBox>
+#include <QListWidgetItem>
 class mainwindow : public QMainWindow
 {
     Q_OBJECT

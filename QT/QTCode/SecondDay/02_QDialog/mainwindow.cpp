@@ -26,7 +26,7 @@ mainwindow::mainwindow(QWidget *parent)
 
         //消息对话框
         //错误对话框
-        QMessageBox::critical(this,"错误","错误");
+       /* QMessageBox::critical(this,"错误","错误");*/
 
         //信息对话框
         /*QMessageBox::information(this,"info","信息");*/
@@ -36,9 +36,24 @@ mainwindow::mainwindow(QWidget *parent)
 
         //提问对话框
 		//参数1父亲  参数2标题  参数3提示内容  参数4按键类型  参数5默认关联回车按键
-        /*QMessageBox::question(this,"ques","提问",QMessageBox::Save |QMessageBox::Cancel,QMessageBox::Cancel);*/
+        /*if (QMessageBox::Save == QMessageBox::question(this, "ques", "提问", QMessageBox::Save | QMessageBox::Cancel, QMessageBox::Cancel))
+        {
+            qDebug()<<"确认";
+        }
+        else
+        {
+            qDebug() << "取消";
+        }*/
 
-       
+        //其他对话框
+        //颜色对话框
+		QColor color = QColorDialog::getColor(QColor(255, 0, 0));
+		qDebug() << "r = " << color.red();
+
+        //文件对话框
+		QString str = QFileDialog::getOpenFileName(this, "openFile", "C:\\Users\\BAOfanTing\\Desktop\\1\\1.png");
+		qDebug() << str;
+
 
         });
 }
