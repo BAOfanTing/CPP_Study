@@ -5,6 +5,8 @@
 #include <QTimer>
 #include <QThread>
 #include <cmath>
+#include <QDebug>
+
 
 /******************************************************************************
  *
@@ -28,11 +30,14 @@ public:
 
     QString caculateTime(int totaltime);
 
+    void getid();
+
 signals:
     void timeUpdated(QString totaltimestr); //发送时间给主界面
     void sig_isRunning(bool isRunning);//发送状态
 
 public slots:
+
     void start();
     void stop();
     void pause();

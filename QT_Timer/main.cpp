@@ -6,6 +6,9 @@
 #include <QQuickView>
 #include <QQmlContext>
 #include <QtQml>
+#include <QDebug>
+#include "timelistmodel.h"
+
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -16,17 +19,22 @@ int main(int argc, char *argv[])
     //设置窗口图标
     app.setWindowIcon(QIcon("icon.svg"));
 
-    //注册计时线程,并将计时线程移动到工作线程
-    TimerThread timerThread;
-    QThread workerThread;
-    timerThread.moveToThread(&workerThread);
+    // //注册计时线程,并将计时线程移动到工作线程
+    // TimerThread timerThread;
+    // QThread workerThread;
+    // timerThread.moveToThread(&workerThread);
 
-    //启动工作线程
-    workerThread.start();
+    // //启动工作线程
+    // workerThread.start();
 
     QQmlApplicationEngine engine;
 
     qmlRegisterType<TimerThread>("com.timerthread",1,0,"TimerThread");
+
+    //把写好的list模型注册到qml中
+    TimeListModel listmodel;
+    engine.rootContext()->setContextProperty("m_TimeListModel",&listmodel);
+
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(
@@ -39,6 +47,9 @@ int main(int argc, char *argv[])
         },
         Qt::QueuedConnection);
     engine.load(url);
+
+    // 打印主线程的 ID
+    qDebug() << "主线程ID: "<< QThread::currentThreadId();
 
     return app.exec();
 }

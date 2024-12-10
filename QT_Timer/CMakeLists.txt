@@ -38,6 +38,7 @@ else()
           ${PROJECT_SOURCES}
           res.qrc
           timerthread.h timerthread.cpp
+          timelistmodel.h timelistmodel.cpp
         )
     endif()
 endif()

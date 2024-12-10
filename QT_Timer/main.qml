@@ -18,6 +18,10 @@ Window {
     height: 480
     visible: true
     title: qsTr("QML-计时器")
+    maximumHeight: 480
+    maximumWidth: 300
+    minimumHeight: 480
+    minimumWidth: 300
 
     //时间显示
     Text{
@@ -45,7 +49,7 @@ Window {
         //当在button里已经定义了click时,外部就不需要mouseArea了,直接监听click型号
         onClicked: {
             if(isrunning){
-                timerThread.stop()
+                timerThread.pause()
                 start_pause.source = "fig/start.svg"
                 console.log("暂停计时")
 
@@ -80,24 +84,27 @@ Window {
     Connections{
         target:timerThread
         // 使用传递过来的 totaltime 参数,信号传递出来的参数在connect内部可以直接使用,在外部不行
-        onTimeUpdated:{
+        function onTimeUpdated(totaltimestr){
             timerDisplay.text = totaltimestr
             totaltime = totaltimestr
             //console.log(totaltime)
         }
-        onSig_isRunning:{
+        function onSig_isRunning(isRunning){
             isrunning = isRunning
             console.log(isRunning)
         }
     }
 
+    Connections{
+        target:timerThread
+    }
 
     property int index: 0
     //终止_记录按钮
     Button{
         id:stop_record
         visible: false
-        x:parent.width/2-start_pause.width/2
+        x:parent.width/2-start_pause.height/2
         y:parent.height/2+150
         width:40;height:40
         source:"fig/record.svg"
@@ -111,10 +118,10 @@ Window {
                 listrect.visible = true
 
                 //把记录加入list模型
-
-
-                recordlistmodel.insert(0,{"text": index.toString() +"   "+totaltime})
+                // recordlistmodel.insert(0,{"text": index.toString() +"   "+totaltime})
+                m_TimeListModel.append(index.toString(),totaltime);
                 index += 1
+                console.log(index.toString()+totaltime);
             }
             else{
                 //终止按钮
@@ -127,14 +134,14 @@ Window {
                 stop_record_anim2.start()
 
                 //判断记录模型是否为空执行动画
-                if(recordlistmodel.count != 0) {timerDisplay_anim2.start()}
+                if(m_TimeListModel.rowCount() != 0) {timerDisplay_anim2.start()}
                 timerDisplay_anim_once = true
                 stop_record.visible = false
                 stop_record.source = "fig/record.svg"
                 listrect.visible = false
                 index = 0
                 firstclick = false
-                recordlistmodel.clear()
+                TimeListModel.clear()
             }
         }
 
@@ -143,7 +150,7 @@ Window {
     Rectangle{
         id:listrect
         width:200;height:300
-        x:(root.width-listrect.width)/2;y:45
+        x:(root.width-listrect.width)/2;y:60
         border.color:  "#dcdfe6"
         border.width: 2
         visible: false
@@ -154,7 +161,7 @@ Window {
             anchors.fill:parent
             anchors.margins: 20 //让元素离listview有边界
             clip: true
-            model:recordlistmodel
+            model:m_TimeListModel
             delegate: recordlist
             spacing: 5
 
@@ -169,7 +176,7 @@ Window {
                 color: "transparent" // 设置背景为透明
                 Text {
                     anchors.centerIn: parent
-                    text: model.text
+                    text: model.m_idnumber + " " + model.m_timeStr;
                     color:"gray"
                     font.family: "SimHei"
                 }
@@ -225,20 +232,20 @@ Window {
         id:timerDisplay_anim1
         target: timerDisplay
         properties: "y"
-        from:root.width/2-stop_record.width/2
-        to:0
+        from:root.height/2-timerDisplay.height/2
+        to:5
         duration: 200
     }
     NumberAnimation{
         id:timerDisplay_anim2
         target: timerDisplay
         properties: "y"
-        to:root.width/2-stop_record.width/2
-        from:0
+        to:root.height/2-timerDisplay.height/2
+        from:5
         duration: 200
     }
 
-    ListModel{
-        id:recordlistmodel
-    }
+    // ListModel{
+    //     id:recordlistmodel
+    // }
 }
