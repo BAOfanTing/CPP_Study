@@ -31,6 +31,12 @@ QtObject{
     readonly property color strBtnBackgroundUnselect: "transparent";    //透明背景
     readonly property color strBtnBackgroundSelect: "#969799";          //背景加深
 
+    //表情
+    readonly property color strEmojiBackgroundColor: bLightModel ? "#ffffff" : "#2c2c2c"  //对方气泡颜色
+
+
+
+
 
     readonly property color strDividerColor: bLightModel ? "lightgray" : "#292929";  //分割线颜色
 

@@ -28,7 +28,7 @@ Item {
                 height:talkConfig.nProfilePictureHeight;
                 anchors.horizontalCenter: parent.horizontalCenter;
                 // source: "qrc:/icon/profile_48_gray.png";
-                source: "qrc:/icon/dingzheng1.png";
+                source: "qrc:/icon/furong.png";
             }
         }
         //消息展示区域

@@ -48,7 +48,7 @@ TalkItemBase{
             radius:4
             width:250
             height:80
-            color: "#ffffff"  //气泡颜色
+            color: colorConfig.strSenderBubbleBackgroundColor //跟发送者气泡颜色一样
 
             //指向发言人的小三角
             Rectangle{
@@ -57,7 +57,7 @@ TalkItemBase{
                 y:talkConfig.nMessageHeight/2-10;
                 anchors.horizontalCenter: talkItemOtherFile.isUser ? parent.right :parent.left
                 rotation: 45
-                color:"#ffffff"  //气泡颜色
+                color:colorConfig.strSenderBubbleBackgroundColor //气泡颜色
             }
             TalkLabel{
                 id:textItem;
@@ -66,7 +66,7 @@ TalkItemBase{
                 // text:model.fileName.length > 18 ? model.fileName.substring(0,16) + "..." : model.fileName;
                 text: extractTextFileName();
                 persistentSelection: true  //点击右键不会取消文本选中 5.15才有?
-                color:"#111111";
+                color:colorConfig.strTextColor;
                 font.pixelSize: 16
                 padding:12
                 wrapMode: TextEdit.WrapAnywhere

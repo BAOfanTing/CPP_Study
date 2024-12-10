@@ -16,11 +16,13 @@ Window {
     property url filePath: "";
     property var fileInfo;
     id:mainWindow
-    width: 900
-    height: 730
+    width: 720
+    height: 1280
     visible: true
     color: "#f5f5f5"
     flags:Qt.Window | Qt.FramelessWindowHint //去掉原始标题栏
+
+    signal sigInsertEmoji(string emojiPath);
 
     //UI高宽配置文件
     TalkConfig{
@@ -35,9 +37,10 @@ Window {
     //表情弹窗
     EmojiItem{
         id:emojiItem;
-        x:-200
-        y:300
+        x:0
+        y:toolItem.y-emojiItem.height-10
     }
+
 
     Rectangle{
         anchors.fill: parent
@@ -74,10 +77,6 @@ Window {
             width: parent.width
             anchors.bottom: parent.bottom
         }
-    }
-    // 在main.qml中调用
-    Component.onCompleted: {
-        emojiItem.open() // 打开Popup
     }
 
     //信号连接,换肤
@@ -128,6 +127,18 @@ Window {
                 console.log("表情按下");
                 emojiItem.open();
             }
+        }
+    }
+
+    //表情发送
+    Connections{
+        target:emojiItem
+        onSigEmojiBtnClicked:{
+            var emojiPath = "qrc:/icon/emoji/"+btnName;
+            var insertStr = "<img src='" + emojiPath + "' width='20' height='20' style='vertical-align:baseline;'/>"
+
+            //插入表情
+            inputItem.textArea.insert(inputItem.textArea.cursorPosition,insertStr)
         }
     }
 
