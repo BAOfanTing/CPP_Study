@@ -84,9 +84,18 @@ Window {
             {
                 filePath = fileModel.getSelectedFileUrl();
                 console.log(filePath);
+                count++
                 if(filePath !== "")
                 {
-                    talkListModel.appendImage("A","A",filePath.toString())
+                    if(count %2 === 0)
+                    {
+                        talkListModel.appendImage("A","A",filePath.toString())
+                    }
+                    else{
+                        talkListModel.appendImage("B","A",filePath.toString())
+                    }
+
+
                 }
             }
         }
@@ -127,7 +136,6 @@ Window {
             }
             //----------------------------测试单击缩放是否闪烁,删
             onClicked: {
-                fileDialog.open();
                 count++
                 if(count%2 === 0)
                 {
