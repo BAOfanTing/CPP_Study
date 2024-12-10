@@ -132,7 +132,8 @@ void FaceAttendence::timerEvent(QTimerEvent *e)
 void FaceAttendence::timer_connect()
 {
     //连接服务器
-    m_socket.connectToHost("192.168.1.8",8866);
+    //m_socket.connectToHost("192.168.1.8",8866);
+    m_socket.connectToHost("192.168.161.144",8866);
     qDebug()<<"正在连接服务器";
 }
 
@@ -156,7 +157,7 @@ void FaceAttendence::receive_data()
     //{employeeID:%1, name : %2,address:%3,time:%4}
     // 接受数据并展示
     QByteArray array = m_socket.readAll(); // 读取所有接收到的数据
-
+    qDebug()<<array;
     // JSON解析
     QJsonParseError err;
     QJsonDocument doc = QJsonDocument::fromJson(array, &err);
@@ -186,5 +187,8 @@ void FaceAttendence::receive_data()
     //-----------------显示头像------------------
     ui->lb_headpic->setStyleSheet("border-radius:70px; border-image: url(./cache.jpg);");
     //显示认证成功
-    ui->wg_success->show();
+    if(employeeID != "")
+    {
+        ui->wg_success->show();
+    }
 }

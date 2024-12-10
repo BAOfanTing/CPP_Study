@@ -78,7 +78,6 @@ void register_ui::on_btn_register_clicked()
     QSqlTableModel model;
     model.setTable("employee");
 
-    qDebug()<<"1";
     //把头像保存到一个路径下
     QString headfile = QString("./data/%1.jpg").arg(ui->le_nickname->text().toUtf8().toBase64());
     cv::imwrite(headfile.toStdString(),image);
@@ -133,7 +132,13 @@ void register_ui::on_btn_opencamera_clicked()
 void register_ui::on_btn_shoot_clicked()
 {
     //保存数据
+    if(ui->le_nickname->text() == "")
+    {
+        QMessageBox::information(nullptr,"信息","请先输入个人信息");
+        return;
+    }
     QString headfile = QString("./data/%1.jpg").arg(ui->le_nickname->text().toUtf8().toBase64());
+    ui->le_path->setText(headfile);
     cv::imwrite(headfile.toStdString(),srcImage);
     killTimer(timerID); // 停止定时器
     ui->btn_opencamera->setText("打开摄像头"); // 设置按钮文本为“打开摄像头”

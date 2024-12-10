@@ -16,6 +16,9 @@ public:
     explicit selectwindow(QWidget *parent = nullptr);
     ~selectwindow();
 
+private slots:
+    void on_btn_check_clicked();
+
 private:
     Ui::selectwindow *ui;
 

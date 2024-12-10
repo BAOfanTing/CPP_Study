@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     }
 
      // 创建考勤记录表 (if not exists: 如果不存在则创建)
-    createstr  = "create table if not exists attendance(attendenceID integer primary key autoincrement, employeeID integer,"
+    createstr  = "create table if not exists attendance(attendenceID integer primary key autoincrement, employeeID integer, name text,"
                         "attendanceTime TimeStamp NOT NULL DEFAULT(datetime('now','localtime')))";
 
     if(!query.exec(createstr))

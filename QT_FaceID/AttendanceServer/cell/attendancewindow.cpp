@@ -130,7 +130,7 @@ void AttendanceWindow::recevice_faceID(qint64 faceID)
     //没有检测到人脸，也得发送空的数据
     if(faceID < 0)
     {
-        QString sdmsg = QString("{\"employeeID\":,\"name\":,\"address\":,\"time\":}");
+        QString sdmsg = QString("{\"employeeID\":\"\",\"name\":\"\",\"address\":\"\",\"time\":\"\"}");
         // 发送数据
         m_socket->write(sdmsg.toUtf8());
     }
@@ -152,14 +152,30 @@ void AttendanceWindow::recevice_faceID(qint64 faceID)
                             .arg(record.value("address").toString())       // 地址
                             .arg(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")); // 当前时间
 
-        // 发送数据
-        m_socket->write(sdmsg.toUtf8());
-    }
+        //--------------把数据写入考勤表------------
+        //时间是系统默认生成不需要加入
+        QString insertstr = QString("INSERT INTO attendance(employeeID,name) VALUES (%1,'%2')")
+                                .arg(record.value("employeeID").toString())
+                                .arg(record.value("name").toString());
 
+        qDebug()<<insertstr;
+        QSqlQuery query;
+        if(query.exec(insertstr))
+        {
+            // 数据插入数据库发送正确数据
+            m_socket->write(sdmsg.toUtf8());
+        }
+        else
+        {
+            QString sdmsg = QString("{\"employeeID\":\"\",\"name\":\"\",\"address\":\"\",\"time\":\"\"}");
+            // 发送数据
+            m_socket->write(sdmsg.toUtf8());
+        }
+    }
 }
 
 void AttendanceWindow::on_btn_query_clicked()
 {
-    qury_win.show();
+    query_win.show();
 }
 
