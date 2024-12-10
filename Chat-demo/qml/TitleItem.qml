@@ -48,6 +48,16 @@ Rectangle{
         }
     }
 
+    // 底部灰色线条
+    Rectangle {
+        height: 1; // 线条高度
+        width: parent.width; // 与父容器同宽
+        color: colorConfig.lightgray; // 浅灰色
+        anchors.bottom: parent.bottom; // 固定在底部
+    }
+
+
+
 
 
 }
