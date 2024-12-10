@@ -18,8 +18,9 @@ ApplicationWindow {
 
     Item {
         anchors.fill:parent
-
+        objectName: "item"
         MouseArea{
+            objectName: "click"
             anchors.fill:parent
             onClicked: {
                 popup.open();
@@ -33,12 +34,11 @@ ApplicationWindow {
             height: parent.height/4
         }
 
-        GstGLVideoItem {
-            id: videoItem2
-            objectName: "videoItem2"
 
-            width: parent.width/4
-            height: parent.height/4
+        Loader {
+            id: popupLoader
+            active: true // 确保弹窗组件被加载
+            sourceComponent: popupComponent
         }
 
 
@@ -50,20 +50,26 @@ ApplicationWindow {
         modal: true
         focus: true
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
+        visible: false;
         objectName: "popup"
+        onOpened: {
+            console.log("Popup opened");
+            popupOpen();
+        }
 
         Rectangle{
             width:260;
             height:260;
             color:"red"
-
+            GstGLVideoItem {
+                id: videoItem2
+                objectName: "videoItem2"
+                anchors.fill:parent
+            }
         }
 
 
     }
-
-
-
 
     }
 }
