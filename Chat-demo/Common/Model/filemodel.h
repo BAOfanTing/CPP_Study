@@ -4,6 +4,13 @@
 #include <QObject>
 #include <QFileDialog>
 #include <QUrl>
+#include <QDebug>
+#include <QFileInfo>
+struct FileInfo {
+    QString fileSizeStr;
+    QString fileName;
+    QString fileSuffix;
+};
 
 class FileModel : public QObject
 {
@@ -13,6 +20,11 @@ public:
 
     //获取选择的文件路径
     Q_INVOKABLE QUrl getSelectedFileUrl();
+
+    //获取文件信息
+    Q_INVOKABLE QVariant extractFileInfo(const QString &filePath);
+    //格式化文件大小
+    QString formatFileSize(qint64 size);
 
 private:
     //私有化构造

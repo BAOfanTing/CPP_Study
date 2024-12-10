@@ -34,6 +34,8 @@ QtObject{
 
     readonly property color strDividerColor: bLightModel ? "lightgray" : "#292929";  //分割线颜色
 
+    readonly property color strTimeBackgroundColor: bLightModel ? "#dadada" : "transparent";    //时间背景
+
     readonly property color lightgray: "lightgray";
     readonly property color green: "#89d961";
     readonly property color white: "#ffffff";

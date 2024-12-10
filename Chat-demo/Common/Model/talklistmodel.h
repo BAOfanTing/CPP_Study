@@ -31,6 +31,13 @@ public:
     Q_INVOKABLE void appendImage(const QString &user,
                                  const QString &sender,
                                  const QString &ImageUrl);
+    //发送其他文件
+    Q_INVOKABLE void appendOtherFile(const QString &user,
+                                     const QString &sender,
+                                     const QString &filePath,
+                                     const QString &fileName,
+                                     const QString &fileSize,
+                                     const QString &fileSuffix);
 
     qint64 caculateTime();
 private:
