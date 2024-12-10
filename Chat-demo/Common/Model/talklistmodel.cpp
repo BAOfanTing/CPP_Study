@@ -57,8 +57,6 @@ QVariant TalkListModel::data(const QModelIndex &index, int role) const
 
     switch(role)
     {
-        default:
-            break;
         case Qt::UserRole+0:
             return item->id;
         case Qt::UserRole+1:
@@ -91,7 +89,8 @@ QVariant TalkListModel::data(const QModelIndex &index, int role) const
             TalkDataImage *talk_image = static_cast<TalkDataImage*>(item.get());
             return talk_image->imagePath;
         }
-
+        default:
+            break;
     }
 }
 
