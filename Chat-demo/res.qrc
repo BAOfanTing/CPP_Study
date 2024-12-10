@@ -1,8 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>icon/profile_48_gray.png</file>
-        <file>icon/camera_dark.png</file>
-        <file>icon/camera_light.png</file>
         <file>icon/close_dark.png</file>
         <file>icon/close_light.png</file>
         <file>icon/expression_dark.png</file>
@@ -98,5 +96,9 @@
         <file>icon/emoji/worried-face_1f61f.png</file>
         <file>icon/emoji/zipper-mouth-face_1f910.png</file>
         <file>icon/furong.png</file>
+        <file>icon/phone_dark.png</file>
+        <file>icon/phone_light.png</file>
+        <file>icon/video_dark.png</file>
+        <file>icon/video_light.png</file>
     </qresource>
 </RCC>
