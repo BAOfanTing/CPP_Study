@@ -77,6 +77,9 @@ chooselevelsene::chooselevelsene(QWidget *parent)
 			play = new PlayScene(i+1);
 			play->show();
 
+			//设置游戏场景的初始位置
+			play->setGeometry(this->geometry());
+
 			//监听返回选择关卡的信号
 			connect(play, &PlayScene::levelSceneBack, [=]() {
 				qDebug() << "返回选择关卡111";
@@ -90,6 +93,8 @@ chooselevelsene::chooselevelsene(QWidget *parent)
 					play = NULL;
 					this->show();//显示选择关卡界面
 					});
+
+				this->setGeometry(play->geometry());
 			});
 		});
 	}
