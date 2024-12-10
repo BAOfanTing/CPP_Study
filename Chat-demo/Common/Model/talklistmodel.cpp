@@ -34,6 +34,9 @@ QHash<int, QByteArray> TalkListModel::roleNames() const
         {Qt::UserRole+3,"datetime"},
         {Qt::UserRole+4,"type"},
         {Qt::UserRole+5,"status"},
+        {Qt::UserRole+6,"fileName"},
+        {Qt::UserRole+7,"fileSize"},
+        {Qt::UserRole+6,"filePath"},
         //文本
         {Qt::UserRole+100,"text"},
         //图片
@@ -93,7 +96,7 @@ void TalkListModel::appendText(const QString &user, const QString &sender, const
     talk_data->id = 0;
     talk_data->user = user;
     talk_data->sender = sender;
-    talk_data->datetime = QDateTime::currentSecsSinceEpoch();
+    talk_data->datetime = caculateTime();
     talk_data->type = TalkData::Text;
     talk_data->status = TalkData::ParseSuccess;
     talk_data->text = text;
@@ -111,7 +114,7 @@ void TalkListModel::appendImage(const QString &user, const QString &sender, cons
     talk_data->id = 0;
     talk_data->user = user;
     talk_data->sender = sender;
-    talk_data->datetime = QDateTime::currentSecsSinceEpoch();
+    talk_data->datetime = caculateTime();
     talk_data->type = TalkData::Image;
     talk_data->status = TalkData::ParseSuccess;
     talk_data->imageUrl = ImageUrl;
@@ -122,5 +125,34 @@ void TalkListModel::appendImage(const QString &user, const QString &sender, cons
     beginInsertRows(QModelIndex(),talkList.count(),talkList.count());
     talkList.push_back(QSharedPointer<TalkDataBasic>(talk_data));
     endInsertRows();
+}
+
+qint64 TalkListModel::caculateTime()
+{
+    qint64 currentTime = QDateTime::currentSecsSinceEpoch();
+    //记录首次时间
+    if(lastShowTime == 0)
+    {
+        lastShowTime = currentTime;
+        return lastShowTime;
+    }
+    else //计算时差重置最后时间
+    {
+        QDateTime lastDateTime = QDateTime::fromSecsSinceEpoch(lastShowTime);
+        QDateTime currentDateTime = QDateTime::fromSecsSinceEpoch(currentTime);
+
+        //计算时差,转换为差了几秒
+        qint64 timeDiff = lastDateTime.secsTo(currentDateTime);
+
+        timeDiff = timeDiff / 30; //转换为分钟
+
+        qDebug() << "timeDiff" << timeDiff;
+        if(timeDiff >= 1 )
+        {
+            lastShowTime = QDateTime::currentSecsSinceEpoch();
+            return lastShowTime;
+        }
+        return 0;
+    }
 }
 
