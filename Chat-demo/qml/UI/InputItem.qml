@@ -7,6 +7,7 @@ import "../../Common"
 //最小 550*150
 Rectangle{
     color: colorConfig.strBackgroundColor;
+    property alias textArea: textArea
 
     //添加文字滚动效果
     ScrollView{
@@ -25,7 +26,7 @@ Rectangle{
 
             color:colorConfig.strTextColor
             readOnly: false // 根据需要设置是否只读
-            wrapMode: TextEdit.Wrap //开启换行
+            wrapMode: TextEdit.WrapAnywhere //开启换行
 
             //开启选择文本
             selectByMouse: true;
