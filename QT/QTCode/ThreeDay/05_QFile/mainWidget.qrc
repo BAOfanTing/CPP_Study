@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/mainWidget"/>
     <qresource prefix="/">
-        <file>Image/butterfly.png</file>
-        <file>Image/mario.gif</file>
+        <file>132.txt</file>
     </qresource>
 </RCC>

@@ -2,10 +2,11 @@
 
 #include <QtWidgets/QWidget>
 #include "ui_mainWidget.h"
-#include <QPaintEvent>
+#include <QPixmap>
 #include <QPainter>
-#include <QPoint>
-#include <QPushButton>
+#include <QPen>
+#include <QImage>
+#include <QPicture>
 
 class mainWidget : public QWidget
 {
@@ -18,7 +19,6 @@ public:
     //»æÍ¼ÊÂ¼þ
     void paintEvent(QPaintEvent *);
 
-    int pos = 0;
 private:
     Ui::mainWidgetClass ui;
 };
