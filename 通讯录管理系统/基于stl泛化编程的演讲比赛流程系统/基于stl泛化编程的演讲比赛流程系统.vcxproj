@@ -131,6 +131,7 @@
     <ClCompile Include="演讲比赛流程管理系统.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Speecher.h" />
     <ClInclude Include="speechManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
