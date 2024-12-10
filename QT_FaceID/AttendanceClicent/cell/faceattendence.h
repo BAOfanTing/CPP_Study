@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <opencv.hpp>
+#include <QTcpSocket>
+#include <QTimer>
+#include <QMessageBox>>
 
 using namespace cv;
 using namespace std;
@@ -24,6 +27,12 @@ public:
     //定时器事件
     void timerEvent(QTimerEvent *e);
 
+
+public slots:
+    void timer_connect();
+    void stop_connnect();
+    void start_connect();
+
 private:
     Ui::FaceAttendence *ui;
 
@@ -32,5 +41,9 @@ private:
 
     //haar -- 级联分类器
     cv::CascadeClassifier cascade;
+
+    //创建网络前套字，定时器
+    QTcpSocket m_socket;
+    QTimer m_timer;
 };
 #endif // FACEATTENDENCE_H

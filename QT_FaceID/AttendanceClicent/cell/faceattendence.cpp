@@ -14,6 +14,15 @@ FaceAttendence::FaceAttendence(QWidget *parent)
 
     //导入级联分类器
     cascade.load("E:/Environment/opencv452/etc/haarcascades/haarcascade_frontalface_alt2.xml");
+
+    //QTcpSocket当断开连接的时候disconnected信号，连接成功会发送connected
+    connect(&m_socket,&QTcpSocket::disconnected,this,&FaceAttendence::start_connect);
+    connect(&m_socket,&QTcpSocket::connected,this,&FaceAttendence::stop_connnect);
+
+    //定时器到时间，连接服务器
+    connect(&m_timer,&QTimer::timeout,this,&FaceAttendence::timer_connect);
+    //启动定时器,每5s连接一次直到成功
+    m_timer.start(5000);
 }
 
 FaceAttendence::~FaceAttendence()
@@ -69,4 +78,25 @@ void FaceAttendence::timerEvent(QTimerEvent *e)
 
     // 将 QPixmap 显示在 QLabel 控件上
     ui->lb_camera->setPixmap(mmp);
+}
+
+
+void FaceAttendence::timer_connect()
+{
+    //连接服务器
+    m_socket.connectToHost("ip地址",22);
+}
+
+void FaceAttendence::stop_connnect()
+{
+    //停止计时器
+    m_timer.stop();
+    QMessageBox::information(nullptr,"信息","连接成功");
+}
+
+void FaceAttendence::start_connect()
+{
+    //5秒连接
+    m_timer.start(5000);
+    QMessageBox::information(nullptr,"信息","服务器断开");
 }
