@@ -34,7 +34,7 @@ Rectangle{
                 MouseArea{
                     anchors.fill: parent
                     onClicked: {
-                        sigBtnClicked(modelData)
+                        sigBtnClicked(modelData) //发送按下的按钮名称
                     }
                 }
             }
