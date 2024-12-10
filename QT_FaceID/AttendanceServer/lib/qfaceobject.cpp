@@ -52,8 +52,8 @@ int QFaceObject::face_query(Mat &faceImage)
     // 调用人脸引擎进行人脸识别
     int64_t faceID = this->fengineptr->Query(image, &similaty);
 
-    //如果人脸可信度大于0.85，发送faceid信号
-    if(similaty>=0.85)
+    //如果人脸可信度大于0.7，发送faceid信号
+    if(similaty>=0.7)
     {
         emit send_faceid(faceID);
     }

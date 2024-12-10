@@ -239,9 +239,9 @@ QLabel#lb_title
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLabel" name="lb_number">
+       <widget class="QLabel" name="lb_employeeID">
         <property name="text">
-         <string>001</string>
+         <string/>
         </property>
         <property name="name" stdset="0">
          <string>value</string>
@@ -270,7 +270,7 @@ QLabel#lb_title
       <item row="3" column="1">
        <widget class="QLabel" name="lb_time">
         <property name="text">
-         <string>131331</string>
+         <string/>
         </property>
         <property name="name" stdset="0">
          <string>value</string>
@@ -280,7 +280,7 @@ QLabel#lb_title
       <item row="1" column="1">
        <widget class="QLabel" name="lb_nickname">
         <property name="text">
-         <string>nihao</string>
+         <string/>
         </property>
         <property name="name" stdset="0">
          <string>value</string>
@@ -307,9 +307,9 @@ QLabel#lb_title
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QLabel" name="lb_department">
+       <widget class="QLabel" name="lb_address">
         <property name="text">
-         <string>nihao</string>
+         <string/>
         </property>
         <property name="name" stdset="0">
          <string>value</string>
@@ -325,7 +325,7 @@ QLabel#lb_title
          </size>
         </property>
         <property name="text">
-         <string>部门</string>
+         <string>地址</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>

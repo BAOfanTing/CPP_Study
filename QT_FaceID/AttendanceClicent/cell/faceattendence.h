@@ -5,7 +5,10 @@
 #include <opencv.hpp>
 #include <QTcpSocket>
 #include <QTimer>
-#include <QMessageBox>>
+#include <QMessageBox>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonParseError>
 
 using namespace cv;
 using namespace std;

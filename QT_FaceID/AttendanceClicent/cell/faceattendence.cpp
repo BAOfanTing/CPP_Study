@@ -143,7 +143,33 @@ void FaceAttendence::start_connect()
 // 接收数据槽函数
 void FaceAttendence::receive_data()
 {
+    //{employeeID:%1, name : %2,address:%3,time:%4}
     // 接受数据并展示
-    QString msg = m_socket.readAll(); // 读取所有接收到的数据
-    qDebug() << msg; // 输出接收到的数据到调试输出
+    QByteArray array = m_socket.readAll(); // 读取所有接收到的数据
+
+    // JSON解析
+    QJsonParseError err;
+    QJsonDocument doc = QJsonDocument::fromJson(array, &err);
+
+    // 检查JSON解析错误
+    if (err.error != QJsonParseError::NoError)
+    {
+        qDebug() << "Json格式错误";
+        return;
+    }
+
+    // 获取JSON对象
+    QJsonObject obj = doc.object();
+
+    // 获取员工ID、姓名、时间和地址信息
+    QString employeeID = obj.value("employeeID").toString(); // 员工ID
+    QString name = obj.value("name").toString();             // 姓名
+    QString timestr = obj.value("time").toString();          // 时间字符串
+    QString address = obj.value("address").toString();       // 地址
+
+    // 更新界面显示
+    ui->lb_employeeID->setText(employeeID);  // 员工ID标签
+    ui->lb_nickname->setText(name);          // 姓名标签
+    ui->lb_address->setText(address);        // 地址标签
+    ui->lb_time->setText(timestr);           // 时间标签
 }
