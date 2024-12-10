@@ -10,6 +10,7 @@
 #include <QLabel>
 #include "MyCoin.h"
 #include "dataconfig.h"
+#include <QTimer>
 
 class PlayScene  : public QMainWindow
 {
@@ -28,6 +29,8 @@ public:
 
 	//二维数组维护每关的具体数据
 	int gameArry[4][4];
+
+	MyCoin* coinbtn[4][4];
 
 signals:
 	//写一个自定义信号，告诉选择场景，点击了返回

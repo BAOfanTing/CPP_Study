@@ -99,6 +99,53 @@ PlayScene::PlayScene(int level)
 			MyCoin* coin = new MyCoin(str);
 			coin->setParent(this);
 			coin->move(59+i*50,204+j*50);
+			
+			//给金币赋值
+			coin->posX = i;
+			coin->posY = j;
+			coin->flag = gameArry[i][j];// 1是正面，2是反面
+
+			//将金币放入到金币的二维数组中
+			coinbtn[i][j] = coin;
+
+			//连接点击
+			connect(coin,&MyCoin::clicked,[=](){
+				coin->changeFlag();
+				//更新flag
+				this->gameArry[i][j] = this->gameArry[i][j] == 0 ? 0 : 1;
+
+
+				//反转周围金币,延时反转
+				QTimer::singleShot(300,[=](){
+					//反转右侧
+					if (coin->posX + 1 <= 3)
+					{
+						coinbtn[coin->posX + 1][coin->posY]->changeFlag();
+						this->gameArry[coin->posX + 1][coin->posY] = this->gameArry[coin->posX + 1][coin->posY] == 0 ? 0 : 1;
+					}
+					//反转左侧
+					if (coin->posX - 1 >= 0)
+					{
+						coinbtn[coin->posX - 1][coin->posY]->changeFlag();
+						this->gameArry[coin->posX - 1][coin->posY] = this->gameArry[coin->posX - 1][coin->posY] == 0 ? 0 : 1;
+					}
+					//反转上侧
+					if (coin->posY - 1 >= 0)
+					{
+						coinbtn[coin->posX][coin->posY - 1]->changeFlag();
+						this->gameArry[coin->posX][coin->posY - 1] = this->gameArry[coin->posX][coin->posY - 1] == 0 ? 0 : 1;
+					}
+					//反转下侧
+					if (coin->posY + 1 <= 3)
+					{
+						coinbtn[coin->posX][coin->posY + 1]->changeFlag();
+						this->gameArry[coin->posX][coin->posY + 1] = this->gameArry[coin->posX][coin->posY + 1] == 0 ? 0 : 1;
+					}
+
+				});
+				
+
+			});
 		}
 	}
 }
