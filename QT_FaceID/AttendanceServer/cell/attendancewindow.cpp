@@ -17,6 +17,20 @@ AttendanceWindow::AttendanceWindow(QWidget *parent)
 
     //给模型绑定表格
     model.setTable("employee");
+
+
+    //-----------------创建线程-----------------
+    QThread *thread = new QThread();
+    //把QfaceObject的对象移动到线程中执行
+    m_faceobject.moveToThread(thread);
+    //启动线程
+    thread->start();
+    //绑定查询槽函数
+    connect(this,&AttendanceWindow::query,&m_faceobject,&QFaceObject::face_query);
+
+    //关联send_faceID的信号
+    connect(&m_faceobject,&QFaceObject::send_faceid,this,&AttendanceWindow::recevice_faceID);
+
 }
 
 AttendanceWindow::~AttendanceWindow()
@@ -94,11 +108,32 @@ void AttendanceWindow::read_data()
     faceImage = cv::imdecode(decode, cv::IMREAD_COLOR);
 
     // 使用 face_query 函数查询人脸，获取人脸ID
-    int faceID = m_faceobject.face_query(faceImage);
+    // int faceID = m_faceobject.face_query(faceImage);//这局代码资源消耗太大
 
+    //发送查询信号
+    emit query(faceImage);
+
+
+}
+
+
+void AttendanceWindow::on_btn_register_clicked()
+{
+    ww.show();
+}
+
+void AttendanceWindow::recevice_faceID(qint64 faceID)
+{
     // 输出人脸ID信息
     qDebug() <<"face:::" <<faceID;
 
+    //没有检测到人脸，也得发送空的数据
+    if(faceID < 0)
+    {
+        QString sdmsg = QString("{\"employeeID\":,\"name\":,\"address\":,\"time\":}");
+        // 发送数据
+        m_socket->write(sdmsg.toUtf8());
+    }
     // -----------------从数据库中提取数据------------------
     // 给模型设置过滤器
     model.setFilter(QString("faceID=%1").arg(faceID));
@@ -122,10 +157,3 @@ void AttendanceWindow::read_data()
     }
 
 }
-
-
-void AttendanceWindow::on_btn_register_clicked()
-{
-    ww.show();
-}
-

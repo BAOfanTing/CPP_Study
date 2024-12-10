@@ -4,12 +4,15 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
-#include "register_ui.h"
-
+#include "cell/register_ui.h"
+#include <opencv.hpp>
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    //注册自定义类型到qt里边
+    qRegisterMetaType<cv::Mat>("cv::Mat&");
+    qRegisterMetaType<cv::Mat>("cv::Mat");
 
     // 连接到 SQLite 数据库
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");

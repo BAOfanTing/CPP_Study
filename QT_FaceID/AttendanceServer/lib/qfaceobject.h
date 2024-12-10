@@ -32,6 +32,7 @@ public slots:
     int face_query(cv::Mat &faceImage);
 
 signals:
+    void send_faceid(qint64 faceID);
 
 private:
     // seeta 人脸引擎指针

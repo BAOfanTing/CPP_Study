@@ -10,6 +10,8 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include "cell/register_ui.h"
+#include <QThread>
+
 using namespace cv;
 
 
@@ -27,6 +29,10 @@ public:
     AttendanceWindow(QWidget *parent = nullptr);
     ~AttendanceWindow();
 
+
+signals:
+    void query(cv::Mat &image);
+
 public slots:
 
     // 接受客户端连接的槽函数
@@ -34,9 +40,9 @@ public slots:
     // 读取数据的槽函数
     void read_data();
 
-private slots:
     void on_btn_register_clicked();
 
+    void recevice_faceID(qint64 faceID);
 private:
     Ui::AttendanceWindow *ui;
 
