@@ -6,7 +6,7 @@
 #include <seeta/FaceEngine.h>
 #include <opencv.hpp>
 #include <QDir>
-
+#include <QDebug>
 using namespace cv;
 using namespace seeta;
 

@@ -79,7 +79,7 @@ void register_ui::on_btn_register_clicked()
     model.setTable("employee");
 
     //把头像保存到一个路径下
-    QString headfile = QString("./data/%1.jpg").arg(ui->le_nickname->text().toUtf8().toBase64());
+    QString headfile = QString("./data/%1.jpg").arg((const QString&)ui->le_nickname->text().toUtf8().toBase64());
     cv::imwrite(headfile.toStdString(),image);
     QSqlRecord record = model.record();
 
@@ -137,7 +137,7 @@ void register_ui::on_btn_shoot_clicked()
         QMessageBox::information(nullptr,"信息","请先输入个人信息");
         return;
     }
-    QString headfile = QString("./data/%1.jpg").arg(ui->le_nickname->text().toUtf8().toBase64());
+    QString headfile = QString("./data/%1.jpg").arg((const QString&)ui->le_nickname->text().toUtf8().toBase64());
     ui->le_path->setText(headfile);
     cv::imwrite(headfile.toStdString(),srcImage);
     killTimer(timerID); // 停止定时器

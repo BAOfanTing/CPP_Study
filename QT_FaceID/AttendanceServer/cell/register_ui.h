@@ -9,7 +9,7 @@
 #include <QMessageBox>
 #include <opencv.hpp>
 #include <QDir>
-
+#include <QString>
 
 using namespace cv;
 

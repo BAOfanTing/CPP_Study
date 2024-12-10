@@ -9,6 +9,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonParseError>
+#include <QTextToSpeech>
 
 using namespace cv;
 using namespace std;

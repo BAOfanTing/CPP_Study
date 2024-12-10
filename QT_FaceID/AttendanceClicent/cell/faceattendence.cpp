@@ -82,7 +82,7 @@ void FaceAttendence::timerEvent(QTimerEvent *e)
             QDataStream stream(&sendData, QIODevice::WriteOnly);
 
             // 设置 QDataStream 的版本
-            stream.setVersion(QDataStream::Qt_6_4);
+            stream.setVersion(QDataStream::Qt_5_12);
 
             // 将数据大小和字节数据写入 sendData
             stream << backsize << byte;
@@ -132,8 +132,8 @@ void FaceAttendence::timerEvent(QTimerEvent *e)
 void FaceAttendence::timer_connect()
 {
     //连接服务器
-    //m_socket.connectToHost("192.168.1.8",8866);
-    m_socket.connectToHost("192.168.161.144",8866);
+    m_socket.connectToHost("192.168.1.8",8866);
+    //m_socket.connectToHost("192.168.161.144",8866);
     qDebug()<<"正在连接服务器";
 }
 
@@ -178,17 +178,23 @@ void FaceAttendence::receive_data()
     QString timestr = obj.value("time").toString();          // 时间字符串
     QString address = obj.value("address").toString();       // 地址
 
-    // 更新界面显示
-    ui->lb_employeeID->setText(employeeID);  // 员工ID标签
-    ui->lb_nickname->setText(name);          // 姓名标签
-    ui->lb_address->setText(address);        // 地址标签
-    ui->lb_time->setText(timestr);           // 时间标签
 
-    //-----------------显示头像------------------
-    ui->lb_headpic->setStyleSheet("border-radius:70px; border-image: url(./cache.jpg);");
-    //显示认证成功
+
     if(employeeID != "")
     {
+        // 更新界面显示
+        ui->lb_employeeID->setText(employeeID);  // 员工ID标签
+        ui->lb_nickname->setText(name);          // 姓名标签
+        ui->lb_address->setText(address);        // 地址标签
+        ui->lb_time->setText(timestr);           // 时间标签
+
+        //-----------------显示头像------------------
+        ui->lb_headpic->setStyleSheet("border-radius:70px; border-image: url(./cache.jpg);");
+        //显示认证成功
+        QString saystr =QString("%1，打卡成功！").arg(ui->lb_nickname->text());
+                                                                 QTextToSpeech * m_speech = new QTextToSpeech();
+
+        m_speech->say(saystr);
         ui->wg_success->show();
     }
 }

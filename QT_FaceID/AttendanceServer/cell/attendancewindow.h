@@ -12,6 +12,7 @@
 #include "cell/register_ui.h"
 #include <QThread>
 #include "cell/selectwindow.h"
+#include <QDateTime>
 using namespace cv;
 
 

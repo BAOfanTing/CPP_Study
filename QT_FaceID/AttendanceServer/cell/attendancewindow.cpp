@@ -51,7 +51,7 @@ void AttendanceWindow::read_data()
 {
     // 创建 QDataStream 对象，并设置其版本为 Qt_6_4
     QDataStream stream(m_socket);
-    stream.setVersion(QDataStream::Qt_6_4);
+    stream.setVersion(QDataStream::Qt_5_15);
 
     // 如果 bsize 为零，则检查套接字中是否有足够的数据读取数据大小
     if (bsize == 0) {
