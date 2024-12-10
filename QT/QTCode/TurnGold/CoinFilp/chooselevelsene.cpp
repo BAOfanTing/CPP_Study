@@ -31,8 +31,8 @@ chooselevelsene::chooselevelsene(QWidget *parent)
 
 	connect(backBtn,&QPushButton::pressed,[=](){
 		qDebug()<<"点击返回";
-
-	
+		//告诉主场景返回了
+		emit this->chooseSceneBack();
 	});
 }
 
