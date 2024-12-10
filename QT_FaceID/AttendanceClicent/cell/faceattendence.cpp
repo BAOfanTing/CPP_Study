@@ -106,7 +106,8 @@ void FaceAttendence::timerEvent(QTimerEvent *e)
 void FaceAttendence::timer_connect()
 {
     //连接服务器
-    m_socket.connectToHost("192.168.190.1",9999);
+    m_socket.connectToHost("192.168.1.8",8866);
+    qDebug()<<"正在连接服务器";
 }
 
 void FaceAttendence::stop_connnect()

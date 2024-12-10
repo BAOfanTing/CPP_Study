@@ -35,5 +35,7 @@ private:
 
     // 与客户端通信的套接字对象
     QTcpSocket *m_socket;
+
+    quint64 bsize;
 };
 #endif // ATTENDANCEWINDOW_H
