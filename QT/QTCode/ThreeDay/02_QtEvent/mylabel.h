@@ -25,4 +25,6 @@ public:
 	//鼠标移动
 	void mouseMoveEvent(QMouseEvent* ev);
 
+	//通过Event事件分发器拦截鼠标按下事件
+	bool event(QEvent *e);
 };

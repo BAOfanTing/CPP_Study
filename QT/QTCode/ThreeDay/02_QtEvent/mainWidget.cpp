@@ -23,7 +23,30 @@ mainWidget::mainWidget(QWidget *parent)
 	connect(ui.btn1,&QPushButton::clicked,[=](){
 		timer->stop();
 	});
+
+	//给label1安装事件过滤器
+	//1、安装事件过滤器
+	ui.label1->installEventFilter(this);
+	//2、重写事件
 }
+
+//2、重写事件,obj就是控件
+bool mainWidget::eventFilter(QObject* watched, QEvent* event)
+{
+	if (watched == ui.label1)
+	{
+		if (event->type() == QEvent::MouseButtonPress)
+		{
+			//类型转换，e是ev的父类
+			QMouseEvent* ev = static_cast<QMouseEvent*>(event);
+			QString str = QString("事件过滤器鼠标按下 x =%1  y =%2 globalx=%3 ").arg(ev->pos().x()).arg(ev->pos().y()).arg(ev->globalPosition().toPoint().x());
+			qDebug() << str;
+		}
+	}
+	//默认交给父类处理
+	return QWidget::eventFilter(watched,event);
+}
+
 
 mainWidget::~mainWidget()
 {}

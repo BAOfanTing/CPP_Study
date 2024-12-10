@@ -46,3 +46,19 @@ void mylabel::mouseMoveEvent(QMouseEvent* ev)
 		qDebug() << "鼠标移动111";
 	/*}*/
 }
+
+bool mylabel::event(QEvent* e)
+{
+	//如果是鼠标按下，在event事件分发中做拦截操作
+	if (e->type() == QEvent::MouseButtonPress)
+	{
+		//类型转换，e是ev的父类
+		QMouseEvent* ev = static_cast<QMouseEvent*>(e);
+		QString str = QString("鼠标按下222 x =%1  y =%2 globalx=%3 ").arg(ev->pos().x()).arg(ev->pos().y()).arg(ev->globalPosition().toPoint().x());
+		qDebug() << str;
+
+		return true;//代表用户自己处理这个事件
+	}
+	//其他事件交给父类处理，默认处理
+	return QLabel::event(e);
+}
