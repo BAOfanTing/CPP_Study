@@ -70,7 +70,7 @@ QLabel#lb_title
       <height>480</height>
      </rect>
     </property>
-    <widget class="QWidget" name="widget_2" native="true">
+    <widget class="QWidget" name="wg_success" native="true">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -135,7 +135,7 @@ QLabel#lb_title
      </property>
     </widget>
     <zorder>lb_camera</zorder>
-    <zorder>widget_2</zorder>
+    <zorder>wg_success</zorder>
     <zorder>lb_traceFace</zorder>
    </widget>
    <widget class="QWidget" name="widget_3" native="true">
@@ -169,7 +169,7 @@ QLabel#lb_title
       </size>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLabel" name="lb_title">

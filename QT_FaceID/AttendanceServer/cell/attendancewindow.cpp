@@ -157,3 +157,9 @@ void AttendanceWindow::recevice_faceID(qint64 faceID)
     }
 
 }
+
+void AttendanceWindow::on_btn_query_clicked()
+{
+    qury_win.show();
+}
+

@@ -26,6 +26,9 @@ FaceAttendence::FaceAttendence(QWidget *parent)
 
     //接受json数据槽函数连接
     connect(&m_socket,&QTcpSocket::readyRead,this,&FaceAttendence::receive_data);
+
+    //一开始隐藏认证成功
+    ui->wg_success->hide();
 }
 
 FaceAttendence::~FaceAttendence()
@@ -43,6 +46,7 @@ void FaceAttendence::timerEvent(QTimerEvent *e)
         // 水平镜像图像
         cv::flip(srcImage, srcImage, 1);
     }
+
     //把图像转为灰度图，提高处理速度
     Mat grayImage;
     cvtColor(srcImage,grayImage,COLOR_BGR2GRAY);
@@ -87,6 +91,9 @@ void FaceAttendence::timerEvent(QTimerEvent *e)
             m_socket.write(sendData);
             // 重置 flag_onepersion 为 -2，避免连续发送
             flag_onepersion = -2;
+
+            //保存终端显示的人脸数据
+            cv::imwrite("./cache.jpg",srcImage);
         }
         // 增加 flag_onepersion，用于计数连续检测到人脸的次数
         flag_onepersion++;
@@ -98,6 +105,7 @@ void FaceAttendence::timerEvent(QTimerEvent *e)
 
          // 重置 flag_onepersion，重新开始计数
         flag_onepersion = 0;
+        ui->wg_success->hide();
     }
 
     //没有数据返回
@@ -116,6 +124,8 @@ void FaceAttendence::timerEvent(QTimerEvent *e)
 
     // 将 QPixmap 显示在 QLabel 控件上
     ui->lb_camera->setPixmap(mmp);
+
+
 }
 
 
@@ -172,4 +182,9 @@ void FaceAttendence::receive_data()
     ui->lb_nickname->setText(name);          // 姓名标签
     ui->lb_address->setText(address);        // 地址标签
     ui->lb_time->setText(timestr);           // 时间标签
+
+    //-----------------显示头像------------------
+    ui->lb_headpic->setStyleSheet("border-radius:70px; border-image: url(./cache.jpg);");
+    //显示认证成功
+    ui->wg_success->show();
 }

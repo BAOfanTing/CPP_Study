@@ -11,7 +11,7 @@
 #include <QSqlRecord>
 #include "cell/register_ui.h"
 #include <QThread>
-
+#include "cell/selectwindow.h"
 using namespace cv;
 
 
@@ -43,6 +43,9 @@ public slots:
     void on_btn_register_clicked();
 
     void recevice_faceID(qint64 faceID);
+private slots:
+    void on_btn_query_clicked();
+
 private:
     Ui::AttendanceWindow *ui;
 
@@ -60,5 +63,6 @@ private:
 
     //测试功能
     register_ui ww;
+    selectwindow query_win;
 };
 #endif // ATTENDANCEWINDOW_H
