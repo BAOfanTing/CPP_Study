@@ -1,7 +1,8 @@
 import QtQuick 2.13
 
 QtObject{
-    readonly property color lightgray: "lightgray"
+    readonly property color lightgray: "lightgray";
+    readonly property color weChatDefult: "#f5f5f5";
 
     readonly property color strTitleColor: "#f5f5f5";
     readonly property color strInputColor: "#f5f5f5";

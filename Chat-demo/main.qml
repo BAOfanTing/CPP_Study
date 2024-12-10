@@ -18,6 +18,10 @@ Window {
     TitleItem{
         window: mainWindow
     }
+
+    ToolItem{
+        y:400
+    }
 }
 
 

@@ -1,5 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>icon/ic_close.png</file>
+        <file>icon/ic_camera.png</file>
+        <file>icon/ic_expression.png</file>
+        <file>icon/ic_file.png</file>
+        <file>icon/ic_record.png</file>
     </qresource>
 </RCC>
