@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     //设置窗口图标
-    app.setWindowIcon(QIcon("icon.svg"));
+    app.setWindowIcon(QIcon("../../fig/icon.svg"));
 
     // //注册计时线程,并将计时线程移动到工作线程
     // TimerThread timerThread;
