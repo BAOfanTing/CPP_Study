@@ -67,13 +67,14 @@ void TimeListModel::clear()
     // 只有当数据列表不为空时才执行清除操作
     if(row > 0) {
         // 通知视图模型即将移除所有行，范围从 0 到最后一行
-        emit beginRemoveRows(QModelIndex(), 0, m_datalist.size() - 1);
+        // emit beginRemoveRows(QModelIndex(), 0, m_datalist.size() - 1);
+        emit beginResetModel();
 
         // 清空数据列表
         m_datalist.clear();
 
         // 通知视图模型移除操作完成
-        emit endRemoveRows();
+        emit endResetModel();
     } else {
         return; // 如果没有数据，直接返回
     }

@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
-import com.timerthread 1.0
+// import com.timerthread 1.0
+import tool 1.0
 /******************************************************************************
  *
  * @file       main.qml
@@ -22,6 +23,24 @@ Window {
     maximumWidth: 300
     minimumHeight: 480
     minimumWidth: 300
+
+    TimerThread_test{
+        id:m_TimerThread;
+    }
+
+    Connections{
+        target:m_TimerThread
+        //使用传递过来的 totaltime 参数,信号传递出来的参数在connect内部可以直接使用,在外部不行
+        function onSig_timeUpdated(totaltimestr){
+            timerDisplay.text = totaltimestr
+            totaltime = totaltimestr
+            // console.log(totaltime)
+        }
+        function onSig_isRunning(isRunning){
+            isrunning = isRunning
+            // console.log(isRunning)
+        }
+    }
 
     //时间显示
     Text{
@@ -49,9 +68,9 @@ Window {
         //当在button里已经定义了click时,外部就不需要mouseArea了,直接监听click型号
         onClicked: {
             if(isrunning){
-                timerThread.pause()
+                m_TimerThread.pause()
                 start_pause.source = "fig/start.svg"
-                console.log("暂停计时")
+                // console.log("暂停计时")
 
                 //将终止图标替换为记录
                 if(firstclick){
@@ -59,10 +78,10 @@ Window {
                 }
             }
             else{
-                timerThread.start()
+                m_TimerThread.start()
                 start_pause.source = "fig/pause.svg"
                 start_pause.width = 40
-                console.log("开始计时")
+                // console.log("开始计时")
 
                 //将暂停图标替换为终止
                 if(firstclick){
@@ -78,27 +97,6 @@ Window {
         }
     }
 
-    TimerThread{
-        id:timerThread
-    }
-    Connections{
-        target:timerThread
-        // 使用传递过来的 totaltime 参数,信号传递出来的参数在connect内部可以直接使用,在外部不行
-        function onTimeUpdated(totaltimestr){
-            timerDisplay.text = totaltimestr
-            totaltime = totaltimestr
-            //console.log(totaltime)
-        }
-        function onSig_isRunning(isRunning){
-            isrunning = isRunning
-            console.log(isRunning)
-        }
-    }
-
-    Connections{
-        target:timerThread
-    }
-
     property int index: 0
     //终止_记录按钮
     Button{
@@ -110,7 +108,7 @@ Window {
         source:"fig/record.svg"
         onClicked: {
             if(source == "qrc:/fig/record.svg"){
-                console.log("记录")
+                // console.log("记录")
                 if(timerDisplay_anim_once){
                     timerDisplay_anim1.start()
                     timerDisplay_anim_once = !timerDisplay_anim_once
@@ -121,12 +119,12 @@ Window {
                 // recordlistmodel.insert(0,{"text": index.toString() +"   "+totaltime})
                 m_TimeListModel.append(index.toString(),totaltime);
                 index += 1
-                console.log(index.toString()+totaltime);
+                // console.log(index.toString()+totaltime);
             }
             else{
                 //终止按钮
-                console.log("终止")
-                timerThread.stop()
+                // console.log("终止")
+                m_TimerThread.stop()
                 timerDisplay.text = "00:00:00"
                 start_pause.source = "fig/start.svg"
                 start_pause.width = 60
