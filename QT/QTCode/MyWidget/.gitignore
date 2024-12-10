@@ -1,0 +1,8 @@
+#自己设置规则
+
+x64/
+**.sln
+**.vcxproj
+**.filters
+**.user
+.vs/
