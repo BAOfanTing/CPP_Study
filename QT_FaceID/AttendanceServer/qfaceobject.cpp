@@ -9,6 +9,8 @@ QFaceObject::QFaceObject(QObject *parent)
     seeta::ModelSetting FRmodel("E:/Environment/SeetaFace2/bin/model/fr_2_10.dat",seeta::ModelSetting::GPU,0);
     // 创建 seeta 人脸引擎对象
     this->fengineptr = new seeta::FaceEngine(FDmodel,PDmodel,FRmodel);
+
+    this->fengineptr->Load("./face.db");
 }
 
 QFaceObject::~QFaceObject()

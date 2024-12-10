@@ -11,14 +11,17 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     attendancewindow.cpp \
-    qfaceobject.cpp
+    qfaceobject.cpp \
+    register_ui.cpp
 
 HEADERS += \
     attendancewindow.h \
-    qfaceobject.h
+    qfaceobject.h \
+    register_ui.h
 
 FORMS += \
-    attendancewindow.ui
+    attendancewindow.ui \
+    register_ui.ui
 
 
 #windows 平台添加头文件和库

@@ -4,11 +4,15 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
-
+#include "register_ui.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    //测试功能
+    register_ui ww;
+    ww.show();
 
     // 连接到 SQLite 数据库
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
