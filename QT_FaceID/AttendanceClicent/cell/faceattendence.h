@@ -32,6 +32,7 @@ public slots:
     void timer_connect();
     void stop_connnect();
     void start_connect();
+    void receive_data();
 
 private:
     Ui::FaceAttendence *ui;
@@ -45,5 +46,7 @@ private:
     //创建网络前套字，定时器
     QTcpSocket m_socket;
     QTimer m_timer;
+
+    int flag_onepersion = 0;
 };
 #endif // FACEATTENDENCE_H

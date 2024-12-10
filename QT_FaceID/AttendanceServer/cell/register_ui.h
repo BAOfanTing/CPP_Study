@@ -52,6 +52,8 @@ private:
     cv::VideoCapture cap;
 
     cv::Mat srcImage;
+
+
 };
 
 #endif // REGISTER_UI_H

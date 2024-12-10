@@ -33,6 +33,19 @@
      <string/>
     </property>
    </widget>
+   <widget class="QPushButton" name="btn_register">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>430</y>
+      <width>131</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>注册用户</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

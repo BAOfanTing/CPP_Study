@@ -14,6 +14,9 @@ AttendanceWindow::AttendanceWindow(QWidget *parent)
     m_server.listen(QHostAddress::Any,8866);
 
     bsize = 0;
+
+    //给模型绑定表格
+    model.setTable("employee");
 }
 
 AttendanceWindow::~AttendanceWindow()
@@ -74,7 +77,7 @@ void AttendanceWindow::read_data()
     ui->lb_pic->setPixmap(m_mp);
 
 
-    // 识别人脸
+    // -----------------识别人脸------------------
     // 定义一个 OpenCV 的 Mat 对象，用于存储人脸图像
     cv::Mat faceImage;
 
@@ -95,5 +98,34 @@ void AttendanceWindow::read_data()
 
     // 输出人脸ID信息
     qDebug() <<"face:::" <<faceID;
+
+    // -----------------从数据库中提取数据------------------
+    // 给模型设置过滤器
+    model.setFilter(QString("faceID=%1").arg(faceID));
+    model.select();
+
+    // 检查是否成功提取到一条记录
+    if (model.rowCount() == 1)
+    {
+        // 获取第一条记录
+        QSqlRecord record = model.record(0);
+
+        // 构建要发送的 JSON 消息
+        QString sdmsg = QString("{\"employeeID\":\"%1\",\"name\":\"%2\",\"address\":\"%3\",\"time\":\"%4\"}")
+                            .arg(record.value("employeeID").toString())    // 员工ID
+                            .arg(record.value("name").toString())          // 姓名
+                            .arg(record.value("address").toString())       // 地址
+                            .arg(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss")); // 当前时间
+
+        // 发送数据
+        m_socket->write(sdmsg.toUtf8());
+    }
+
+}
+
+
+void AttendanceWindow::on_btn_register_clicked()
+{
+    ww.show();
 }
 

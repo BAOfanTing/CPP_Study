@@ -23,6 +23,9 @@ FaceAttendence::FaceAttendence(QWidget *parent)
     connect(&m_timer,&QTimer::timeout,this,&FaceAttendence::timer_connect);
     //启动定时器,每5s连接一次直到成功
     m_timer.start(5000);
+
+    //接受json数据槽函数连接
+    connect(&m_socket,&QTcpSocket::readyRead,this,&FaceAttendence::receive_data);
 }
 
 FaceAttendence::~FaceAttendence()
@@ -47,7 +50,9 @@ void FaceAttendence::timerEvent(QTimerEvent *e)
     //检测人脸
     std::vector<Rect> faceRects;
     cascade.detectMultiScale(grayImage,faceRects,1.1,3);
-    if(faceRects.size()>0)
+
+    // 如果检测到人脸且 flag_onepersion 大于等于 0
+    if(faceRects.size()>0 && flag_onepersion >=0)
     {
         Rect rect = faceRects.at(0);//第一个人脸的矩形框
         //绘制矩形框
@@ -56,32 +61,43 @@ void FaceAttendence::timerEvent(QTimerEvent *e)
         //移动圆形检测框
         ui->lb_traceFace->move(rect.x-rect.width/2,rect.y-rect.height/2);
 
-        //把Mat数据转化为QbyteArry,编码成jpg格式
-        vector<uchar> buf;
-        cv::imencode(".jpg",srcImage,buf);
-        QByteArray byte((const char*)buf.data(),buf.size());
+        // 如果 flag_onepersion 大于 2，表示连续检测到人脸
+        if(flag_onepersion > 2)
+        {
+            //把Mat数据转化为QbyteArry,编码成jpg格式
+            vector<uchar> buf;
+            cv::imencode(".jpg",srcImage,buf);
+            QByteArray byte((const char*)buf.data(),buf.size());
 
-        // 获取数据大小
-        quint64 backsize = byte.size();
-        // 创建用于发送数据的 QByteArray 对象
-        QByteArray sendData;
+            // 获取数据大小
+            quint64 backsize = byte.size();
+            // 创建用于发送数据的 QByteArray 对象
+            QByteArray sendData;
 
-        // 创建 QDataStream 对象，用于将数据写入 sendData
-        QDataStream stream(&sendData, QIODevice::WriteOnly);
+            // 创建 QDataStream 对象，用于将数据写入 sendData
+            QDataStream stream(&sendData, QIODevice::WriteOnly);
 
-        // 设置 QDataStream 的版本
-        stream.setVersion(QDataStream::Qt_6_4);
+            // 设置 QDataStream 的版本
+            stream.setVersion(QDataStream::Qt_6_4);
 
-        // 将数据大小和字节数据写入 sendData
-        stream << backsize << byte;
+            // 将数据大小和字节数据写入 sendData
+            stream << backsize << byte;
 
-        // 将数据发送给客户端
-        m_socket.write(sendData);
+            // 将数据发送给客户端
+            m_socket.write(sendData);
+            // 重置 flag_onepersion 为 -2，避免连续发送
+            flag_onepersion = -2;
+        }
+        // 增加 flag_onepersion，用于计数连续检测到人脸的次数
+        flag_onepersion++;
     }
-    else
+    if(faceRects.size() == 0)
     {
         //没有检测到人脸 移动圆形检测框到中心
         ui->lb_traceFace->move(100,60);
+
+         // 重置 flag_onepersion，重新开始计数
+        flag_onepersion = 0;
     }
 
     //没有数据返回
@@ -122,4 +138,12 @@ void FaceAttendence::start_connect()
     //5秒连接
     m_timer.start(5000);
     QMessageBox::information(nullptr,"信息","服务器断开");
+}
+
+// 接收数据槽函数
+void FaceAttendence::receive_data()
+{
+    // 接受数据并展示
+    QString msg = m_socket.readAll(); // 读取所有接收到的数据
+    qDebug() << msg; // 输出接收到的数据到调试输出
 }

@@ -6,7 +6,10 @@
 #include <QTcpServer>
 #include "lib/qfaceobject.h"
 #include <opencv.hpp>
-
+#include <QSqlTableModel>>
+#include <QSqlQuery>
+#include <QSqlRecord>
+#include "cell/register_ui.h"
 using namespace cv;
 
 
@@ -31,6 +34,9 @@ public slots:
     // 读取数据的槽函数
     void read_data();
 
+private slots:
+    void on_btn_register_clicked();
+
 private:
     Ui::AttendanceWindow *ui;
 
@@ -43,5 +49,10 @@ private:
     qint64 bsize;
 
     QFaceObject m_faceobject;
+    //定义数据库表格模型
+    QSqlTableModel model;
+
+    //测试功能
+    register_ui ww;
 };
 #endif // ATTENDANCEWINDOW_H
