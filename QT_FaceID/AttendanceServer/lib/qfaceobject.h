@@ -5,6 +5,8 @@
 #include <seeta/FaceDatabase.h>
 #include <seeta/FaceEngine.h>
 #include <opencv.hpp>
+#include <QDir>
+
 using namespace cv;
 using namespace seeta;
 

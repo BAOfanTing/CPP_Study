@@ -5,9 +5,11 @@
 #include <QFileDialog>
 #include <QSqlTableModel>
 #include <QSqlRecord>
-#include "qfaceobject.h"
+#include "lib/qfaceobject.h"
 #include <QMessageBox>
-#include <opencv.hpp>>
+#include <opencv.hpp>
+#include <QDir>
+
 
 using namespace cv;
 

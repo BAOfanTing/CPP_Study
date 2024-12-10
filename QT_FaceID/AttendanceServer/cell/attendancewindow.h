@@ -4,6 +4,10 @@
 #include <QMainWindow>
 #include <QTcpSocket>
 #include <QTcpServer>
+#include "lib/qfaceobject.h"
+#include <opencv.hpp>
+
+using namespace cv;
 
 
 QT_BEGIN_NAMESPACE
@@ -36,6 +40,8 @@ private:
     // 与客户端通信的套接字对象
     QTcpSocket *m_socket;
 
-    quint64 bsize;
+    qint64 bsize;
+
+    QFaceObject m_faceobject;
 };
 #endif // ATTENDANCEWINDOW_H

@@ -72,5 +72,28 @@ void AttendanceWindow::read_data()
 
     // 将图像显示在 QLabel 控件上
     ui->lb_pic->setPixmap(m_mp);
+
+
+    // 识别人脸
+    // 定义一个 OpenCV 的 Mat 对象，用于存储人脸图像
+    cv::Mat faceImage;
+
+    // 定义一个无符号字符型向量 decode，用于存储解码后的数据
+    std::vector<uchar> decode;
+
+    // 调整 decode 的大小为与 data 相同
+    decode.resize(data.size());
+
+    // 将数据从 data 拷贝到 decode 中
+    memcpy(decode.data(), data.data(), data.size());
+
+    // 对解码后的数据进行颜色图像格式的解码，得到人脸图像
+    faceImage = cv::imdecode(decode, cv::IMREAD_COLOR);
+
+    // 使用 face_query 函数查询人脸，获取人脸ID
+    int faceID = m_faceobject.face_query(faceImage);
+
+    // 输出人脸ID信息
+    qDebug() <<"face:::" <<faceID;
 }
 

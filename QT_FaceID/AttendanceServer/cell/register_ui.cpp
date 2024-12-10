@@ -6,6 +6,12 @@ register_ui::register_ui(QWidget *parent)
     , ui(new Ui::register_ui)
 {
     ui->setupUi(this);
+    //检查data文件夹是否存在
+    QDir dir("./data/");
+    if (!dir.exists())
+    {
+        dir.mkpath(".");
+    }
 }
 
 register_ui::~register_ui()
@@ -72,6 +78,7 @@ void register_ui::on_btn_register_clicked()
     QSqlTableModel model;
     model.setTable("employee");
 
+    qDebug()<<"1";
     //把头像保存到一个路径下
     QString headfile = QString("./data/%1.jpg").arg(ui->le_nickname->text().toUtf8().toBase64());
     cv::imwrite(headfile.toStdString(),image);

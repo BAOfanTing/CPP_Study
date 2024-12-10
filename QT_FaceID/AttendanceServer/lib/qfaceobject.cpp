@@ -33,6 +33,7 @@ int64_t QFaceObject::face_register(Mat &faceImage)
         // 注册成功后保存人脸数据库
         this->fengineptr->Save("./face.db");
     }
+    qDebug()<<"faceid"<<faceID;
     return faceID;
 }
 
