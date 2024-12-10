@@ -27,7 +27,8 @@ Item {
                 width:talkConfig.nProfilePictureHeight;
                 height:talkConfig.nProfilePictureHeight;
                 anchors.horizontalCenter: parent.horizontalCenter;
-                source: "qrc:/icon/profile_48_gray.png";
+                // source: "qrc:/icon/profile_48_gray.png";
+                source: "qrc:/icon/dingzheng1.png";
             }
         }
         //消息展示区域
@@ -50,7 +51,8 @@ Item {
                 width:talkConfig.nProfilePictureHeight;
                 height:talkConfig.nProfilePictureHeight;
                 anchors.horizontalCenter: parent.horizontalCenter;
-                source: "qrc:/icon/profile_48_gray.png";
+                // source: "qrc:/icon/profile_48_gray.png";
+                source: "qrc:/icon/dingzheng2.png";
             }
         }
 

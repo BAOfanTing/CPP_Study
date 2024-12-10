@@ -104,11 +104,9 @@ Window {
                         if(count %2 === 0)
                         {
                             talkListModel.appendOtherFile("A","A",filePath.toString(),fileInfo.fileName,fileInfo.fileSize,fileInfo.fileSuffix);
-                            console.log("222")
                         }
                         else{
                             talkListModel.appendOtherFile("B","A",filePath.toString(),fileInfo.fileName,fileInfo.fileSize,fileInfo.fileSuffix);
-                            console.log("222")
                         }
                     }
                 }

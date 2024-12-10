@@ -21,5 +21,8 @@
         <file>icon/TXT.png</file>
         <file>icon/UNKNOWN.png</file>
         <file>icon/VIDEO.png</file>
+        <file>icon/ZIP.png</file>
+        <file>icon/dingzheng1.png</file>
+        <file>icon/dingzheng2.png</file>
     </qresource>
 </RCC>

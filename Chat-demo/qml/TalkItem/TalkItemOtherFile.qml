@@ -68,6 +68,7 @@ TalkItemBase{
                 persistentSelection: true  //点击右键不会取消文本选中 5.15才有?
                 color:"#111111";
                 font.pixelSize: 16
+                padding:12
                 wrapMode: TextEdit.WrapAnywhere
             }
             Image{
@@ -105,18 +106,21 @@ TalkItemBase{
                             {
                                 return "qrc:/icon/VIDEO.png";
                             }
+                            case "zip":
+                            {
+                                return "qrc:/icon/ZIP.png";
+                            }
                             default:
                             {
                                 return "qrc:/icon/UNKNOWN.png"
                             }
                         }
                 smooth: true
-                //判断是否需要缩放图
             }
             //文件大小
             Text{
-                y:40
-                padding:14
+                y:45
+                padding:12
                 id:fileSizeText
                 text:model.fileSize
                 font.pixelSize: 12
