@@ -6,11 +6,13 @@ Rectangle{
     height: 30
     color:colorConfig.strBtnBackgroundUnselect
     property string imageSource: ""
+    property int imgWidth :24;
+    property int imgHeight : 24;
 
     Image{
         id:btnImage;
-        width:24;
-        height:24;
+        width:imgWidth;
+        height:imgHeight;
         anchors.centerIn: parent;
         source: imageSource;
 

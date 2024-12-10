@@ -15,4 +15,6 @@ QtObject{
     property int nImageMaxWidth: 250;
     property int nImageMaxHeight: 250;
 
+
+
 }

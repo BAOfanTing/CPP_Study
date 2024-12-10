@@ -32,6 +32,13 @@ Window {
         id: colorConfig
     }
 
+    //表情弹窗
+    EmojiItem{
+        id:emojiItem;
+        x:-200
+        y:300
+    }
+
     Rectangle{
         anchors.fill: parent
         //标题栏
@@ -68,6 +75,10 @@ Window {
             anchors.bottom: parent.bottom
         }
     }
+    // 在main.qml中调用
+    Component.onCompleted: {
+        emojiItem.open() // 打开Popup
+    }
 
     //信号连接,换肤
     Connections{
@@ -81,6 +92,7 @@ Window {
         target:toolItem
         onSigBtnClicked:{
             //按下的是文件按钮
+            console.log(btnName)
             if(btnName === "qrc:/icon/file_dark.png" || btnName === "qrc:/icon/file_light.png")
             {
                 filePath = fileModel.getSelectedFileUrl();
@@ -110,6 +122,11 @@ Window {
                         }
                     }
                 }
+            }
+            else if(btnName === "qrc:/icon/expression_light.png" || btnName === "qrc:/icon/expression_dark.png")   //按下的表情按钮
+            {
+                console.log("表情按下");
+                emojiItem.open();
             }
         }
     }

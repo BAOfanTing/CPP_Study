@@ -80,39 +80,39 @@ TalkItemBase{
                         {
                             case "pdf":
                             {
-                                return "qrc:/icon/PDF.png";
+                                return "qrc:/icon/file/PDF.png";
                             }
                             case "docx":
                             {
-                                return "qrc:/icon/WORD.png";
+                                return "qrc:/icon/file/WORD.png";
                             }
                             case "csv":
                             {
-                                return "qrc:/icon/EXCEL.png";
+                                return "qrc:/icon/file/EXCEL.png";
                             }
                             case "xlsx":
                             {
-                                return "qrc:/icon/EXCEL.png";
+                                return "qrc:/icon/file/EXCEL.png";
                             }
                             case "txt":
                             {
-                                return "qrc:/icon/TXT.png";
+                                return "qrc:/icon/file/TXT.png";
                             }
                             case "ppt":
                             {
-                                return "qrc:/icon/PPT.png";
+                                return "qrc:/icon/file/PPT.png";
                             }
                             case "mp4":
                             {
-                                return "qrc:/icon/VIDEO.png";
+                                return "qrc:/icon/file/VIDEO.png";
                             }
                             case "zip":
                             {
-                                return "qrc:/icon/ZIP.png";
+                                return "qrc:/icon/file/ZIP.png";
                             }
                             default:
                             {
-                                return "qrc:/icon/UNKNOWN.png"
+                                return "qrc:/icon/file/UNKNOWN.png"
                             }
                         }
                 smooth: true

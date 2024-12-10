@@ -33,7 +33,8 @@ Rectangle{
             selectedTextColor: "#ffffff";
             persistentSelection: true  //点击右键不会取消文本选中 5.15才有?
 
-            text: "132132131313131321321a3sdfasdfasd32f13213213212"
+            textFormat: TextEdit.RichText //能够显示png表情
+            text: "132132131313131321321a3sdfasdfasd32f13213213212 <img src='qrc:/icon/emoji/angry-face_1f620.png' width='20' height='20' style='vertical-align:baseline;'/>"
         }
 
         //连接复制粘贴的信号

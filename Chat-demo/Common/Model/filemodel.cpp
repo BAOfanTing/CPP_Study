@@ -52,10 +52,10 @@ QVariant FileModel::extractFileInfo(const QString &filePath)
     QString fileSizeStr = formatFileSize(fileSize);
 
     // 打印输出
-    qDebug() << "File Path: " << localPath;
-    qDebug() << "File Name: " << fileName;
-    qDebug() << "File Size: " << fileSize ;
-    qDebug() << "File Suffix: " << fileSuffix;
+    // qDebug() << "File Path: " << localPath;
+    // qDebug() << "File Name: " << fileName;
+    // qDebug() << "File Size: " << fileSize ;
+    // qDebug() << "File Suffix: " << fileSuffix;
 
     QVariantMap map; //把数据变成qml能够接受的格式
     map["fileName"] = fileName;
@@ -74,6 +74,17 @@ QString FileModel::formatFileSize(qint64 size)
         return QString::number(size / (1024.0 * 1024), 'f', 2) + " MB";
     else
         return QString::number(size / (1024.0 * 1024 * 1024), 'f', 2) + " GB";
+}
+
+QStringList FileModel::getEmojiName()
+{
+    QDir dir("../../icon/emoji/");//表情所在地址
+    if(!dir.exists())
+    {
+        qDebug()<< "表情包路径不存在";
+    }
+    QStringList files = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
+    return files;
 }
 
 
