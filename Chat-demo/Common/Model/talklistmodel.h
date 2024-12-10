@@ -6,6 +6,7 @@
 #include <QSharedPointer>
 #include "TalkListDefine.h"
 #include <QDateTime>
+#include <QDebug>
 
 class TalkListModel : public QAbstractListModel
 {
@@ -26,6 +27,9 @@ public:
     Q_INVOKABLE void appendText(const QString &user,
                                 const QString &sender,
                                 const QString &text);
+    Q_INVOKABLE void appendImage(const QString &user,
+                                 const QString &sender,
+                                 const QString &ImageUrl);
 
 private:
     //私有化构造

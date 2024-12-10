@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QApplication>
 #include "./Common/Model/TalkListDefine.h"
 #include "./Common/Model/talklistmodel.h"
 #include "./Common/Model/filemodel.h"
@@ -10,7 +11,7 @@ int main(int argc, char *argv[])
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
 
 
     qmlRegisterType<TalkData>("TalkModel",1,0,"TalkData");

@@ -13,6 +13,7 @@ Window {
     property real initialHeight: 730  // 定义初始高度
     property real initialMouseX: 0  // 定义初始鼠标X坐标
     property real initialMouseY: 0  // 定义初始鼠标Y坐标
+    property url filePath: "";
     id:mainWindow
     width: 900
     height: 730
@@ -67,11 +68,27 @@ Window {
         }
     }
 
-    //信号连接
+    //信号连接,换肤
     Connections{
         target: titleItem
         onSigModifySkin:{
             bLightModel = !bLightModel
+        }
+    }
+    //选择文件传送
+    Connections{
+        target:toolItem
+        onSigBtnClicked:{
+            //按下的是文件按钮
+            if(btnName === "qrc:/icon/file_dark.png" || btnName === "qrc:/icon/file_light.png")
+            {
+                filePath = fileModel.getSelectedFileUrl();
+                console.log(filePath);
+                if(filePath !== "")
+                {
+                    talkListModel.appendImage("A","A",filePath.toString())
+                }
+            }
         }
     }
 

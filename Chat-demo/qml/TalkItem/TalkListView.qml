@@ -37,14 +37,25 @@ ListView{
         sourceComponent: {
             switch(model.type){
             case TalkData.Text:
+            {
                 return textComp;
             }
+            case TalkData.Image:
+            {
+                return imageComp;
+            }
+
             return nullComp;
+            }
         }
 
         Component{
             id:textComp
             TalkItemText{}
+        }
+        Component{
+            id:imageComp
+            TalkItemImage{}
         }
     }
     header: Item{

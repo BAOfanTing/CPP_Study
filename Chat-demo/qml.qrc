@@ -13,5 +13,6 @@
         <file>qml/TalkItem/TalkListView.qml</file>
         <file>Common/CopyPaste.qml</file>
         <file>Common/IconButton.qml</file>
+        <file>qml/TalkItem/TalkItemImage.qml</file>
     </qresource>
 </RCC>
