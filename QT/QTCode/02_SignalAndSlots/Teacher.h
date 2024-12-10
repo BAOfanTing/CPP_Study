@@ -1,5 +1,6 @@
 #pragma once
 #include <QObject>
+#include <QString>
 class Teacher  : public QObject
 {
 	Q_OBJECT
@@ -11,4 +12,6 @@ public:
 //可以有参数，可以重载
 signals:
 	void hungry();
+
+	void hungry(QString foodname);
 };
