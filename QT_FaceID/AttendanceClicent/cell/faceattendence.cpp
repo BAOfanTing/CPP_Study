@@ -55,6 +55,28 @@ void FaceAttendence::timerEvent(QTimerEvent *e)
 
         //移动圆形检测框
         ui->lb_traceFace->move(rect.x-rect.width/2,rect.y-rect.height/2);
+
+        //把Mat数据转化为QbyteArry,编码成jpg格式
+        vector<uchar> buf;
+        cv::imencode(".jpg",srcImage,buf);
+        QByteArray byte((const char*)buf.data(),buf.size());
+
+        // 获取数据大小
+        quint64 backsize = byte.size();
+        // 创建用于发送数据的 QByteArray 对象
+        QByteArray sendData;
+
+        // 创建 QDataStream 对象，用于将数据写入 sendData
+        QDataStream stream(&sendData, QIODevice::WriteOnly);
+
+        // 设置 QDataStream 的版本
+        stream.setVersion(QDataStream::Qt_6_4);
+
+        // 将数据大小和字节数据写入 sendData
+        stream << backsize << byte;
+
+        // 将数据发送给客户端
+        m_socket.write(sendData);
     }
     else
     {
