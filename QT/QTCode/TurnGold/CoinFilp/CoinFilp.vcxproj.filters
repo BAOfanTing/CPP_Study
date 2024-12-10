@@ -52,6 +52,9 @@
     <ClCompile Include="MyCoin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="dataconfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MyPushButton.h">
@@ -64,6 +67,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="MyCoin.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="dataconfig.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

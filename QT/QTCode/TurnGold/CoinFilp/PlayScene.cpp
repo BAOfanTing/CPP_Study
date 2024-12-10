@@ -61,6 +61,16 @@ PlayScene::PlayScene(int level)
 	label->setFont(font);
 	label->setGeometry(30,this->height()-50,120,50);
 
+	//初始化每个关卡的二维数组
+	dataConfig config;
+	for (int i = 0;i<4;i++)
+	{
+		for (int j = 0;j<4;j++)
+		{	//把按钮的状态保存下来
+			gameArry[i][j] = config.mData[this->levelindex][i][j];
+		}
+	}
+
 	//显示金币背景图
 	for (int i = 0;i<4;i++)
 	{
@@ -73,8 +83,20 @@ PlayScene::PlayScene(int level)
 			backlabel->setParent(this);
 			backlabel->move(57+i*50,200+j*50);
 
+			QString str;
+			if (gameArry[i][j] == 1)
+			{
+				//显示金币
+				str = ":/res/Coin0001.png";
+			}
+			else
+			{
+				//显示银币
+				str = ":/res/Coin0008.png";
+			}
+
 			//创建金币
-			MyCoin* coin = new MyCoin(":/res/Coin0001.png");
+			MyCoin* coin = new MyCoin(str);
 			coin->setParent(this);
 			coin->move(59+i*50,204+j*50);
 		}
