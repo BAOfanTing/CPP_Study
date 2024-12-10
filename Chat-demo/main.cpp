@@ -3,6 +3,7 @@
 #include <QQmlContext>
 #include "./Common/Model/TalkListDefine.h"
 #include "./Common/Model/talklistmodel.h"
+#include "./Common/Model/filemodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,11 +12,15 @@ int main(int argc, char *argv[])
 #endif
     QGuiApplication app(argc, argv);
 
+
     qmlRegisterType<TalkData>("TalkModel",1,0,"TalkData");
     QQmlApplicationEngine engine;
     //获取单例
     TalkListModel* talkListModel = TalkListModel::getInstance();
     engine.rootContext()->setContextProperty("talkListModel",talkListModel);
+    //文件单例
+    FileModel* fileModel = FileModel::getInstance();
+    engine.rootContext()->setContextProperty("fileModel",fileModel);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(

@@ -4,6 +4,7 @@ import QtQuick.Controls 2.13
 import "./qml/UI"
 import "./qml/TalkItem"
 import "./Common/config"
+import "./Common"
 import TalkModel 1.0
 
 Window {
@@ -18,7 +19,6 @@ Window {
     visible: true
     color: "#f5f5f5"
     flags:Qt.Window | Qt.FramelessWindowHint //去掉原始标题栏
-
 
     //UI高宽配置文件
     TalkConfig{
@@ -110,6 +110,7 @@ Window {
             }
             //----------------------------测试单击缩放是否闪烁,删
             onClicked: {
+                fileDialog.open();
                 count++
                 if(count%2 === 0)
                 {
