@@ -7,5 +7,6 @@
         <file>fig/stop.png</file>
         <file>fig/stop.svg</file>
         <file>fig/record.svg</file>
+        <file>fig/icon.svg</file>
     </qresource>
 </RCC>
