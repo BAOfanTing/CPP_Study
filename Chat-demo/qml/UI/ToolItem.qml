@@ -1,5 +1,5 @@
 import QtQuick 2.13
-import "../Common/config"
+import "../../Common/config"
 
 Rectangle{
     width:700;
@@ -39,6 +39,7 @@ Rectangle{
             height: parent.height
         }
 
+        //右侧标签
         Repeater{
             model:rightModel.split(",");
             delegate:IconButton{

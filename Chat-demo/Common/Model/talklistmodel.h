@@ -11,7 +11,8 @@ class TalkListModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    TalkListModel();
+    // 获取单例实例
+    static TalkListModel* getInstance();
 
     //重写三个函数
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -27,6 +28,15 @@ public:
                                 const QString &text);
 
 private:
+    //私有化构造
+    TalkListModel();
+    //禁止复制构造和赋值操作
+    TalkListModel(const TalkListModel&) = delete;
+    TalkListModel &operator = (const TalkListModel&) = delete;
+
+    //静态实例
+    static TalkListModel *instance;
+
     QList<QSharedPointer<TalkDataBasic>> talkList;
 };
 

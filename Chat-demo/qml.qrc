@@ -1,11 +1,16 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>qml/InputItem.qml</file>
-        <file>qml/ChatContentItem.qml</file>
-        <file>qml/TitleItem.qml</file>
-        <file>qml/ToolItem.qml</file>
+        <file>qml/UI/InputItem.qml</file>
+        <file>qml/UI/ChatContentItem.qml</file>
+        <file>qml/UI/TitleItem.qml</file>
+        <file>qml/UI/ToolItem.qml</file>
         <file>Common/config/ColorConfig.qml</file>
         <file>Common/config/IconButton.qml</file>
+        <file>qml/TalkItem/TalkItemBase.qml</file>
+        <file>qml/TalkItem/TalkItemText.qml</file>
+        <file>Common/config/TalkConfig.qml</file>
+        <file>qml/TalkItem/TalkLabel.qml</file>
+        <file>qml/TalkItem/TalkListView.qml</file>
     </qresource>
 </RCC>

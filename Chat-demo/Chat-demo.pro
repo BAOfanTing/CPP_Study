@@ -6,7 +6,7 @@ QT += quick
 
 SOURCES += \
         main.cpp \
-        talklistmodel.cpp
+        Common/Model/talklistmodel.cpp
 
 RESOURCES += qml.qrc res.qrc
 
@@ -24,5 +24,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    TalkListDefine.h \
-    talklistmodel.h
+    Common/Model/TalkListDefine.h \
+    Common/Model/talklistmodel.h

@@ -1,6 +1,6 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.12
-
+import TalkModel 1.0
 Rectangle{
     color: colorConfig.weChatDefult;
     width:700;
@@ -10,7 +10,7 @@ Rectangle{
     ScrollView{
         id:view
         width:parent.width-20;
-        height:parent.height-50;
+        height:parent.height-60;
         anchors.horizontalCenter: parent.horizontalCenter;
         anchors.top: parent.top;
         anchors.topMargin: 10;
@@ -22,6 +22,13 @@ Rectangle{
             font.family: colorConfig.strTextFont;
             readOnly: false // 根据需要设置是否只读
             wrapMode: TextEdit.Wrap //开启换行
+
+            //开启选择文本
+            selectByMouse: true;
+            selectionColor: "#3399ff";
+            selectedTextColor: "#ffffff";
+
+            text: "132132131313131321321a3sdfasdfasd32f132132132132132132132132132132132132132132132132132132132131321321312"
         }
     }
 
@@ -51,6 +58,8 @@ Rectangle{
             hoverEnabled: true; //启用鼠标悬浮检测
             onClicked: {
                 console.log("send");
+                talkListModel.appendText("B","A",textArea.text)
+                console.log(textArea.text)
             }
             onEntered: {
                 sendBtn.color = "#d2d2d2";
