@@ -32,6 +32,8 @@ PlayScene::PlayScene(int level)
 	connect(quitAction,&QAction::triggered,[=](){
 		this->close();
 	
+	
+
 	});
 
 
@@ -45,6 +47,38 @@ PlayScene::PlayScene(int level)
 		//告诉选择关卡返回了
 		emit this->levelSceneBack();
 	});
+	
+	//显示当前关卡
+	QLabel* label =new QLabel;
+	label->setParent(this);
+	//设置字体
+	QFont font;
+	font.setFamily("华文新魏");
+	font.setPointSize(20);
+	QString levelstr = QString("LEVEL:%1").arg(levelindex);
+	label->setText(levelstr);
+	//加载字体
+	label->setFont(font);
+	label->setGeometry(30,this->height()-50,120,50);
+
+	//显示金币背景图
+	for (int i = 0;i<4;i++)
+	{
+		for (int j = 0;j<4;j++)
+		{
+			//绘制背景图片
+			QLabel* backlabel = new QLabel;
+			backlabel->setGeometry(0,0,50,50);
+			backlabel->setPixmap(QPixmap(":/res/BoardNode(1).png"));
+			backlabel->setParent(this);
+			backlabel->move(57+i*50,200+j*50);
+
+			//创建金币
+			MyCoin* coin = new MyCoin(":/res/Coin0001.png");
+			coin->setParent(this);
+			coin->move(59+i*50,204+j*50);
+		}
+	}
 }
 
 void PlayScene::paintEvent(QPaintEvent* event)

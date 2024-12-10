@@ -90,6 +90,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="chooselevelsene.cpp" />
+    <ClCompile Include="MyCoin.cpp" />
     <ClCompile Include="MyPushButton.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <QtRcc Include="MainScene.qrc" />
@@ -106,6 +107,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="PlayScene.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="MyCoin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

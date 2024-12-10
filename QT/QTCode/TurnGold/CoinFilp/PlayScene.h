@@ -7,8 +7,8 @@
 #include <QPainter>
 #include <QPixmap>
 #include "MyPushButton.h"
-
-
+#include <QLabel>
+#include "MyCoin.h"
 class PlayScene  : public QMainWindow
 {
 	Q_OBJECT
