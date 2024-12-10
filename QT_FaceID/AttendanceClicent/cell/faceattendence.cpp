@@ -84,7 +84,7 @@ void FaceAttendence::timerEvent(QTimerEvent *e)
 void FaceAttendence::timer_connect()
 {
     //连接服务器
-    m_socket.connectToHost("ip地址",22);
+    m_socket.connectToHost("192.168.190.1",9999);
 }
 
 void FaceAttendence::stop_connnect()
