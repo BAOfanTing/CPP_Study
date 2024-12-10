@@ -6,5 +6,6 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     widget w;
     w.show();
+    system("chcp 65001");
     return a.exec();
 }

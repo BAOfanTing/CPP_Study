@@ -1,5 +1,5 @@
 ﻿#include "Student.h"
-
+#pragma execution_character_set("utf-8")
 
 Student::Student(QObject *parent)
 	: QObject(parent)
