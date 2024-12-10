@@ -105,13 +105,13 @@ QLabel#lb_title
       </item>
      </layout>
     </widget>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="lb_traceFace">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>100</x>
        <y>50</y>
-       <width>291</width>
-       <height>261</height>
+       <width>271</width>
+       <height>271</height>
       </rect>
      </property>
      <property name="text">
@@ -136,7 +136,7 @@ QLabel#lb_title
     </widget>
     <zorder>lb_camera</zorder>
     <zorder>widget_2</zorder>
-    <zorder>label</zorder>
+    <zorder>lb_traceFace</zorder>
    </widget>
    <widget class="QWidget" name="widget_3" native="true">
     <property name="geometry">

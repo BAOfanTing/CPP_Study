@@ -29,5 +29,8 @@ private:
 
     //摄像头
     VideoCapture cap;
+
+    //haar -- 级联分类器
+    cv::CascadeClassifier cascade;
 };
 #endif // FACEATTENDENCE_H

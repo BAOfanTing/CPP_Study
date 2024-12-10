@@ -10,15 +10,16 @@ FaceAttendence::FaceAttendence(QWidget *parent)
     //打开摄像头
     cap.open(0);//如果是linux的话，dev/video
     //启动定时器，每多少毫秒采集一次
-    startTimer(1);
+    startTimer(100);
+
+    //导入级联分类器
+    cascade.load("E:/Environment/opencv452/etc/haarcascades/haarcascade_frontalface_alt2.xml");
 }
 
 FaceAttendence::~FaceAttendence()
 {
     delete ui;
 }
-
-
 
 void FaceAttendence::timerEvent(QTimerEvent *e)
 {
@@ -30,6 +31,28 @@ void FaceAttendence::timerEvent(QTimerEvent *e)
         // 水平镜像图像
         cv::flip(srcImage, srcImage, 1);
     }
+    //把图像转为灰度图，提高处理速度
+    Mat grayImage;
+    cvtColor(srcImage,grayImage,COLOR_BGR2GRAY);
+
+    //检测人脸
+    std::vector<Rect> faceRects;
+    cascade.detectMultiScale(grayImage,faceRects,1.1,3);
+    if(faceRects.size()>0)
+    {
+        Rect rect = faceRects.at(0);//第一个人脸的矩形框
+        //绘制矩形框
+        // rectangle(srcImage,rect,Scalar(0,0,255));
+
+        //移动圆形检测框
+        ui->lb_traceFace->move(rect.x-rect.width/2,rect.y-rect.height/2);
+    }
+    else
+    {
+        //没有检测到人脸 移动圆形检测框到中心
+        ui->lb_traceFace->move(100,60);
+    }
+
     //没有数据返回
     if(srcImage.data == NULL)
     {
