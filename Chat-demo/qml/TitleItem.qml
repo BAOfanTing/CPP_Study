@@ -9,11 +9,11 @@ Rectangle{
     property point dragStartPos: Qt.point(0, 0);
 
     Text{
-
-        x:30
-        y:parent.height/2-15
+        x:30;
+        y:parent.height/2-15;
         text: "这是标题"
-        font.pixelSize: 30
+        font.pixelSize: 30;
+        font.family: colorConfig.strTextFont;
     }
 
     //拖拽窗口
@@ -26,13 +26,28 @@ Rectangle{
 
         onPositionChanged: {
             if(window){
-                console.log("change")
                 window.x += (mouse.x - dragStartPos.x);
                 window.y += (mouse.y - dragStartPos.y);
             }
         }
-
-
     }
+
+    //关闭界面
+    IconButton{
+        anchors.top: parent.top;
+        anchors.right: parent.right;
+        imageSource: "qrc:/icon/ic_close.png"; //设置图标
+
+        MouseArea{
+            anchors.fill:parent;
+            onClicked: {
+                if(window){
+                    window.close();
+                }
+            }
+        }
+    }
+
+
 
 }

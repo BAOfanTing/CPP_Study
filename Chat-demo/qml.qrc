@@ -6,5 +6,6 @@
         <file>qml/TitleItem.qml</file>
         <file>qml/ToolItem.qml</file>
         <file>Common/config/ColorConfig.qml</file>
+        <file>Common/config/IconButton.qml</file>
     </qresource>
 </RCC>
