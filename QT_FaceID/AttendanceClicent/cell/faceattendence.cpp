@@ -191,9 +191,10 @@ void FaceAttendence::receive_data()
         //-----------------显示头像------------------
         ui->lb_headpic->setStyleSheet("border-radius:70px; border-image: url(./cache.jpg);");
         //显示认证成功
-        QString saystr =QString("%1，打卡成功！").arg(ui->lb_nickname->text());
-                                                                 QTextToSpeech * m_speech = new QTextToSpeech();
 
+        //增加语音播报
+        QTextToSpeech * m_speech = new QTextToSpeech();
+        QString saystr =QString("%1，打卡成功！").arg(ui->lb_nickname->text());
         m_speech->say(saystr);
         ui->wg_success->show();
     }
