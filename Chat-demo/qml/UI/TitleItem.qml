@@ -7,7 +7,7 @@ Rectangle{
     color: colorConfig.strBackgroundColor;
     property var window: null;
     property point dragStartPos: Qt.point(0, 0);
-    signal sigModifySkin();
+    signal sigModifySkin(); //跟换皮肤信号
 
     Text{
         x:30;
