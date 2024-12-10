@@ -11,6 +11,7 @@
 #include <QTimer>
 #include <QMenu>
 #include <QMenuBar>
+#include "PlayScene.h"
 
 class MainScene : public QMainWindow
 {

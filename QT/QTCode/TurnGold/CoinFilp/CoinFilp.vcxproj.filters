@@ -46,12 +46,18 @@
     <ClCompile Include="chooselevelsene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PlayScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MyPushButton.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="chooselevelsene.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="PlayScene.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

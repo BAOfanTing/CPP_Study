@@ -29,7 +29,7 @@ chooselevelsene::chooselevelsene(QWidget *parent)
 	backBtn->setParent(this);
 	backBtn->move(this->width()-backBtn->width(),this->height()-backBtn->height());
 
-	connect(backBtn,&QPushButton::pressed,[=](){
+	connect(backBtn,&MyPushButton::clicked,[=](){
 		qDebug()<<"点击返回";
 		//告诉主场景返回了
 		emit this->chooseSceneBack();
@@ -59,8 +59,26 @@ chooselevelsene::chooselevelsene(QWidget *parent)
 		connect(menubtn,&MyPushButton::clicked,[=](){
 			QString str = QString("您选择的是%1关").arg(i+1);
 			qDebug() << str;
+
+
+			//进入游戏场景
+			this->hide();//隐藏选择关卡窗口
+			play = new PlayScene(i+1);
+			play->show();
+
+			//监听返回选择关卡的信号
+			connect(play, &PlayScene::levelSceneBack, [=]() {
+				qDebug() << "返回选择关卡111";
+				QTimer::singleShot(500, this, [=]() {
+					delete play;//删除当前关卡
+					play = NULL;
+					this->show();//显示选择关卡界面
+					});
+			});
 		});
 	}
+
+	
 
 
 }
@@ -70,7 +88,6 @@ chooselevelsene::~chooselevelsene()
 
 void chooselevelsene::paintEvent(QPaintEvent*)
 {
-	
 	//创建画家
 	QPainter painter(this);
 	//加载图片
