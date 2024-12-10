@@ -4,6 +4,7 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <QDialog>
+#include <QMessageBox>
 
 class mainwindow : public QMainWindow
 {
