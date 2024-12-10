@@ -142,9 +142,33 @@ PlayScene::PlayScene(int level)
 						this->gameArry[coin->posX][coin->posY + 1] = this->gameArry[coin->posX][coin->posY + 1] == 0 ? 0 : 1;
 					}
 
+					//判断是否胜利
+					this->isWin = true;
+					for (int i = 0; i < 4; i++)
+					{
+						for (int j = 0; j < 4; j++)
+						{
+							if (coinbtn[i][j]->flag == false)
+							{
+								this->isWin = false;
+								i = 5;
+								break;
+							}
+						}
+					}
+					if (this->isWin)
+					{
+						qDebug() << "游戏胜利";
+						//胜利后不能点击金币
+						for (int i = 0; i < 4; i++)
+						{
+							for (int j = 0; j < 4; j++)
+							{
+								coinbtn[i][j]->Canclick = false;
+							}
+						}
+					}
 				});
-				
-
 			});
 		}
 	}

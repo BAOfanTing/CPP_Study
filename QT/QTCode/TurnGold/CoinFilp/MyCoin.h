@@ -32,4 +32,7 @@ public:
 
 	//重写按下事件
 	void mousePressEvent(QMouseEvent *e);
+
+	//胜利后不能点击
+	bool Canclick = true;
 };

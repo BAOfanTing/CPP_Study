@@ -29,8 +29,11 @@ public:
 
 	//二维数组维护每关的具体数据
 	int gameArry[4][4];
-
+	//储存金币
 	MyCoin* coinbtn[4][4];
+	
+	//判断是否胜利
+	bool isWin;
 
 signals:
 	//写一个自定义信号，告诉选择场景，点击了返回

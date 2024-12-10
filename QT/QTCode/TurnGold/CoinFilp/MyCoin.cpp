@@ -86,9 +86,10 @@ void MyCoin::changeFlag()
 
 }
 
+//重载鼠标点击事件，增加不能点击的条件
 void MyCoin::mousePressEvent(QMouseEvent* e)
 {
-	if (this->isAnimation)
+	if (this->isAnimation || this->Canclick== false)
 	{
 		return;
 	}
