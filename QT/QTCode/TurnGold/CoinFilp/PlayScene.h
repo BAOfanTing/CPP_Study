@@ -11,6 +11,8 @@
 #include "MyCoin.h"
 #include "dataconfig.h"
 #include <QTimer>
+#include <QPoint>
+#include <QPropertyAnimation>
 
 class PlayScene  : public QMainWindow
 {

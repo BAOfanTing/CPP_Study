@@ -31,9 +31,6 @@ PlayScene::PlayScene(int level)
 	//退出游戏
 	connect(quitAction,&QAction::triggered,[=](){
 		this->close();
-	
-	
-
 	});
 
 
@@ -60,6 +57,16 @@ PlayScene::PlayScene(int level)
 	//加载字体
 	label->setFont(font);
 	label->setGeometry(30,this->height()-50,120,50);
+
+	//加载胜利背景图
+	QLabel* winlabel = new QLabel;
+	QPixmap winpix;
+	winpix.load(":/res/LevelCompletedDialogBg.png");
+	winlabel->setGeometry(0,0,winpix.width(),winpix.height());
+	winlabel->setPixmap(winpix);
+	winlabel->setParent(this);
+	winlabel->move((this->width()- winpix.width())*0.5,-winpix.height());
+
 
 	//初始化每个关卡的二维数组
 	dataConfig config;
@@ -167,6 +174,19 @@ PlayScene::PlayScene(int level)
 								coinbtn[i][j]->Canclick = false;
 							}
 						}
+
+						//创建动态特效
+						QPropertyAnimation* animation = new QPropertyAnimation(winlabel, "geometry");
+						//设置时间间隔
+						animation->setDuration(1000);
+						//起始位置
+						animation->setStartValue(QRect(winlabel->x(),winlabel->y(),winlabel->width(),winlabel->height()));
+						//结束位置
+						animation->setEndValue(QRect(winlabel->x(), winlabel->y()+200, winlabel->width(), winlabel->height()));
+						//设置弹跳曲线
+						animation->setEasingCurve(QEasingCurve::OutBounce);
+						//执行动画
+						animation->start();
 					}
 				});
 			});
