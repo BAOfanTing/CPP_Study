@@ -12,5 +12,6 @@
         <file>Common/config/TalkConfig.qml</file>
         <file>qml/TalkItem/TalkLabel.qml</file>
         <file>qml/TalkItem/TalkListView.qml</file>
+        <file>Common/CopyPaste.qml</file>
     </qresource>
 </RCC>
