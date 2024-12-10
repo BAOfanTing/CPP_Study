@@ -13,5 +13,13 @@
         <file>icon/record_light.png</file>
         <file>icon/skin_dark.png</file>
         <file>icon/skin_light.png</file>
+        <file>icon/PDF.png</file>
+        <file>icon/PPT.png</file>
+        <file>icon/WORD.png</file>
+        <file>icon/EXCEL.png</file>
+        <file>icon/MUSIC.png</file>
+        <file>icon/TXT.png</file>
+        <file>icon/UNKNOWN.png</file>
+        <file>icon/VIDEO.png</file>
     </qresource>
 </RCC>

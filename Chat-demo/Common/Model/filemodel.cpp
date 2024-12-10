@@ -59,7 +59,7 @@ QVariant FileModel::extractFileInfo(const QString &filePath)
 
     QVariantMap map; //把数据变成qml能够接受的格式
     map["fileName"] = fileName;
-    map["fileSize"] = fileName;
+    map["fileSize"] = fileSizeStr;
     map["fileSuffix"] = fileSuffix;
     return map;
 }

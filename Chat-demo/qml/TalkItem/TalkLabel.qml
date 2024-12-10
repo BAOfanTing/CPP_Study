@@ -7,7 +7,7 @@ TextEdit{
     id:textEdit;
     padding:14;
     font{
-        family: "Microsoft YaHei";
+        family: colorConfig.strTextFont;
         pixelSize: 18;
     }
 
@@ -15,6 +15,7 @@ TextEdit{
     // horizontalAlignment: TextEdit.AlignLeft;
     readOnly: true;
 
+    //开启鼠标选择
     selectByMouse: true;
     selectionColor: "#3399ff";
     selectedTextColor: "#ffffff";

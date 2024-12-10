@@ -153,6 +153,11 @@ void TalkListModel::appendOtherFile(const QString &user, const QString &sender, 
     talk_data->fileName = fileName;
     talk_data->fileSuffix = fileSuffix;
 
+    // 打印输出
+    qDebug() << "File Path: " <<  talk_data->filePath;
+    qDebug() << "File Name: " << talk_data->fileName;
+    qDebug() << "File Size: " << talk_data->fileSize ;
+    qDebug() << "File Suffix: " << talk_data->fileSuffix;
 
     //插入模型
     beginInsertRows(QModelIndex(),talkList.count(),talkList.count());
