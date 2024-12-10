@@ -2,7 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>qml/InputItem.qml</file>
-        <file>qml/TextShowItem.qml</file>
+        <file>qml/ChatContentItem.qml</file>
         <file>qml/TitleItem.qml</file>
         <file>qml/ToolItem.qml</file>
         <file>Common/config/ColorConfig.qml</file>

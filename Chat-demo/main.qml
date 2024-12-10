@@ -20,7 +20,7 @@ Window {
             window: mainWindow
         }
 
-        TextShowItem{
+        ChatContentItem{
 
         }
 
