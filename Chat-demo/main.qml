@@ -17,12 +17,10 @@ Window {
     property var fileInfo;
     id:mainWindow
     width: 720
-    height: 1280
+    height: 1024
     visible: true
-    color: "#f5f5f5"
+    color: "transparent"
     flags:Qt.Window | Qt.FramelessWindowHint //去掉原始标题栏
-
-    signal sigInsertEmoji(string emojiPath);
 
     //UI高宽配置文件
     TalkConfig{
