@@ -1,2 +1,3 @@
-﻿  初始stl.cpp
+﻿  员工分组.cpp
+E:\CPP_Study\通讯录管理系统\STL\员工分组.cpp(62,10): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
   STL.vcxproj -> E:\CPP_Study\通讯录管理系统\x64\Debug\STL.exe
