@@ -34,6 +34,35 @@ chooselevelsene::chooselevelsene(QWidget *parent)
 		//告诉主场景返回了
 		emit this->chooseSceneBack();
 	});
+
+	//生成一套矩阵的关卡图标
+	for (int i = 0; i < 20; i++)
+	{
+		MyPushButton* menubtn = new MyPushButton(":/res/LevelIcon.png");
+		menubtn->setParent(this);
+		menubtn->move(25+i%4 * 70,130+i/4 * 70);
+
+		//添加关卡文字组
+		QLabel* label = new QLabel;
+		label->setParent(this);
+		label->setFixedSize(menubtn->width(),menubtn->height());
+		label->setText(QString::number(i+1));
+		label->move(25 + i % 4 * 70, 130 + i / 4 * 70);
+
+		//设置label的字的对齐方式,居中
+		label->setAlignment(Qt::AlignHCenter |Qt::AlignVCenter);
+		//设置让鼠标穿透事件
+		label->setAttribute(Qt::WA_TransparentForMouseEvents);
+
+
+		//监听每个按钮的事件
+		connect(menubtn,&MyPushButton::clicked,[=](){
+			QString str = QString("您选择的是%1关").arg(i+1);
+			qDebug() << str;
+		});
+	}
+
+
 }
 
 chooselevelsene::~chooselevelsene()

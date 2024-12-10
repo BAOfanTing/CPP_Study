@@ -6,6 +6,8 @@
 #include <QAction>
 #include <QPainter>
 #include "MyPushButton.h"
+#include <QLabel>
+
 class chooselevelsene  : public QMainWindow
 {
 	Q_OBJECT
