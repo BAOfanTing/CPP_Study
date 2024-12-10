@@ -1,12 +1,14 @@
 import QtQuick 2.13
 import "../../Common/config"
+import "../../Common"
 
 Rectangle{
     width:700;
     height:80;
-    color: colorConfig.strTitleColor;
+    color: colorConfig.strBackgroundColor;
     property var window: null;
     property point dragStartPos: Qt.point(0, 0);
+    signal sigModifySkin();
 
     Text{
         x:30;
@@ -14,6 +16,7 @@ Rectangle{
         text: "这是标题"
         font.pixelSize: 30;
         font.family: colorConfig.strTextFont;
+        color: colorConfig.strTextColor
     }
 
     //拖拽窗口
@@ -34,9 +37,12 @@ Rectangle{
 
     //关闭界面
     IconButton{
+        id:closeIcon
         anchors.top: parent.top;
+        anchors.topMargin: 5
         anchors.right: parent.right;
-        imageSource: "qrc:/icon/ic_close.png"; //设置图标
+        anchors.rightMargin: 10
+        imageSource: bLightModel ? "qrc:/icon/close_light.png" : "qrc:/icon/close_dark.png"; //设置图标
 
         MouseArea{
             anchors.fill:parent;
@@ -47,12 +53,26 @@ Rectangle{
             }
         }
     }
+    IconButton{
+        id:skinIcon
+        anchors.top: closeIcon.top;
+        anchors.right: closeIcon.left;
+        imageSource: bLightModel ? "qrc:/icon/skin_light.png" : "qrc:/icon/skin_dark.png"; //设置图标
+
+        MouseArea{
+            anchors.fill:parent;
+            onClicked: {
+                sigModifySkin();
+            }
+        }
+    }
+
 
     // 底部灰色线条
     Rectangle {
         height: 1; // 线条高度
         width: parent.width; // 与父容器同宽
-        color: colorConfig.lightgray; // 浅灰色
+        color: colorConfig.strDividerColor; // 浅灰色
         anchors.bottom: parent.bottom; // 固定在底部
     }
 

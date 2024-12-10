@@ -10,7 +10,6 @@ TextEdit{
         family: "Microsoft YaHei";
         pixelSize: 18;
     }
-    color: "#666666";
 
     verticalAlignment: TextEdit.AlignVCenter;
     horizontalAlignment: TextEdit.AlignLeft;

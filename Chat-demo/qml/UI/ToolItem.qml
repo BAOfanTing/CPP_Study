@@ -1,19 +1,19 @@
 import QtQuick 2.13
 import "../../Common/config"
+import "../../Common"
 
 Rectangle{
     width:700;
     height:40;
-    color: colorConfig.weChatDefult;
+    color: colorConfig.strBackgroundColor;
 
-    property string leftModel: "qrc:/icon/ic_expression.png,qrc:/icon/ic_file.png,qrc:/icon/ic_record.png"; //左侧按钮
-    property string rightModel: "qrc:/icon/ic_camera.png"; //右侧按钮
+
 
     // 顶部灰色线条
     Rectangle {
         height: 1; // 线条高度
         width: parent.width; // 与父容器同宽
-        color: colorConfig.lightgray; // 浅灰色
+        color: colorConfig.strDividerColor; // 浅灰色
         anchors.bottom: parent.top; // 固定在底部
     }
 
@@ -26,7 +26,7 @@ Rectangle{
 
         //左侧标签,文件,记录按钮
         Repeater{
-            model:leftModel.split(",");
+            model:colorConfig.leftModel.split(",");
             delegate:IconButton{
                 imageSource: modelData
             }
@@ -34,14 +34,14 @@ Rectangle{
 
         // 占位符，用于填充空白
         Rectangle {
-            color: colorConfig.weChatDefult;
-            width: parent.width - (leftModel.split(",").length + rightModel.split(",").length) * 30 - 20 * (leftModel.split(",").length + rightModel.split(",").length - 1)
+            color: colorConfig.strBackgroundColor;
+            width: parent.width - (colorConfig.leftModel.split(",").length + colorConfig.rightModel.split(",").length) * 30 - 20 * (colorConfig.leftModel.split(",").length + colorConfig.rightModel.split(",").length - 1)
             height: parent.height
         }
 
         //右侧标签
         Repeater{
-            model:rightModel.split(",");
+            model:colorConfig.rightModel.split(",");
             delegate:IconButton{
                 imageSource: modelData
             }

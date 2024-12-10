@@ -6,12 +6,12 @@
         <file>qml/UI/TitleItem.qml</file>
         <file>qml/UI/ToolItem.qml</file>
         <file>Common/config/ColorConfig.qml</file>
-        <file>Common/config/IconButton.qml</file>
         <file>qml/TalkItem/TalkItemBase.qml</file>
         <file>qml/TalkItem/TalkItemText.qml</file>
         <file>Common/config/TalkConfig.qml</file>
         <file>qml/TalkItem/TalkLabel.qml</file>
         <file>qml/TalkItem/TalkListView.qml</file>
         <file>Common/CopyPaste.qml</file>
+        <file>Common/IconButton.qml</file>
     </qresource>
 </RCC>
