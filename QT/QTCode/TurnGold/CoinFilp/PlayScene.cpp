@@ -33,6 +33,13 @@ PlayScene::PlayScene(int level)
 		this->close();
 	});
 
+	QSoundEffect* flipsound = new QSoundEffect(this);
+	//加载本地文件
+	flipsound->setSource(QUrl::fromLocalFile(":/res/ConFlipSound.wav"));
+
+	QSoundEffect* winsound = new QSoundEffect(this);
+	//加载本地文件
+	winsound->setSource(QUrl::fromLocalFile(":/res/LevelWinSound.wav"));
 
 	//返回按钮
 	MyPushButton* backBtn = new MyPushButton(":/res/BackButton.png", ":/res/BackButtonSelected.png");
@@ -121,9 +128,11 @@ PlayScene::PlayScene(int level)
 				//更新flag
 				this->gameArry[i][j] = this->gameArry[i][j] == 0 ? 0 : 1;
 
+				//播放音效
+				flipsound->play();
 
 				//反转周围金币,延时反转
-				QTimer::singleShot(300,[=](){
+				QTimer::singleShot(100,[=](){
 					//反转右侧
 					if (coin->posX + 1 <= 3)
 					{
@@ -187,6 +196,9 @@ PlayScene::PlayScene(int level)
 						animation->setEasingCurve(QEasingCurve::OutBounce);
 						//执行动画
 						animation->start();
+
+						//播放胜利音效
+						winsound->play();
 					}
 				});
 			});

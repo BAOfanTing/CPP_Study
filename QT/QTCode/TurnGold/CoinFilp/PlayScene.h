@@ -13,6 +13,7 @@
 #include <QTimer>
 #include <QPoint>
 #include <QPropertyAnimation>
+#include <QSoundEffect>
 
 class PlayScene  : public QMainWindow
 {

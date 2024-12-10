@@ -12,6 +12,7 @@
 #include <QMenu>
 #include <QMenuBar>
 #include "PlayScene.h"
+#include <QSoundEffect>
 
 class MainScene : public QMainWindow
 {

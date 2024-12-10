@@ -3,6 +3,10 @@
 chooselevelsene::chooselevelsene(QWidget *parent)
 	: QMainWindow(parent)
 {
+	QSoundEffect* choosesound = new QSoundEffect(this);
+	//加载本地文件
+	choosesound->setSource(QUrl::fromLocalFile(":/res/TapButtonSound.wav"));
+
 	//设置固定大小
 	this->setFixedSize(320, 580);
 	//设置图片
@@ -31,6 +35,11 @@ chooselevelsene::chooselevelsene(QWidget *parent)
 
 	connect(backBtn,&MyPushButton::clicked,[=](){
 		qDebug()<<"点击返回";
+		//播放音效
+		QSoundEffect* backsound = new QSoundEffect(this);
+		//加载本地文件
+		backsound->setSource(QUrl::fromLocalFile(":/res/BackButtonSound.wav"));
+		backsound->play();
 		//告诉主场景返回了
 		emit this->chooseSceneBack();
 	});
@@ -60,6 +69,8 @@ chooselevelsene::chooselevelsene(QWidget *parent)
 			QString str = QString("您选择的是%1关").arg(i+1);
 			qDebug() << str;
 
+			//播放音效
+			choosesound->play();
 
 			//进入游戏场景
 			this->hide();//隐藏选择关卡窗口
@@ -69,6 +80,11 @@ chooselevelsene::chooselevelsene(QWidget *parent)
 			//监听返回选择关卡的信号
 			connect(play, &PlayScene::levelSceneBack, [=]() {
 				qDebug() << "返回选择关卡111";
+				//播放音效
+				QSoundEffect* backsound = new QSoundEffect(this);
+				//加载本地文件
+				backsound->setSource(QUrl::fromLocalFile(":/res/BackButtonSound.wav"));
+				backsound->play();
 				QTimer::singleShot(500, this, [=]() {
 					delete play;//删除当前关卡
 					play = NULL;

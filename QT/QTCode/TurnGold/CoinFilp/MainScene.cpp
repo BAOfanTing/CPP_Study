@@ -4,7 +4,10 @@ MainScene::MainScene(QWidget *parent)
     : QMainWindow(parent)
 {
     ui.setupUi(this);
-
+	//播放音效
+	QSoundEffect* startsound = new QSoundEffect(this);
+	//加载本地文件
+	startsound->setSource(QUrl::fromLocalFile(":/res/TapButtonSound.wav"));
     //设置固定大小
     this->setFixedSize(320,580);
     //设置图片
@@ -31,18 +34,22 @@ MainScene::MainScene(QWidget *parent)
 
 
     connect(startBtn, &QPushButton::clicked, [=]() {
+        //播放音效
+		startsound->play();
         qDebug()<<"点击开始了";
         startBtn->zoom1();
         startBtn->zoom1(true);
-
+		
         
         //延时，进入选择关卡场景
         QTimer::singleShot(500,this,[=](){
+
 			//自身隐藏
 			this->hide();
 			//显示关卡
 			chooseScene->show();
         });
+		
         
     });
 
