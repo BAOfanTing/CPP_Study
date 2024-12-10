@@ -14,12 +14,7 @@
    <string>FaceAttendence</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#widget
-{
-	background-color: rgb(124, 124, 124);
-}
-
-QWidget#widget_3
+   <string notr="true">QWidget#widget_3
 {
 	
 	background-color: rgb(94, 94, 94);
@@ -94,7 +89,7 @@ QLabel#lb_title
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>yes.png</pixmap>
+         <pixmap resource="../res.qrc">:/res/yes.png</pixmap>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -123,9 +118,25 @@ QLabel#lb_title
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>crc.png</pixmap>
+      <pixmap resource="../res.qrc">:/res/crc.png</pixmap>
      </property>
     </widget>
+    <widget class="QLabel" name="lb_camera">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>480</width>
+       <height>480</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <zorder>lb_camera</zorder>
+    <zorder>widget_2</zorder>
+    <zorder>label</zorder>
    </widget>
    <widget class="QWidget" name="widget_3" native="true">
     <property name="geometry">
@@ -329,6 +340,8 @@ QLabel#lb_title
    </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../res.qrc"/>
+ </resources>
  <connections/>
 </ui>
