@@ -1,4 +1,4 @@
-QT       += core gui network
+QT       += core gui network sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -10,13 +10,25 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    attendancewindow.cpp
+    attendancewindow.cpp \
+    qfaceobject.cpp
 
 HEADERS += \
-    attendancewindow.h
+    attendancewindow.h \
+    qfaceobject.h
 
 FORMS += \
     attendancewindow.ui
+
+
+#windows 平台添加头文件和库
+INCLUDEPATH += E:\Environment\opencv452\include
+INCLUDEPATH += E:\Environment\opencv452\include\opencv2
+INCLUDEPATH += E:\Environment\SeetaFace2\include
+INCLUDEPATH += E:\Environment\SeetaFace2\include\seeta
+LIBS += E:\Environment\opencv452\x64\mingw\lib\libopencv*
+LIBS += E:\Environment\SeetaFace2\lib\libSeeta*
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
