@@ -7,9 +7,7 @@ import TalkModel 1.0
 
 ListView{
     id:listView
-
     clip:true
-
     headerPositioning: ListView.OverlayHeader   // 头部显示方式：覆盖式（可以与内容重叠）
     footerPositioning: ListView.OverlayFooter   // 底部显示方式：覆盖式（可以与内容重叠）
     boundsBehavior: Flickable.StopAtBounds      // 内容超出时，停止在边界处

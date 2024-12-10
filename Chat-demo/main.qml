@@ -17,7 +17,8 @@ Window {
     height: 730
     visible: true
     color: "#f5f5f5"
-    flags:Qt.FramelessWindowHint //去掉原始标题栏
+    flags:Qt.Window | Qt.FramelessWindowHint //去掉原始标题栏
+
 
     //UI高宽配置文件
     TalkConfig{
@@ -74,7 +75,7 @@ Window {
         }
     }
 
-
+    property int count: 0
     //窗口缩放,使用一个透明的小矩形在右下角
     Rectangle{
         id:resizeHandle
@@ -83,6 +84,7 @@ Window {
         color:"transparent"
         anchors.right: parent.right
         anchors.bottom: parent.bottom
+
         MouseArea{
             id:resizeArea
             anchors.fill: parent
@@ -101,9 +103,22 @@ Window {
                 {
                     var deltaX = mouse.x - initialMouseX;
                     var deltaY = mouse.y - initialMouseY;
-                    mainWindow.width = Math.max(initialWidth + deltaX,550) //设置最小宽度值
-                    mainWindow.height = Math.max(initialHeight + deltaY,620) //设置最小宽度值
+                    mainWindow.width = Math.max(initialWidth + deltaX,talkConfig.nMinWidth) //设置最小宽度值
+                    mainWindow.height = Math.max(initialHeight + deltaY,talkConfig.nMinHeight) //设置最小宽度值
 
+                }
+            }
+            //----------------------------测试单击缩放是否闪烁,删
+            onClicked: {
+                count++
+                if(count%2 === 0)
+                {
+                    mainWindow.width = 550
+                    mainWindow.height = 620
+                }
+                else{
+                    mainWindow.width = 1600
+                    mainWindow.height = 1020
                 }
             }
         }
