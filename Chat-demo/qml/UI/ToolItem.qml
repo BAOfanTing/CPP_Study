@@ -8,7 +8,7 @@ Rectangle{
     height:40;
     color: colorConfig.strBackgroundColor;
 
-    signal sigBtnClicked(string btnName);
+    signal sigBtnClicked(string btnName); //工具栏图标按下信号
 
     // 顶部灰色线条
     Rectangle {
