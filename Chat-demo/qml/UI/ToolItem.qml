@@ -2,8 +2,9 @@ import QtQuick 2.13
 import "../../Common/config"
 import "../../Common"
 
+//工具栏高度固定40
 Rectangle{
-    width:700;
+    width:Math.max(550,parent.width);
     height:40;
     color: colorConfig.strBackgroundColor;
 

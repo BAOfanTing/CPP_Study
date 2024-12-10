@@ -10,8 +10,8 @@ Item {
     property int profilePictureHeight: 48;  //头像
     property int messageHeight: 48;
 
-    property int leftWidth: 100;
-    property int rightWidth: 100;
+    property int leftWidth: 90;
+    property int rightWidth: 90;
     property int contentWidth:Math.max(200,talkItemBase.width-talkItemBase.leftWidth-talkItemBase.rightWidth);
     property bool isUser: (model.user === model.sender);
 
