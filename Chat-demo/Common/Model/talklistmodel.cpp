@@ -53,6 +53,10 @@ QVariant TalkListModel::data(const QModelIndex &index, int role) const
     }
     //增加下标越界判断
     const int row = index.row();
+    if(row <0 && row > talkList.size())
+    {
+        return 0;
+    }
     auto item = talkList.at(row);
 
     switch(role)

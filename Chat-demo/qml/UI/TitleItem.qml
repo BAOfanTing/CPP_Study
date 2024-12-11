@@ -5,7 +5,7 @@ import "../../Common"
 //标题栏,高度固定80
 Rectangle{
     color: colorConfig.strBackgroundColor;
-    property var window: null;
+    // property var window: null;
     property point dragStartPos: Qt.point(0, 0);
     signal sigModifySkin(); //跟换皮肤信号
 
@@ -18,21 +18,21 @@ Rectangle{
         color: colorConfig.strTextColor
     }
 
-    //拖拽窗口
-    MouseArea{
-        anchors.fill:parent;
-        preventStealing: true;
-        onPressed: {
-            dragStartPos = Qt.point(mouse.x,mouse.y); //记录初始位置
-        }
+    // //拖拽窗口
+    // MouseArea{
+    //     anchors.fill:parent;
+    //     preventStealing: true;
+    //     onPressed: {
+    //         dragStartPos = Qt.point(mouse.x,mouse.y); //记录初始位置
+    //     }
 
-        onPositionChanged: {
-            if(window){
-                window.x += (mouse.x - dragStartPos.x);
-                window.y += (mouse.y - dragStartPos.y);
-            }
-        }
-    }
+    //     onPositionChanged: {
+    //         if(window){
+    //             window.x += (mouse.x - dragStartPos.x);
+    //             window.y += (mouse.y - dragStartPos.y);
+    //         }
+    //     }
+    // }
 
     //关闭界面
     IconButton{

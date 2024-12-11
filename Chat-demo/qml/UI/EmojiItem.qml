@@ -2,14 +2,14 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 import "../../Common"
 
-Popup
+Item
 {
-    id:emojiPopup
+    id:emojiItem
     width:285;
     height:180;
     //直接Rectangle有黑边而且有背景,使用contentItem就没有了
     signal sigEmojiBtnClicked(string btnName);
-    contentItem: Rectangle{
+    Rectangle{
         anchors.fill: parent
         color: colorConfig.strEmojiBackgroundColor;
         radius: 8;
@@ -51,11 +51,6 @@ Popup
             anchors.bottom: parent.bottom
             color: colorConfig.strEmojiBackgroundColor;
         }
-    }
-    //设置背景
-    background: Rectangle{
-        color: "transparent"
-        border.color: "transparent"
     }
 }
 

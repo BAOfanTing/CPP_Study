@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
-        <file>qml/UI/InputItem.qml</file>
+        <file>chat-demo.qml</file>
+        <file>qml/UI/ChatInputItem.qml</file>
         <file>qml/UI/ChatContentItem.qml</file>
         <file>qml/UI/TitleItem.qml</file>
         <file>qml/UI/ToolItem.qml</file>
