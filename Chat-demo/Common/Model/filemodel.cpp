@@ -76,7 +76,7 @@ QString FileModel::formatFileSize(qint64 size)
 
 QStringList FileModel::getEmojiName()
 {
-    QDir dir("../../icon/emoji/");//表情所在地址
+    QDir dir("E:/QTproject/CPP_Study/Chat-demo/InstantMessage/icon/emoji");//表情所在地址,使用绝对地址
     if(!dir.exists())
     {
         qDebug()<< "表情包路径不存在";

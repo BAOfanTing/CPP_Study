@@ -1,6 +1,6 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.13
-import "../../Common"
+import "../Common"
 
 Item
 {
@@ -29,7 +29,7 @@ Item
             delegate:IconButton{
                 width:20
                 height:20
-                imageSource:"qrc:/icon/emoji/"+modelData
+                imageSource:"qrc:/InstantMessage/icon/emoji/"+modelData
                 imgHeight: 20
                 imgWidth: 20
 

@@ -1,6 +1,6 @@
 import QtQuick 2.13
-import "../../Common/config"
-import "../../Common"
+import "../Common/config"
+import "../Common"
 
 //工具栏高度固定40
 Rectangle{

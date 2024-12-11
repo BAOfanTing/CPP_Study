@@ -4,7 +4,7 @@ import QtQuick 2.13
 TalkItemBase{
     id:talkItemOtherFile
 
-    //截取文件名
+    //截取文件名,文件名长了后省略
     function extractTextFileName(){
         var TextSize = 0; //字符长度
         var TextCount = 0; //计数
@@ -80,39 +80,39 @@ TalkItemBase{
                         {
                             case "pdf":
                             {
-                                return "qrc:/icon/file/PDF.png";
+                                return talkConfig.fileDirPrefix+"PDF.png";
                             }
                             case "docx":
                             {
-                                return "qrc:/icon/file/WORD.png";
+                                return talkConfig.fileDirPrefix+"WORD.png";
                             }
                             case "csv":
                             {
-                                return "qrc:/icon/file/EXCEL.png";
+                                return talkConfig.fileDirPrefix+"EXCEL.png";
                             }
                             case "xlsx":
                             {
-                                return "qrc:/icon/file/EXCEL.png";
+                                return talkConfig.fileDirPrefix+"EXCEL.png";
                             }
                             case "txt":
                             {
-                                return "qrc:/icon/file/TXT.png";
+                                return talkConfig.fileDirPrefix+"TXT.png";
                             }
                             case "ppt":
                             {
-                                return "qrc:/icon/file/PPT.png";
+                                return talkConfig.fileDirPrefix+"PPT.png";
                             }
                             case "mp4":
                             {
-                                return "qrc:/icon/file/VIDEO.png";
+                                return talkConfig.fileDirPrefix+"VIDEO.png";
                             }
                             case "zip":
                             {
-                                return "qrc:/icon/file/ZIP.png";
+                                return talkConfig.fileDirPrefix+"ZIP.png";
                             }
                             default:
                             {
-                                return "qrc:/icon/file/UNKNOWN.png"
+                                return talkConfig.fileDirPrefix+"UNKNOWN.png"
                             }
                         }
                 smooth: true

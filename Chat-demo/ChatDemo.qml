@@ -1,33 +1,26 @@
 import QtQuick 2.13
 import QtQuick.Window 2.13
 import QtQuick.Controls 2.13
-import "./qml/UI"
-import "./qml/TalkItem"
+import "./InstantMessage"
+import "./InstantMessage/TalkItem"
 import "./Common/config"
 import "./Common"
 import TalkModel 1.0
 
-// 使用模块在main.cpp里添加上
-// #include "./Common/Model/TalkListDefine.h"
-// #include "./Common/Model/talklistmodel.h"
-// #include "./Common/Model/filemodel.h"
-
-// qmlRegisterType<TalkData>("TalkModel",1,0,"TalkData");
-// QQmlApplicationEngine engine;
-// //获取单例
-// TalkListModel* talkListModel = TalkListModel::getInstance();
-// engine.rootContext()->setContextProperty("talkListModel",talkListModel);
-// //文件单例
-// FileModel* fileModel = FileModel::getInstance();
-// engine.rootContext()->setContextProperty("fileModel",fileModel);
 
 Rectangle {
+    id:mainRect
     property bool bLightModel: true
     property url filePath: "";
     property var fileInfo;
-    width: 720
-    height: 1024
     color: "transparent"
+    //设置最小高宽
+    onWidthChanged: {
+        mainRect.width = Math.max(talkConfig.nMinWidth,mainRect.width);
+    }
+    onHeightChanged: {
+        mainRect.height = Math.max(talkConfig.nMinHeight,mainRect.height);
+    }
 
     //UI高宽配置文件
     TalkConfig{
@@ -67,11 +60,12 @@ Rectangle {
             width: parent.width
         }
         //消息框
-        ChatContentItem{
+        Rectangle{
             id:chatContentItem
             width: parent.width
             anchors.top: titleItem.bottom
             anchors.bottom: toolItem.top
+            color: colorConfig.strBackgroundColor
             TalkListView{
                 id:talk_view
                 anchors.fill:parent
@@ -107,7 +101,7 @@ Rectangle {
         onSigBtnClicked:{
             //按下的是文件按钮
             console.log(btnName)
-            if(btnName === "qrc:/icon/file_dark.png" || btnName === "qrc:/icon/file_light.png")
+            if(btnName === "qrc:/InstantMessage/icon/file_dark.png" || btnName === "qrc:/InstantMessage/icon/file_light.png")
             {
                 filePath = fileModel.getSelectedFileUrl();
                 fileInfo = fileModel.extractFileInfo(filePath)
@@ -137,7 +131,7 @@ Rectangle {
                     }
                 }
             }
-            else if(btnName === "qrc:/icon/expression_light.png" || btnName === "qrc:/icon/expression_dark.png")   //按下的表情按钮
+            else if(btnName === "qrc:/InstantMessage/icon/expression_light.png" || btnName === "qrc:/InstantMessage/icon/expression_dark.png")   //按下的表情按钮
             {
                 console.log("表情按下");
                 emojiItemPopup.open();
@@ -149,7 +143,7 @@ Rectangle {
     Connections{
         target:emojiItem
         onSigEmojiBtnClicked:{
-            var emojiPath = "qrc:/icon/emoji/"+btnName;
+            var emojiPath = "qrc:/InstantMessage/icon/emoji/"+btnName;
             var insertStr = "<img src='" + emojiPath + "' width='20' height='20' style='vertical-align:baseline;'/>"
 
             //插入表情

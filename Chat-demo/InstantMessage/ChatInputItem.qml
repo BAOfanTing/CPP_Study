@@ -1,7 +1,7 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.12
 import TalkModel 1.0
-import "../../Common"
+import "../Common"
 
 
 //最小 550*150
@@ -80,9 +80,9 @@ Rectangle{
             anchors.fill:parent;
             hoverEnabled: true; //启用鼠标悬浮检测
             onClicked: {
-                // 清理文本末尾的空白字符（包括空格、换行符）
+                // 清理文本末尾的空白字符（包括空格、换行符）,使用富文本模式显示表情,就失效了
                 var trimmedText = textArea.text.replace(/\s+$/, ""); // 正则表达式匹配末尾空白字符
-                talkListModel.appendText("A","A",trimmedText)
+                talkListModel.appendText("A","A",trimmedText);
                 // console.log(textArea.text)
             }
             onEntered: {
@@ -120,7 +120,7 @@ Rectangle{
             anchors.fill:parent;
             hoverEnabled: true; //启用鼠标悬浮检测
             onClicked: {
-                // console.log("send");
+                //使用富文本模式显示表情,就失效了
                 var trimmedText = textArea.text.replace(/\s+$/, ""); // 正则表达式匹配末尾空白字符
                 talkListModel.appendText("B","A",trimmedText)
                 // console.log(textArea.text)

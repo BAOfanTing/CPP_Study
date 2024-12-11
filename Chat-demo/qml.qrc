@@ -1,20 +1,20 @@
 <RCC>
     <qresource prefix="/">
-        <file>chat-demo.qml</file>
-        <file>qml/UI/ChatInputItem.qml</file>
-        <file>qml/UI/ChatContentItem.qml</file>
-        <file>qml/UI/TitleItem.qml</file>
-        <file>qml/UI/ToolItem.qml</file>
+        <file>ChatDemo.qml</file>
         <file>Common/config/ColorConfig.qml</file>
-        <file>qml/TalkItem/TalkItemBase.qml</file>
-        <file>qml/TalkItem/TalkItemText.qml</file>
         <file>Common/config/TalkConfig.qml</file>
-        <file>qml/TalkItem/TalkLabel.qml</file>
-        <file>qml/TalkItem/TalkListView.qml</file>
         <file>Common/CopyPaste.qml</file>
         <file>Common/IconButton.qml</file>
-        <file>qml/TalkItem/TalkItemImage.qml</file>
-        <file>qml/TalkItem/TalkItemOtherFile.qml</file>
-        <file>qml/UI/EmojiItem.qml</file>
+        <file>main.qml</file>
+        <file>InstantMessage/ChatInputItem.qml</file>
+        <file>InstantMessage/EmojiItem.qml</file>
+        <file>InstantMessage/TitleItem.qml</file>
+        <file>InstantMessage/ToolItem.qml</file>
+        <file>InstantMessage/TalkItem/TalkItemBase.qml</file>
+        <file>InstantMessage/TalkItem/TalkItemImage.qml</file>
+        <file>InstantMessage/TalkItem/TalkItemOtherFile.qml</file>
+        <file>InstantMessage/TalkItem/TalkItemText.qml</file>
+        <file>InstantMessage/TalkItem/TalkLabel.qml</file>
+        <file>InstantMessage/TalkItem/TalkListView.qml</file>
     </qresource>
 </RCC>

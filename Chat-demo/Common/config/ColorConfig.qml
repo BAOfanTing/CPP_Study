@@ -9,9 +9,9 @@ QtObject{
     // property color urlCloseIcon: bLightModel ? "qrc:/icon/close_light.png" : "qrc:/icon/close_dark.png";  //关闭按钮样式    这样设置显示不了不知道为啥
 
     //ToolItem
-    readonly property string leftModel: bLightModel ? "qrc:/icon/expression_light.png,qrc:/icon/file_light.png,qrc:/icon/record_light.png" :
-                                            "qrc:/icon/expression_dark.png,qrc:/icon/file_dark.png,qrc:/icon/record_dark.png"; //左侧按钮
-    readonly property string rightModel:bLightModel ? "qrc:/icon/phone_light.png,qrc:/icon/video_light.png" : "qrc:/icon/phone_dark.png,qrc:/icon/video_dark.png" ; //右侧按钮
+    readonly property string leftModel: bLightModel ? "qrc:/InstantMessage/icon/expression_light.png,qrc:/InstantMessage/icon/file_light.png,qrc:/InstantMessage/icon/record_light.png" :
+                                            "qrc:/InstantMessage/icon/expression_dark.png,qrc:/InstantMessage/icon/file_dark.png,qrc:/InstantMessage/icon/record_dark.png"; //左侧按钮
+    readonly property string rightModel:bLightModel ? "qrc:/InstantMessage/icon/phone_light.png,qrc:/InstantMessage/icon/video_light.png" : "qrc:/InstantMessage/icon/phone_dark.png,qrc:/InstantMessage/icon/video_dark.png" ; //右侧按钮
 
 
     //InputItem

@@ -1,6 +1,6 @@
 import QtQuick 2.13
-import "../../Common/config"
-import "../../Common"
+import "../Common/config"
+import "../Common"
 
 //标题栏,高度固定80
 Rectangle{
@@ -41,7 +41,7 @@ Rectangle{
         anchors.topMargin: 5
         anchors.right: parent.right;
         anchors.rightMargin: 10
-        imageSource: bLightModel ? "qrc:/icon/close_light.png" : "qrc:/icon/close_dark.png"; //设置图标
+        imageSource: bLightModel ? "qrc:/InstantMessage/icon/close_light.png" : "qrc:/InstantMessage/icon/close_dark.png"; //设置图标
 
         MouseArea{
             anchors.fill:parent;
@@ -56,7 +56,7 @@ Rectangle{
         id:skinIcon
         anchors.top: closeIcon.top;
         anchors.right: closeIcon.left;
-        imageSource: bLightModel ? "qrc:/icon/skin_light.png" : "qrc:/icon/skin_dark.png"; //设置图标
+        imageSource: bLightModel ? "qrc:/InstantMessage/icon/skin_light.png" : "qrc:/InstantMessage/icon/skin_dark.png"; //设置图标
 
         MouseArea{
             anchors.fill:parent;
