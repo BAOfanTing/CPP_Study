@@ -11,7 +11,7 @@ QtObject{
     //ToolItem
     readonly property string leftModel: bLightModel ? "qrc:/icon/expression_light.png,qrc:/icon/file_light.png,qrc:/icon/record_light.png" :
                                             "qrc:/icon/expression_dark.png,qrc:/icon/file_dark.png,qrc:/icon/record_dark.png"; //左侧按钮
-    readonly property string rightModel:bLightModel ? "qrc:/icon/phone_light.png,qrc:/icon/video_light.png" : "qrc:/icon/phone_light.png,qrc:/icon/video_dark.png" ; //右侧按钮
+    readonly property string rightModel:bLightModel ? "qrc:/icon/phone_light.png,qrc:/icon/video_light.png" : "qrc:/icon/phone_dark.png,qrc:/icon/video_dark.png" ; //右侧按钮
 
 
     //InputItem

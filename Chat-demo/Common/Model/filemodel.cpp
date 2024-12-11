@@ -18,17 +18,7 @@ FileModel *FileModel::getInstance()
 
 QUrl FileModel::getSelectedFileUrl()
 {
-    // 获取父窗口，若没有则使用 nullptr
-    QWidget *parentWindow = nullptr;
-    QFileDialog fileDialog(parentWindow);
-
-    const QString FileDialogQSS =
-        "QWidget { background-color: yellow }";
-    // 设置 QSS
-    fileDialog.setStyleSheet(FileDialogQSS);
-    fileDialog.setOption(QFileDialog::DontUseNativeDialog, true);
-
-    QUrl filePath = fileDialog.getOpenFileUrl(
+    QUrl filePath =QFileDialog::getOpenFileUrl(
         nullptr,
         QString("选择文件"),                            //标题
         QUrl(),                                     //默认路径
@@ -67,13 +57,21 @@ QVariant FileModel::extractFileInfo(const QString &filePath)
 QString FileModel::formatFileSize(qint64 size)
 {
     if (size < 1024)
+    {
         return QString::number(size) + " B";
+    }
     else if (size < 1024 * 1024)
+    {
         return QString::number(size / 1024.0, 'f', 2) + " KB";
+    }
     else if (size < 1024 * 1024 * 1024)
+    {
         return QString::number(size / (1024.0 * 1024), 'f', 2) + " MB";
+    }
     else
+    {
         return QString::number(size / (1024.0 * 1024 * 1024), 'f', 2) + " GB";
+    }
 }
 
 QStringList FileModel::getEmojiName()

@@ -43,7 +43,6 @@ QHash<int, QByteArray> TalkListModel::roleNames() const
         //图片
         {Qt::UserRole+200,"imagePath"},
 
-
     };
 }
 
@@ -52,6 +51,7 @@ QVariant TalkListModel::data(const QModelIndex &index, int role) const
     if(!index.isValid()){
         return QVariant();
     }
+    //增加下标越界判断
     const int row = index.row();
     auto item = talkList.at(row);
 
@@ -116,6 +116,7 @@ void TalkListModel::appendText(const QString &user, const QString &sender, const
     beginInsertRows(QModelIndex(),talkList.count(),talkList.count());
     talkList.push_back(QSharedPointer<TalkDataBasic>(talk_data));
     endInsertRows();
+
 }
 
 //图片消息
@@ -129,13 +130,12 @@ void TalkListModel::appendImage(const QString &user, const QString &sender, cons
     talk_data->type = TalkData::Image;
     talk_data->status = TalkData::ParseSuccess;
     talk_data->imagePath = ImageUrl;
-    // qDebug() << ImageUrl;
-    // qDebug() << talk_data->imagePath;
 
     //插入模型
     beginInsertRows(QModelIndex(),talkList.count(),talkList.count());
     talkList.push_back(QSharedPointer<TalkDataBasic>(talk_data));
     endInsertRows();
+
 }
 
 void TalkListModel::appendOtherFile(const QString &user, const QString &sender, const QString &filePath, const QString &fileName, const QString &fileSize, const QString &fileSuffix)
@@ -152,16 +152,28 @@ void TalkListModel::appendOtherFile(const QString &user, const QString &sender, 
     talk_data->fileName = fileName;
     talk_data->fileSuffix = fileSuffix;
 
-    // 打印输出
-    qDebug() << "File Path: " <<  talk_data->filePath;
-    qDebug() << "File Name: " << talk_data->fileName;
-    qDebug() << "File Size: " << talk_data->fileSize ;
-    qDebug() << "File Suffix: " << talk_data->fileSuffix;
+    // // 打印输出
+    // qDebug() << "File Path: " <<  talk_data->filePath;
+    // qDebug() << "File Name: " << talk_data->fileName;
+    // qDebug() << "File Size: " << talk_data->fileSize ;
+    // qDebug() << "File Suffix: " << talk_data->fileSuffix;
 
     //插入模型
     beginInsertRows(QModelIndex(),talkList.count(),talkList.count());
     talkList.push_back(QSharedPointer<TalkDataBasic>(talk_data));
     endInsertRows();
+
+}
+
+void TalkListModel::controlDisplayMessagesCount()
+{
+    //超出消息上限,移除第一条消息
+    if(talkList.size() >= nDisplayMessages)
+    {
+        beginRemoveRows(QModelIndex(),0,0);
+        talkList.removeFirst();
+        endRemoveRows();
+    }
 }
 
 qint64 TalkListModel::caculateTime()

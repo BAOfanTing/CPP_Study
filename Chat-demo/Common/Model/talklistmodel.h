@@ -8,6 +8,8 @@
 #include <QDateTime>
 #include <QDebug>
 
+#define nDisplayMessages 10
+
 class TalkListModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -39,6 +41,10 @@ public:
                                      const QString &fileSize,
                                      const QString &fileSuffix);
 
+    //控制最大展示消息数量
+    Q_INVOKABLE void controlDisplayMessagesCount();
+
+    //计算时间间隔
     qint64 caculateTime();
 private:
     //私有化构造

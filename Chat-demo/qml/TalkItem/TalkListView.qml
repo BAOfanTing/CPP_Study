@@ -22,15 +22,19 @@ ListView{
         interval:10;
         running: false;
         repeat:false;
-        onTriggered:positionViewAtEnd();
+        onTriggered:
+        {
+            model.controlDisplayMessagesCount(); //插入完成后删除
+            positionViewAtEnd();
+        }
     }
+
     onCountChanged:{
         if(count > 0)
         {
             timer.restart();
         }
     }
-
 
     // 委托：加载不同类型的组件，基于 `model.type` 的值选择合适的组件
     delegate: Loader{
@@ -51,6 +55,7 @@ ListView{
 
             return nullComp;
             }   
+
         }
         Component{
             id:textComp
