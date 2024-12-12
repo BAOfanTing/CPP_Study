@@ -29,7 +29,7 @@ Item
             delegate:IconButton{
                 width:20
                 height:20
-                imageSource:"qrc:/InstantMessage/icon/emoji/"+modelData
+                imageSource:talkConfig.emojiDirPrefix+modelData
                 imgHeight: 20
                 imgWidth: 20
 

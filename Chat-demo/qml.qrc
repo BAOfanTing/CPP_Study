@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>ChatDemo.qml</file>
         <file>Common/config/ColorConfig.qml</file>
         <file>Common/config/TalkConfig.qml</file>
         <file>Common/CopyPaste.qml</file>
@@ -16,5 +15,6 @@
         <file>InstantMessage/TalkItem/TalkItemText.qml</file>
         <file>InstantMessage/TalkItem/TalkLabel.qml</file>
         <file>InstantMessage/TalkItem/TalkListView.qml</file>
+        <file>InstantMessage/ChatDemo.qml</file>
     </qresource>
 </RCC>

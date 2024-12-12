@@ -16,7 +16,7 @@ QtObject{
     property int nImageMaxHeight: 250;
 
     readonly property string fileDirPrefix: "qrc:/InstantMessage/icon/file/"  //文件图标所在路径前缀
-
+    readonly property string emojiDirPrefix: "qrc:/InstantMessage/icon/emoji/"  //表情图标所在路径前缀
 
 
 }

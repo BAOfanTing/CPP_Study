@@ -2,7 +2,7 @@
 import QtQuick 2.13
 import QtQuick.Window 2.13
 import QtQuick.Controls 2.13
-
+import "./InstantMessage/"
 Window{
     width: 1920
     height: 1080

@@ -1,10 +1,9 @@
 import QtQuick 2.13
 import QtQuick.Window 2.13
 import QtQuick.Controls 2.13
-import "./InstantMessage"
-import "./InstantMessage/TalkItem"
-import "./Common/config"
-import "./Common"
+import "./TalkItem"
+import "../Common/config"
+import "../Common"
 import TalkModel 1.0
 
 
