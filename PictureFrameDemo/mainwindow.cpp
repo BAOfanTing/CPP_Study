@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QGraphicsRectItem>
+#include <QGraphicsLineItem>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -7,12 +9,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    MyGraphicsView *gv_view = new MyGraphicsView(this);
-    gv_view->setScene(new QGraphicsScene(this));  // 初始化视图场景
+    gv_view = new MyGraphicsView(this);
     // 放入垂直布局
     ui->verticalLayout_2->addWidget(gv_view);
-
-
 }
 
 MainWindow::~MainWindow()
@@ -61,6 +60,34 @@ void MainWindow::on_btn_SelectImg_clicked()
         QMessageBox::warning(this, tr("错误"), tr("无法加载图片: %1").arg(filename));
         return;
     }
+    if (!gv_view->scene()) {
+        gv_view->setScene(new QGraphicsScene(this));
+    } else {
+        gv_view->scene()->clear();
+    }
+    //场景大小设置为视图大小
+//    QRectF viewRect = gv_view->viewport()->rect();
+//    gv_view->scene()->setSceneRect(0,0,viewRect.width(),viewRect.height());
+
+    //缩放图片到场景大小
     QPixmap pixmap = QPixmap::fromImage(image);
-    gv_view->scene()->addPixmap(pixmap);//添加图像到场景
+    QSizeF targetsize = gv_view->scene()->sceneRect().size();
+    QPixmap scaledPixmap = pixmap.scaled(targetsize.toSize(),Qt::KeepAspectRatio,Qt::SmoothTransformation);
+    //将图片设置到场景
+    gv_view->scene()->addPixmap(scaledPixmap);
+    gv_view->setAlignment(Qt::AlignCenter);
+}
+
+void MainWindow::on_btn_Clear_clicked()
+{
+    //清空画的点线框
+    for (auto item :  gv_view->scene()->items())
+    {
+        if (item->type() == QGraphicsRectItem::Type ||
+            item->type() == QGraphicsLineItem::Type ||
+            item->type() == QGraphicsEllipseItem::Type)
+        {
+             gv_view->scene()->removeItem(item);
+        }
+    }
 }

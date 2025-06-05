@@ -3,6 +3,7 @@
 #include <QMouseEvent>
 #include <QGraphicsRectItem>
 #include <QGraphicsLineItem>
+#include <QGraphicsScene>
 
 
 #include <mygraphicsellipseitem.h>
@@ -12,7 +13,11 @@
 MyGraphicsView::MyGraphicsView(MainWindow *window,QWidget *parent)
     : QGraphicsView(parent), m_window(window)
 {
-    setSceneRect(0, 0, 800, 600);  // 只允许场景显示在固定区域
+    // 先创建并设置一个scene
+    auto scene = new QGraphicsScene(this);
+    this->setScene(scene);
+    QRectF viewRect = this->viewport()->rect();
+    this->scene()->setSceneRect(0,0,viewRect.width(),viewRect.height());
     //判断绘制属性
     connect(m_window,&MainWindow::sig_DrawRect,[=](bool bTrue){m_bDrawRect =bTrue;});
     connect(m_window,&MainWindow::sig_DrawLine,[=](bool bTrue){m_bDrawLine =bTrue;});

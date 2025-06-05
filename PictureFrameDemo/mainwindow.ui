@@ -52,6 +52,13 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QPushButton" name="btn_Clear">
+         <property name="text">
+          <string>清空绘图</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </item>

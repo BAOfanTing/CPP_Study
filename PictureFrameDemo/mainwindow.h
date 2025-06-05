@@ -21,9 +21,10 @@ public:
     ~MainWindow();
 
 signals:
-    void  sig_DrawRect(bool bDraw);
-    void  sig_DrawLine(bool bDraw);
-    void  sig_DrawPoint(bool bDraw);
+    void sig_DrawRect(bool bDraw);
+    void sig_DrawLine(bool bDraw);
+    void sig_DrawPoint(bool bDraw);
+    void sig_CLear(QGraphicsScene *scene);
 
 private slots:
     void on_btn_Rect_clicked();
@@ -34,6 +35,8 @@ private slots:
     void on_btn_SelectImg_clicked();
 
     void on_btn_Point_clicked();
+
+    void on_btn_Clear_clicked();
 
 private:
     Ui::MainWindow *ui;
