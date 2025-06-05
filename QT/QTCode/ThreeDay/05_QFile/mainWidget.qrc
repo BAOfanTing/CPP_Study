@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/mainWidget"/>
-    <qresource prefix="/">
-        <file>132.txt</file>
-    </qresource>
-</RCC>

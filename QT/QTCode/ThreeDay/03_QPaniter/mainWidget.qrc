@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/mainWidget"/>
-    <qresource prefix="/">
-        <file>Image/butterfly.png</file>
-        <file>Image/mario.gif</file>
-    </qresource>
-</RCC>
