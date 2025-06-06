@@ -65,6 +65,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="btn_scale">
+         <property name="text">
+          <string>图片缩放</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="btn_SelectImg">
          <property name="text">
           <string>选择图片</string>

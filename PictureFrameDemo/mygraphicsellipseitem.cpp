@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "mygraphicsellipseitem.h"
 #include <QCursor>
 #include <QDebug>

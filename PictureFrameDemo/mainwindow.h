@@ -40,6 +40,8 @@ private slots:
 
     void on_cb_item_activated(int index);
 
+    void on_btn_scale_stateChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
     MyGraphicsView *gv_view;

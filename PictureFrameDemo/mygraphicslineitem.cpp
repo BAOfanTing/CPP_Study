@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "mygraphicslineitem.h"
 #include <QCursor>
 #include <QGraphicsSceneHoverEvent>

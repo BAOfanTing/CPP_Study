@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QGraphicsRectItem>
 #include <QGraphicsLineItem>
+#include <logitem.h>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -23,6 +24,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_btn_Rect_clicked()
 {
     qDebug() << "按钮状态:" << ui->btn_Rect->isChecked();
+    LogItem::getInstance()->appendLog("框按下");
     emit sig_DrawRect(ui->btn_Rect->isChecked());
     emit sig_DrawLine(ui->btn_Line->isChecked());
     emit sig_DrawPoint(ui->btn_Point->isChecked());
@@ -95,4 +97,9 @@ void MainWindow::on_btn_Clear_clicked()
 void MainWindow::on_cb_item_activated(int index)
 {
     emit sig_DrawIndex(index);
+}
+
+void MainWindow::on_btn_scale_stateChanged(int arg1)
+{
+
 }
