@@ -58,6 +58,7 @@ void MyGraphicsView::mousePressEvent(QMouseEvent *event)
         item->setBrush(QBrush(Qt::transparent));
         item->setFlags(QGraphicsItem::ItemIsMovable); //可以拖动
         this->scene()->addItem(item);
+        LogItem::getInstance()->appendLog("框已绘制");
 
         m_bDrawRect = false;//只绘制一次
     }
@@ -70,6 +71,7 @@ void MyGraphicsView::mousePressEvent(QMouseEvent *event)
         item->setPen(QPen(Qt::red,4));
         item->setFlags(QGraphicsItem::ItemIsMovable); //可以拖动
         scene()->addItem(item);
+        LogItem::getInstance()->appendLog("线已绘制");
 
         m_bDrawLine = false;//只绘制一次
     }
@@ -82,6 +84,7 @@ void MyGraphicsView::mousePressEvent(QMouseEvent *event)
         point->setBrush(Qt::red);
         point->setFlags(QGraphicsItem::ItemIsMovable); //可以拖动
         scene()->addItem(point);
+        LogItem::getInstance()->appendLog("点已绘制");
 
         m_bDrawPoint = false;//只绘制一次
     }

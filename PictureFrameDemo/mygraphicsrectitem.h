@@ -15,10 +15,13 @@ public:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
 private:
-    bool m_resizing = false;
+    bool m_RightResizing = false;
+    bool m_LeftResizing = false;
     QPointF m_lastMousePos;        // 上一次鼠标位置
 
     static int rectCounter;  // 静态计数器
+
+    QGraphicsTextItem *label; //名称
 };
 
 #endif // MYGRAPHICSRECTITEM_H

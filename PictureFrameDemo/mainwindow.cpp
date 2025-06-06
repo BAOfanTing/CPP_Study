@@ -11,8 +11,15 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     gv_view = new MyGraphicsView(this);
-    // 放入垂直布局
+    // 放入垂直布局,MyGraphicsView只能够放入布局中
     ui->verticalLayout_2->addWidget(gv_view);
+    //初始让按钮无法使用
+    ui->btn_Line->setEnabled(false);
+    ui->btn_Rect->setEnabled(false);
+    ui->btn_Point->setEnabled(false);
+    ui->btn_Clear->setEnabled(false);
+    ui->cb_item->setEnabled(false);
+    ui->btn_scale->setEnabled(false);
 }
 
 MainWindow::~MainWindow()
@@ -47,6 +54,7 @@ void MainWindow::on_btn_Point_clicked()
     emit sig_DrawPoint(ui->btn_Point->isChecked());
 }
 
+//选择图片加载到场景
 void MainWindow::on_btn_SelectImg_clicked()
 {
     QString filename = QFileDialog::getOpenFileName(this, tr("打开图片"), "",
@@ -61,6 +69,7 @@ void MainWindow::on_btn_SelectImg_clicked()
         QMessageBox::warning(this, tr("错误"), tr("无法加载图片: %1").arg(filename));
         return;
     }
+    //场景二次初始化清空
     if (!gv_view->scene()) {
         gv_view->setScene(new QGraphicsScene(this));
     } else {
@@ -74,14 +83,26 @@ void MainWindow::on_btn_SelectImg_clicked()
     QPixmap pixmap = QPixmap::fromImage(image);
     QSizeF targetsize = gv_view->scene()->sceneRect().size();
     QPixmap scaledPixmap = pixmap.scaled(targetsize.toSize(),Qt::KeepAspectRatio,Qt::SmoothTransformation);
-    //将图片设置到场景
-    gv_view->scene()->addPixmap(scaledPixmap);
-    gv_view->setAlignment(Qt::AlignCenter);
+
+    QGraphicsPixmapItem *pixmapItem = gv_view->scene()->addPixmap(scaledPixmap);
+
+
+//    //将图片设置到场景
+//    gv_view->scene()->addPixmap(scaledPixmap);
+//    gv_view->setAlignment(Qt::AlignCenter);
+
+    //启用按钮
+    ui->btn_Line->setEnabled(true);
+    ui->btn_Rect->setEnabled(true);
+    ui->btn_Point->setEnabled(true);
+    ui->btn_Clear->setEnabled(true);
+    ui->cb_item->setEnabled(true);
+    ui->btn_scale->setEnabled(true);
 }
 
+//清空画的点线框,若是想清空所有，直接调clear
 void MainWindow::on_btn_Clear_clicked()
 {
-    //清空画的点线框
     for (auto item :  gv_view->scene()->items())
     {
         if (item->type() == QGraphicsRectItem::Type ||
@@ -93,6 +114,7 @@ void MainWindow::on_btn_Clear_clicked()
     }
 }
 
+//combox的形式选择绘制那个图形
 void MainWindow::on_cb_item_activated(int index)
 {
     emit sig_DrawIndex(index);
@@ -102,4 +124,5 @@ void MainWindow::on_cb_item_activated(int index)
 void MainWindow::on_btn_scale_stateChanged(int value)
 {
     sig_CanScale(value);
+    LogItem::getInstance()->appendLog(value >0 ? "场景缩放启动" : "场景多放关闭" );
 }
