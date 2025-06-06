@@ -1,6 +1,5 @@
 #include "mygraphicsellipseitem.h"
 #include <QCursor>
-#include <QDebug>
 
 int MyGraphicsEllipseItem::pointCounter = 1;
 

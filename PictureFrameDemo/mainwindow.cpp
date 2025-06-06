@@ -23,8 +23,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_btn_Rect_clicked()
 {
-    qDebug() << "按钮状态:" << ui->btn_Rect->isChecked();
-    LogItem::getInstance()->appendLog("框按下");
+    LogItem::getInstance()->appendLog(("框按下"));
     emit sig_DrawRect(ui->btn_Rect->isChecked());
     emit sig_DrawLine(ui->btn_Line->isChecked());
     emit sig_DrawPoint(ui->btn_Point->isChecked());
@@ -33,7 +32,7 @@ void MainWindow::on_btn_Rect_clicked()
 
 void MainWindow::on_btn_Line_clicked()
 {
-    qDebug() << "按钮状态:" << ui->btn_Line->isChecked();
+    LogItem::getInstance()->appendLog(("线按下"));
     emit sig_DrawRect(ui->btn_Rect->isChecked());
     emit sig_DrawLine(ui->btn_Line->isChecked());
     emit sig_DrawPoint(ui->btn_Point->isChecked());
@@ -42,7 +41,7 @@ void MainWindow::on_btn_Line_clicked()
 
 void MainWindow::on_btn_Point_clicked()
 {
-    qDebug() << "按钮状态:" << ui->btn_Point->isChecked();
+    LogItem::getInstance()->appendLog(("点按下"));
     emit sig_DrawRect(ui->btn_Rect->isChecked());
     emit sig_DrawLine(ui->btn_Line->isChecked());
     emit sig_DrawPoint(ui->btn_Point->isChecked());
@@ -68,8 +67,8 @@ void MainWindow::on_btn_SelectImg_clicked()
         gv_view->scene()->clear();
     }
     //场景大小设置为视图大小
-//    QRectF viewRect = gv_view->viewport()->rect();
-//    gv_view->scene()->setSceneRect(0,0,viewRect.width(),viewRect.height());
+    QRectF viewRect = gv_view->viewport()->rect();
+    gv_view->scene()->setSceneRect(0,0,viewRect.width(),viewRect.height());
 
     //缩放图片到场景大小
     QPixmap pixmap = QPixmap::fromImage(image);
@@ -99,7 +98,8 @@ void MainWindow::on_cb_item_activated(int index)
     emit sig_DrawIndex(index);
 }
 
-void MainWindow::on_btn_scale_stateChanged(int arg1)
+//是否启用缩放
+void MainWindow::on_btn_scale_stateChanged(int value)
 {
-
+    sig_CanScale(value);
 }

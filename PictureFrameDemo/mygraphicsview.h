@@ -11,6 +11,7 @@ class MyGraphicsView :public QGraphicsView
 public:
     explicit MyGraphicsView(MainWindow *window,QWidget *parent = nullptr);
     void mousePressEvent(QMouseEvent *event) override;
+    void wheelEvent(QWheelEvent *event) override;
 
 public slots:
 
@@ -20,6 +21,7 @@ private:
     bool m_bDrawRect = false;
     bool m_bDrawPoint = false;
     bool m_bDrawLine = false;
+    int m_bCanScale = 0;
 
 };
 

@@ -25,6 +25,7 @@ signals:
     void sig_DrawLine(bool bDraw);
     void sig_DrawPoint(bool bDraw);
     void sig_DrawIndex(int index);
+    void sig_CanScale(int value);
 
 private slots:
     void on_btn_Rect_clicked();

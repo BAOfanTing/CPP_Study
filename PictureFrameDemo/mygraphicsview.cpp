@@ -9,12 +9,13 @@
 #include <mygraphicsellipseitem.h>
 #include <mygraphicslineitem.h>
 #include <mygraphicsrectitem.h>
+#include <logitem.h>
 
 MyGraphicsView::MyGraphicsView(MainWindow *window,QWidget *parent)
     : QGraphicsView(parent), m_window(window)
 {
     // 先创建并设置一个scene
-    auto scene = new QGraphicsScene(this);
+    QGraphicsScene *scene = new QGraphicsScene(this);
     this->setScene(scene);
     QRectF viewRect = this->viewport()->rect();
     this->scene()->setSceneRect(0,0,viewRect.width(),viewRect.height());
@@ -22,6 +23,7 @@ MyGraphicsView::MyGraphicsView(MainWindow *window,QWidget *parent)
     connect(m_window,&MainWindow::sig_DrawRect,[=](bool bTrue){m_bDrawRect =bTrue;});
     connect(m_window,&MainWindow::sig_DrawLine,[=](bool bTrue){m_bDrawLine =bTrue;});
     connect(m_window,&MainWindow::sig_DrawPoint,[=](bool bTrue){m_bDrawPoint =bTrue;});
+    connect(m_window,&MainWindow::sig_CanScale,[=](int value){m_bCanScale = value;});
     connect(m_window,&MainWindow::sig_DrawIndex,[=](int index){switch (index)
         {
             case 0:
@@ -45,7 +47,6 @@ MyGraphicsView::MyGraphicsView(MainWindow *window,QWidget *parent)
 //捕获鼠标绘图
 void MyGraphicsView::mousePressEvent(QMouseEvent *event)
 {
-//    qDebug() << "Mouse button:" << event->buttons();
     //画矩形
     if(m_bDrawRect &&  event->buttons() == Qt::LeftButton)
     {
@@ -86,4 +87,30 @@ void MyGraphicsView::mousePressEvent(QMouseEvent *event)
     }
     QGraphicsView::mousePressEvent(event);//保留父类的默认行为
 }
+
+//捕获滚轮缩放
+void MyGraphicsView::wheelEvent(QWheelEvent *event)
+{
+    if(m_bCanScale)
+    {
+        const double scaleFactor = 1.15; //缩放因子
+        if(event->angleDelta().y() > 0)
+        {
+            scale(scaleFactor,scaleFactor);  //放大
+            LogItem::getInstance()->appendLog("放大场景");
+        }
+        else
+        {
+            scale(1.0 / scaleFactor,1.0 / scaleFactor); //缩小
+            LogItem::getInstance()->appendLog("缩小场景");
+        }
+    }
+    else
+    {
+        QGraphicsView::wheelEvent(event);//保留父类的默认行为
+    }
+}
+
+
+
 

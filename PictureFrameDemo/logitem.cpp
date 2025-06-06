@@ -61,6 +61,7 @@ void LogItem::appendLog(const QString &message)
     if(m_textStream.device())
     {
       m_textStream << timeAndMessage <<"\n";
+      qDebug()<<timeAndMessage;
       m_textStream.flush();
     }
 
