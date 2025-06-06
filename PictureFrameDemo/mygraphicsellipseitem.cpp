@@ -1,3 +1,4 @@
+#pragma execution_character_set("utf-8")
 #include "mygraphicsellipseitem.h"
 #include <QCursor>
 #include <QDebug>
@@ -10,7 +11,7 @@ MyGraphicsEllipseItem::MyGraphicsEllipseItem(qreal x, qreal y, qreal w, qreal h,
     setAcceptHoverEvents(true);  //允许悬浮事件
 
     //名称
-    QString labelText = QString("线 %1").arg(pointCounter++);
+    QString labelText = QString("Point %1").arg(pointCounter++);
     QGraphicsTextItem *label = new QGraphicsTextItem(labelText,this);
     //移至右上角
     QPointF topRight = rect().topRight();

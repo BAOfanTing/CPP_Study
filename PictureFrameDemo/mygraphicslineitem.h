@@ -14,12 +14,15 @@ public:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
+    void updateLabel();
+
 private:
     bool m_Left_resizing = false;
     bool m_Right_resizing = false;
     QPointF m_lastMousePos;        // 上一次鼠标位置
 
     static int lineCounter;
+    QGraphicsTextItem *m_label;
 };
 
 #endif // MYGRAPHICSLINEITEM_H

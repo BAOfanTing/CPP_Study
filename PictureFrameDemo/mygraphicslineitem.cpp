@@ -1,3 +1,4 @@
+#pragma execution_character_set("utf-8")
 #include "mygraphicslineitem.h"
 #include <QCursor>
 #include <QGraphicsSceneHoverEvent>
@@ -10,12 +11,12 @@ MyGraphicsLineItem::MyGraphicsLineItem(const QLineF &line, QGraphicsItem *parent
     setAcceptHoverEvents(true);//接收鼠标悬浮
 
     //名称
-    QString labelText = QString("线 %1").arg(lineCounter++);
-    QGraphicsTextItem *label = new QGraphicsTextItem(labelText,this);
+    QString labelText = QString("Line %1").arg(lineCounter++);
+    m_label = new QGraphicsTextItem(labelText,this);
     //移至中间
     QPointF center = line.center();
-    label->setPos(center.x(),center.y()-5);
-    label->setDefaultTextColor(Qt::red);
+    m_label->setPos(center.x(),center.y()-5);
+    m_label->setDefaultTextColor(Qt::red);
 }
 
 void MyGraphicsLineItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
@@ -25,6 +26,7 @@ void MyGraphicsLineItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     bool nearLeft = (l.p1() - event->pos()).manhattanLength() < edgeMargin;
     bool nearRight = (l.p2() - event->pos()).manhattanLength() < edgeMargin;
 
+    //移动左点还是右点
     if(nearLeft)
     {
         m_Left_resizing = true;
@@ -64,6 +66,7 @@ void MyGraphicsLineItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
          l.setP1(l.p1()+delta);
          setLine(l);  // 更新线段
          m_lastMousePos = event->pos();
+         updateLabel();
     }
     else if(m_Right_resizing)
     {
@@ -71,6 +74,7 @@ void MyGraphicsLineItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         l.setP2(l.p2()+delta);
         setLine(l);  // 更新线段
         m_lastMousePos = event->pos();
+        updateLabel();
     }
     else
     {
@@ -84,4 +88,11 @@ void MyGraphicsLineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     m_Left_resizing = false;
     m_Right_resizing = false;
     QGraphicsLineItem::mouseReleaseEvent(event);//保留父类的默认行为
+}
+
+//更新文本位置
+void MyGraphicsLineItem::updateLabel()
+{
+    QPointF center = line().center();
+    m_label->setPos(center.x(), center.y() - 5);
 }

@@ -9,11 +9,11 @@ MyGraphicsRectItem::MyGraphicsRectItem(const QRectF &rect, QGraphicsItem *parent
 {
     setAcceptHoverEvents(true);  //允许悬浮事件
     //名称
-    QString labelText = QString("矩形 %1").arg(rectCounter++);
+    QString labelText = QString("Rect %1").arg(rectCounter++);
     QGraphicsTextItem *label = new QGraphicsTextItem(labelText,this);
     //移至右上角
     QPointF topLeft = rect.topLeft();
-    label->setPos(topLeft.x()+5,topLeft.y()-20);
+    label->setPos(topLeft.x()-5,topLeft.y()-20);
     label->setDefaultTextColor(Qt::red);
 }
 
@@ -58,8 +58,17 @@ void MyGraphicsRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         QPointF delta = event->pos() - m_lastMousePos;
         QRectF r = rect();
 
-        r.setRight(r.right() + delta.x());
-        r.setBottom(r.bottom() + delta.y());
+        //限制最小缩放为40*40
+        qreal newWidth = r.width() + delta.x();//计算新大小
+        qreal newHeight = r.height() + delta.y();
+
+        const qreal minWidth = 40.0;
+        const qreal minHeight = 40.0;
+
+        //取最大值
+        newWidth = qMax(newWidth, minWidth);
+        newHeight = qMax(newHeight, minHeight);
+        r.setSize(QSizeF(newWidth,newHeight));
 
         setRect(r.normalized());
         m_lastMousePos = event->pos();//给下一次事件记录位置
