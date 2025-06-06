@@ -24,7 +24,7 @@ signals:
     void sig_DrawRect(bool bDraw);
     void sig_DrawLine(bool bDraw);
     void sig_DrawPoint(bool bDraw);
-    void sig_CLear(QGraphicsScene *scene);
+    void sig_DrawIndex(int index);
 
 private slots:
     void on_btn_Rect_clicked();
@@ -37,6 +37,8 @@ private slots:
     void on_btn_Point_clicked();
 
     void on_btn_Clear_clicked();
+
+    void on_cb_item_activated(int index);
 
 private:
     Ui::MainWindow *ui;

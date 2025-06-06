@@ -91,3 +91,8 @@ void MainWindow::on_btn_Clear_clicked()
         }
     }
 }
+
+void MainWindow::on_cb_item_activated(int index)
+{
+    emit sig_DrawIndex(index);
+}

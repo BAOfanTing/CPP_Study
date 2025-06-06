@@ -22,6 +22,24 @@ MyGraphicsView::MyGraphicsView(MainWindow *window,QWidget *parent)
     connect(m_window,&MainWindow::sig_DrawRect,[=](bool bTrue){m_bDrawRect =bTrue;});
     connect(m_window,&MainWindow::sig_DrawLine,[=](bool bTrue){m_bDrawLine =bTrue;});
     connect(m_window,&MainWindow::sig_DrawPoint,[=](bool bTrue){m_bDrawPoint =bTrue;});
+    connect(m_window,&MainWindow::sig_DrawIndex,[=](int index){switch (index)
+        {
+            case 0:
+            m_bDrawRect = true;
+            m_bDrawPoint =false;
+            m_bDrawLine =false;
+            break;
+            case 1:
+            m_bDrawRect = false;
+            m_bDrawPoint =true;
+            m_bDrawLine =false;
+            break;
+            case 2:
+            m_bDrawRect = false;
+            m_bDrawPoint =false;
+            m_bDrawLine =true;
+            break;
+        }});
 }
 
 //捕获鼠标绘图

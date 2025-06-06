@@ -25,6 +25,25 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
+        <widget class="QComboBox" name="cb_item">
+         <item>
+          <property name="text">
+           <string>框</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>点</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>线</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
         <widget class="QRadioButton" name="btn_Rect">
          <property name="text">
           <string>框</string>

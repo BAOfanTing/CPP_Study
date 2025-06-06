@@ -1,3 +1,4 @@
 /QT_Timer/build
 /QT_Timer/CMakeLists.txt.user
 **/*.user
+./PictureFrameDemo/PictureFrameDemo.pro.user
