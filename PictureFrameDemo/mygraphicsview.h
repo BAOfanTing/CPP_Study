@@ -13,8 +13,9 @@ public:
     void mousePressEvent(QMouseEvent *event) override;
     void wheelEvent(QWheelEvent *event) override;
 
-public slots:
 
+public slots:
+    void showImage();
 
 private:
     MainWindow *m_window;

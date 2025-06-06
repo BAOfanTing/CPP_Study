@@ -108,6 +108,7 @@ void MyGraphicsRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         QRectF newRect(newTopLeft,bottomRight);
         setRect(newRect.normalized());
 
+        //左上角拉伸时名称跟随
         label->setPos(newTopLeft.x()-5,newTopLeft.y()-20);
         label->setDefaultTextColor(Qt::red);
         m_lastMousePos = event->pos();

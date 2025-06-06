@@ -57,40 +57,8 @@ void MainWindow::on_btn_Point_clicked()
 //选择图片加载到场景
 void MainWindow::on_btn_SelectImg_clicked()
 {
-    QString filename = QFileDialog::getOpenFileName(this, tr("打开图片"), "",
-                            tr("Image Files (*.png *.jpg *.jpeg *.bmp *.xpm)"));
 
-    if (filename.isEmpty()) {
-        return;
-    }
-
-    QImage image(filename);
-    if (image.isNull()) {
-        QMessageBox::warning(this, tr("错误"), tr("无法加载图片: %1").arg(filename));
-        return;
-    }
-    //场景二次初始化清空
-    if (!gv_view->scene()) {
-        gv_view->setScene(new QGraphicsScene(this));
-    } else {
-        gv_view->scene()->clear();
-    }
-    //场景大小设置为视图大小
-    QRectF viewRect = gv_view->viewport()->rect();
-    gv_view->scene()->setSceneRect(0,0,viewRect.width(),viewRect.height());
-
-    //缩放图片到场景大小
-    QPixmap pixmap = QPixmap::fromImage(image);
-    QSizeF targetsize = gv_view->scene()->sceneRect().size();
-    QPixmap scaledPixmap = pixmap.scaled(targetsize.toSize(),Qt::KeepAspectRatio,Qt::SmoothTransformation);
-
-    QGraphicsPixmapItem *pixmapItem = gv_view->scene()->addPixmap(scaledPixmap);
-
-
-//    //将图片设置到场景
-//    gv_view->scene()->addPixmap(scaledPixmap);
-//    gv_view->setAlignment(Qt::AlignCenter);
-
+    emit sig_ShowImage();
     //启用按钮
     ui->btn_Line->setEnabled(true);
     ui->btn_Rect->setEnabled(true);

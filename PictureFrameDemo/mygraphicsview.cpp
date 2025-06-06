@@ -24,6 +24,7 @@ MyGraphicsView::MyGraphicsView(MainWindow *window,QWidget *parent)
     connect(m_window,&MainWindow::sig_DrawLine,[=](bool bTrue){m_bDrawLine =bTrue;});
     connect(m_window,&MainWindow::sig_DrawPoint,[=](bool bTrue){m_bDrawPoint =bTrue;});
     connect(m_window,&MainWindow::sig_CanScale,[=](int value){m_bCanScale = value;});
+    connect(m_window,&MainWindow::sig_ShowImage,this,&MyGraphicsView::showImage);
     connect(m_window,&MainWindow::sig_DrawIndex,[=](int index){switch (index)
         {
             case 0:
@@ -113,6 +114,49 @@ void MyGraphicsView::wheelEvent(QWheelEvent *event)
         QGraphicsView::wheelEvent(event);//保留父类的默认行为
     }
 }
+
+//加载图片
+void MyGraphicsView::showImage()
+{
+    QString filename = QFileDialog::getOpenFileName(this, tr("打开图片"), "",
+                            tr("Image Files (*.png *.jpg *.jpeg *.bmp *.xpm)"));
+    if (filename.isEmpty()) {
+        return;
+    }
+
+    QImage image(filename);
+    if (image.isNull()) {
+        QMessageBox::warning(this, tr("错误"), tr("无法加载图片: %1").arg(filename));
+        return;
+    }
+    //场景二次初始化清空
+    if (!this->scene()) {
+        this->setScene(new QGraphicsScene(this));
+    } else {
+        this->scene()->clear();
+    }
+    //场景大小设置为视图大小
+    QRectF viewRect = this->viewport()->rect();
+    this->scene()->setSceneRect(0,0,viewRect.width(),viewRect.height());
+
+    //缩放图片到场景大小
+    QPixmap pixmap = QPixmap::fromImage(image);
+    QSizeF targetsize = this->scene()->sceneRect().size();
+    QPixmap scaledPixmap = pixmap.scaled(targetsize.toSize(),Qt::KeepAspectRatio,Qt::SmoothTransformation);
+
+    //添加图片到场景
+    QGraphicsPixmapItem *pixmapItem = this->scene()->addPixmap(scaledPixmap);
+
+    //让图片在场景中居中
+    QRectF sceneRect = this->scene()->sceneRect();
+    QRectF pixmapRect = pixmapItem->boundingRect();
+    qreal x = (sceneRect.width() -pixmapRect.width())/2.0;
+    qreal y = (sceneRect.height() -pixmapRect.height())/2.0;
+
+    pixmapItem->setPos(x,y);
+}
+
+
 
 
 
