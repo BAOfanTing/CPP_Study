@@ -1,6 +1,8 @@
 #ifndef MYGRAPHICSELLIPSEITEM_H
 #define MYGRAPHICSELLIPSEITEM_H
 
+//使用椭圆来代替点
+
 #include <QObject>
 #include <QGraphicsEllipseItem>
 

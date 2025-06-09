@@ -1,4 +1,13 @@
 /QT_Timer/build
 /QT_Timer/CMakeLists.txt.user
 **/*.user
-./PictureFrameDemo/PictureFrameDemo.pro.user
+
+**/*.pro.user
+/PictureFrameDemo/.vs
+/PictureFrameDemo/debug
+/PictureFrameDemo/release
+/PictureFrameDemo/log.txt
+**/*.vcxproj
+**/*.filters
+
+

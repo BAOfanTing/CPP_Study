@@ -5,12 +5,12 @@
 #include <QGraphicsLineItem>
 #include <QGraphicsScene>
 
-
 #include <mygraphicsellipseitem.h>
 #include <mygraphicslineitem.h>
 #include <mygraphicsrectitem.h>
 #include <logitem.h>
 
+//view相当于画布的视野,scene相当于画布
 MyGraphicsView::MyGraphicsView(MainWindow *window,QWidget *parent)
     : QGraphicsView(parent), m_window(window)
 {
@@ -23,9 +23,9 @@ MyGraphicsView::MyGraphicsView(MainWindow *window,QWidget *parent)
     connect(m_window,&MainWindow::sig_DrawRect,[=](bool bTrue){m_bDrawRect =bTrue;});
     connect(m_window,&MainWindow::sig_DrawLine,[=](bool bTrue){m_bDrawLine =bTrue;});
     connect(m_window,&MainWindow::sig_DrawPoint,[=](bool bTrue){m_bDrawPoint =bTrue;});
-    connect(m_window,&MainWindow::sig_CanScale,[=](int value){m_bCanScale = value;});
-    connect(m_window,&MainWindow::sig_ShowImage,this,&MyGraphicsView::showImage);
-    connect(m_window,&MainWindow::sig_DrawIndex,[=](int index){switch (index)
+    connect(m_window,&MainWindow::sig_CanScale,[=](int value){m_bCanScale = value;});   //缩放图片
+    connect(m_window,&MainWindow::sig_ShowImage,this,&MyGraphicsView::showImage);       //展示图片
+    connect(m_window,&MainWindow::sig_DrawIndex,[=](int index){switch (index)           //combox形式选择绘制属性
         {
             case 0:
             m_bDrawRect = true;
@@ -149,8 +149,8 @@ void MyGraphicsView::showImage()
 
     //让图片在场景中居中
     QRectF sceneRect = this->scene()->sceneRect();
-    QRectF pixmapRect = pixmapItem->boundingRect();
-    qreal x = (sceneRect.width() -pixmapRect.width())/2.0;
+    QRectF pixmapRect = pixmapItem->boundingRect(); //获取图像高宽
+    qreal x = (sceneRect.width() -pixmapRect.width())/2.0;//计算放置位置
     qreal y = (sceneRect.height() -pixmapRect.height())/2.0;
 
     pixmapItem->setPos(x,y);

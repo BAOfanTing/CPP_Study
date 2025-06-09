@@ -39,6 +39,7 @@ private slots:
     void on_btn_Point_clicked();
 
     void on_btn_Clear_clicked();
+	void on_btn_Save_clicked();
 
     void on_cb_item_activated(int index);
 
