@@ -125,16 +125,16 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        cb_item->setItemText(0, QCoreApplication::translate("MainWindow", "\346\241\206", nullptr));
-        cb_item->setItemText(1, QCoreApplication::translate("MainWindow", "\347\202\271", nullptr));
-        cb_item->setItemText(2, QCoreApplication::translate("MainWindow", "\347\272\277", nullptr));
+        cb_item->setItemText(0, QCoreApplication::translate("MainWindow", "Rect", nullptr));
+        cb_item->setItemText(1, QCoreApplication::translate("MainWindow", "Point", nullptr));
+        cb_item->setItemText(2, QCoreApplication::translate("MainWindow", "Line", nullptr));
 
-        btn_Rect->setText(QCoreApplication::translate("MainWindow", "\346\241\206", nullptr));
-        btn_Line->setText(QCoreApplication::translate("MainWindow", "\347\272\277", nullptr));
-        btn_Point->setText(QCoreApplication::translate("MainWindow", "\347\202\271", nullptr));
-        btn_scale->setText(QCoreApplication::translate("MainWindow", "\345\233\276\347\211\207\347\274\251\346\224\276", nullptr));
-        btn_SelectImg->setText(QCoreApplication::translate("MainWindow", "\351\200\211\346\213\251\345\233\276\347\211\207", nullptr));
-        btn_Clear->setText(QCoreApplication::translate("MainWindow", "\346\270\205\347\251\272\347\273\230\345\233\276", nullptr));
+        btn_Rect->setText(QCoreApplication::translate("MainWindow", "Rect", nullptr));
+        btn_Line->setText(QCoreApplication::translate("MainWindow", "Line", nullptr));
+        btn_Point->setText(QCoreApplication::translate("MainWindow", "Point", nullptr));
+        btn_scale->setText(QCoreApplication::translate("MainWindow", "Image Scale", nullptr));
+        btn_SelectImg->setText(QCoreApplication::translate("MainWindow", "select image", nullptr));
+        btn_Clear->setText(QCoreApplication::translate("MainWindow", "clear", nullptr));
         btn_Save->setText(QCoreApplication::translate("MainWindow", "savePic", nullptr));
     } // retranslateUi
 

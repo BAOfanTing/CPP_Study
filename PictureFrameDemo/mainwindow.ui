@@ -28,17 +28,17 @@
         <widget class="QComboBox" name="cb_item">
          <item>
           <property name="text">
-           <string>框</string>
+           <string>Rect</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>点</string>
+           <string>Point</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>线</string>
+           <string>Line</string>
           </property>
          </item>
         </widget>
@@ -46,42 +46,42 @@
        <item>
         <widget class="QRadioButton" name="btn_Rect">
          <property name="text">
-          <string>框</string>
+          <string>Rect</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QRadioButton" name="btn_Line">
          <property name="text">
-          <string>线</string>
+          <string>Line</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QRadioButton" name="btn_Point">
          <property name="text">
-          <string>点</string>
+          <string>Point</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="btn_scale">
          <property name="text">
-          <string>图片缩放</string>
+          <string>Image Scale</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="btn_SelectImg">
          <property name="text">
-          <string>选择图片</string>
+          <string>select image</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="btn_Clear">
          <property name="text">
-          <string>清空绘图</string>
+          <string>clear</string>
          </property>
         </widget>
        </item>

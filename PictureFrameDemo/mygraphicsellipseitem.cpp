@@ -9,7 +9,7 @@ MyGraphicsEllipseItem::MyGraphicsEllipseItem(qreal x, qreal y, qreal w, qreal h,
     setAcceptHoverEvents(true);  //允许悬浮事件
 
     //名称
-    QString labelText = QString("Point %1").arg(pointCounter++);
+    QString labelText = QString(QObject::tr("Point %1").arg(pointCounter++));
     QGraphicsTextItem *label = new QGraphicsTextItem(labelText,this);
     //移至右上角
     QPointF topRight = rect().topRight();

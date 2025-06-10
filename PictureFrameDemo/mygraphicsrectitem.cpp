@@ -9,7 +9,7 @@ MyGraphicsRectItem::MyGraphicsRectItem(const QRectF &rect, QGraphicsItem *parent
 {
     setAcceptHoverEvents(true);  //允许悬浮事件
     //名称
-    QString labelText = QString("Rect %1").arg(rectCounter++);
+    QString labelText = QString(QObject::tr("Rect %1").arg(rectCounter++));
     label = new QGraphicsTextItem(labelText,this);
     //移至右上角
     QPointF topLeft = rect.topLeft();

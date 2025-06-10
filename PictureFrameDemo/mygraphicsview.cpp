@@ -118,7 +118,7 @@ void MyGraphicsView::wheelEvent(QWheelEvent *event)
 //加载图片
 void MyGraphicsView::showImage()
 {
-    QString filename = QFileDialog::getOpenFileName(this, tr("打开图片"), "",
+    QString filename = QFileDialog::getOpenFileName(this, tr("open Image"), "",
                             tr("Image Files (*.png *.jpg *.jpeg *.bmp *.xpm)"));
     if (filename.isEmpty()) {
         return;
@@ -126,7 +126,7 @@ void MyGraphicsView::showImage()
 
     QImage image(filename);
     if (image.isNull()) {
-        QMessageBox::warning(this, tr("错误"), tr("无法加载图片: %1").arg(filename));
+        QMessageBox::warning(this, tr("error"), tr("Can't load Image: %1").arg(filename));
         return;
     }
     //场景二次初始化清空

@@ -10,7 +10,7 @@ MyGraphicsLineItem::MyGraphicsLineItem(const QLineF &line, QGraphicsItem *parent
     setAcceptHoverEvents(true);//接收鼠标悬浮
 
     //名称
-    QString labelText = QString("Line %1").arg(lineCounter++);
+    QString labelText = QString(QObject::tr("Line %1").arg(lineCounter++));
     m_label = new QGraphicsTextItem(labelText,this);
     //移至中间
     QPointF center = line.center();
