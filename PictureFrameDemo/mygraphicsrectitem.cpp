@@ -1,6 +1,7 @@
 #include "mygraphicsrectitem.h"
 #include <QCursor>
 #include <QGraphicsSceneHoverEvent>
+#include "logitem.h"
 
 int MyGraphicsRectItem::rectCounter = 1;
 
@@ -9,7 +10,7 @@ MyGraphicsRectItem::MyGraphicsRectItem(const QRectF &rect, QGraphicsItem *parent
 {
     setAcceptHoverEvents(true);  //允许悬浮事件
     //名称
-    QString labelText = QString(QObject::tr("Rect %1").arg(rectCounter++));
+    labelText = QString(QObject::tr("Rect %1").arg(rectCounter++));
     label = new QGraphicsTextItem(labelText,this);
     //移至右上角
     QPointF topLeft = rect.topLeft();
@@ -20,12 +21,20 @@ MyGraphicsRectItem::MyGraphicsRectItem(const QRectF &rect, QGraphicsItem *parent
 //检测鼠标是否靠近右下角
 void MyGraphicsRectItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
-    QRectF r = rect();
+    QRectF r = rect();     //这个是局部坐标,使用它坐标不会变
     qreal edgeMargin = 20.0;
+
+	QRectF rectInScene = this->sceneBoundingRect();			//使用场景坐标,能够随拖动进行变化
+	//日志打印坐标
+	LogItem::getInstance()->appendLog(QString("%1 左上角(%2,%3),右下(%4,%5)").arg(labelText)
+																			.arg(rectInScene.topLeft().x())
+																			.arg(rectInScene.topLeft().y())
+																			.arg(rectInScene.bottomRight().x())
+																			.arg(rectInScene.bottomRight().y()));
 
     bool nearRightBottom = QLineF(event->pos(), r.bottomRight()).length() < edgeMargin;//判断鼠标是否在右下角
     bool nearLeftTop = QLineF(event->pos(), r.topLeft()).length()  < edgeMargin;  //判断鼠标是否在左上角
-    //能否进行缩放
+    //能否进行大小调整
     if(nearRightBottom)
     {
         setCursor(QCursor(Qt::SizeFDiagCursor));
@@ -63,7 +72,7 @@ void MyGraphicsRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     const qreal minWidth = 40.0;
     const qreal minHeight = 40.0;
 
-    if(m_RightResizing)
+    if(m_RightResizing)//右下角缩放大小,简单
     {
         //计算两次鼠标位置差值，扩大边
         QPointF delta = event->pos() - m_lastMousePos;
@@ -81,7 +90,7 @@ void MyGraphicsRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         setRect(r.normalized());
         m_lastMousePos = event->pos();//给下一次事件记录位置
     }
-    else if(m_LeftResizing)
+    else if(m_LeftResizing) //左上角缩放大小,需要考率矩形是以左上角为基点来绘制的
     {
         //计算两次鼠标位置差值，扩大边
         QPointF delta = event->pos() - m_lastMousePos;

@@ -23,6 +23,7 @@ private:
 
     static int lineCounter;
     QGraphicsTextItem *m_label;
+	QString labelText;			//名称字符串
 };
 
 #endif // MYGRAPHICSLINEITEM_H
