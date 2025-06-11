@@ -2,6 +2,9 @@
 #include <QCursor>
 #include <QGraphicsSceneHoverEvent>
 #include "logitem.h"
+#include "Config.h"
+#include <QBrush>
+#include <QPen>
 
 int MyGraphicsRectItem::rectCounter = 1;
 
@@ -9,13 +12,16 @@ MyGraphicsRectItem::MyGraphicsRectItem(const QRectF &rect, QGraphicsItem *parent
     :QGraphicsRectItem(rect,parent)
 {
     setAcceptHoverEvents(true);  //允许悬浮事件
+	setPen(QPen(Config::itemColor, 4));
+	setBrush(QBrush(Qt::transparent));
+	setFlags(QGraphicsItem::ItemIsMovable); //可以拖动
     //名称
-    labelText = QString(QObject::tr("Rect %1").arg(rectCounter++));
-    label = new QGraphicsTextItem(labelText,this);
+	m_strLabelText = QString(QObject::tr("Rect %1").arg(rectCounter++));
+	m_itmLabel = new QGraphicsTextItem(m_strLabelText,this);
     //移至右上角
     QPointF topLeft = rect.topLeft();
-    label->setPos(topLeft.x()-5,topLeft.y()-20);
-    label->setDefaultTextColor(Qt::red);
+	m_itmLabel->setPos(topLeft.x()-5,topLeft.y()-20);
+	m_itmLabel->setDefaultTextColor(Config::textColor);
 }
 
 //检测鼠标是否靠近右下角
@@ -26,7 +32,7 @@ void MyGraphicsRectItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 
 	QRectF rectInScene = this->sceneBoundingRect();			//使用场景坐标,能够随拖动进行变化
 	//日志打印坐标
-	LogItem::getInstance()->appendLog(QString("%1 左上角(%2,%3),右下(%4,%5)").arg(labelText)
+	LogItem::getInstance()->appendLog(QString("%1 左上角(%2,%3),右下(%4,%5)").arg(m_strLabelText)
 																			.arg(rectInScene.topLeft().x())
 																			.arg(rectInScene.topLeft().y())
 																			.arg(rectInScene.bottomRight().x())
@@ -118,8 +124,8 @@ void MyGraphicsRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         setRect(newRect.normalized());
 
         //左上角拉伸时名称跟随
-        label->setPos(newTopLeft.x()-5,newTopLeft.y()-20);
-        label->setDefaultTextColor(Qt::red);
+		m_itmLabel->setPos(newTopLeft.x()-5,newTopLeft.y()-20);
+		m_itmLabel->setDefaultTextColor(Qt::red);
         m_lastMousePos = event->pos();
     }
     else

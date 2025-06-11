@@ -29,26 +29,17 @@ signals:
     void sig_ShowImage();
 
 private slots:
-    void on_btn_Rect_clicked();
-
-    void on_btn_Line_clicked();
-
-
-    void on_btn_SelectImg_clicked();
-
-    void on_btn_Point_clicked();
-
-    void on_btn_Clear_clicked();
-	void on_btn_Save_clicked();
-
-    void on_cb_item_activated(int index);
-
-    void on_btn_scale_stateChanged(int arg1);
+    void on_m_prbtnRect_clicked();
+    void on_m_prbtnLine_clicked();
+    void on_m_ppbtnSelectImage_clicked();
+    void on_m_prbtnPoint_clicked();
+    void on_m_ppbtnClear_clicked();
+	void on_m_ppbtnSaveImage_clicked();
+    void on_m_pcbxSelectItem_activated(int index);
+    void on_m_pckxScale_stateChanged(int arg1);
 
 private:
-    Ui::MainWindow *ui;
-    MyGraphicsView *gv_view;
-
-
+    Ui::MainWindow *ui; 
+    MyGraphicsView *m_pgvView; 
 };
 #endif // MAINWINDOW_H

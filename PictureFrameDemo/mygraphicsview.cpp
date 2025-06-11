@@ -19,12 +19,17 @@ MyGraphicsView::MyGraphicsView(MainWindow *window,QWidget *parent)
     this->setScene(scene);
     QRectF viewRect = this->viewport()->rect();
     this->scene()->setSceneRect(0,0,viewRect.width(),viewRect.height());
+
+	this->setRenderHint(QPainter::Antialiasing, true);		//打开抗锯齿模式
+	this->setDragMode(QGraphicsView::ScrollHandDrag);		//允许拖动场景
+
+	
     //判断绘制属性
-    connect(m_window,&MainWindow::sig_DrawRect,[=](bool bTrue){m_bDrawRect =bTrue;});
-    connect(m_window,&MainWindow::sig_DrawLine,[=](bool bTrue){m_bDrawLine =bTrue;});
-    connect(m_window,&MainWindow::sig_DrawPoint,[=](bool bTrue){m_bDrawPoint =bTrue;});
-    connect(m_window,&MainWindow::sig_CanScale,[=](int value){m_bCanScale = value;});   //缩放图片
-    connect(m_window,&MainWindow::sig_ShowImage,this,&MyGraphicsView::showImage);       //展示图片
+    connect(m_window,&MainWindow::sig_DrawRect,[=](bool bTrue){m_bDrawRect = bTrue;});
+    connect(m_window,&MainWindow::sig_DrawLine,[=](bool bTrue){m_bDrawLine = bTrue;});
+    connect(m_window,&MainWindow::sig_DrawPoint,[=](bool bTrue){m_bDrawPoint = bTrue;});
+    connect(m_window,&MainWindow::sig_CanScale,[=](int value){m_nCanScale = value;});   //缩放图片
+    connect(m_window,&MainWindow::sig_ShowImage,this,&MyGraphicsView::on_m_ppbtnSelectImageclicked);       //展示图片
     connect(m_window,&MainWindow::sig_DrawIndex,[=](int index){switch (index)           //combox形式选择绘制属性
         {
             case 0:
@@ -55,9 +60,6 @@ void MyGraphicsView::mousePressEvent(QMouseEvent *event)
         QRectF rect(scenePos.x()-10,scenePos.y()-10,80,80);//以鼠标中心4040绘制矩形
 
         MyGraphicsRectItem *item = new MyGraphicsRectItem(rect);
-        item->setPen(QPen(Qt::red,4));
-        item->setBrush(QBrush(Qt::transparent));
-        item->setFlags(QGraphicsItem::ItemIsMovable); //可以拖动
         this->scene()->addItem(item);
         LogItem::getInstance()->appendLog("框已绘制");
 
@@ -68,10 +70,8 @@ void MyGraphicsView::mousePressEvent(QMouseEvent *event)
     {
         QPointF scenePos = mapToScene(event->pos());
         QLineF line(scenePos,scenePos+QPointF(100,0));
-        MyGraphicsLineItem *item = new MyGraphicsLineItem(line);
-        item->setPen(QPen(Qt::red,4));
-        item->setFlags(QGraphicsItem::ItemIsMovable); //可以拖动
-        scene()->addItem(item);
+        MyGraphicsLineItem *lineItem = new MyGraphicsLineItem(line);
+        scene()->addItem(lineItem);
         LogItem::getInstance()->appendLog("线已绘制");
 
         m_bDrawLine = false;//只绘制一次
@@ -81,10 +81,9 @@ void MyGraphicsView::mousePressEvent(QMouseEvent *event)
     {
         QPointF scenePos = mapToScene(event->pos());
         qreal radius = 10;
+		//创建点
         MyGraphicsEllipseItem *point = new MyGraphicsEllipseItem(scenePos.x(),scenePos.y(),2*radius,2*radius);
-        point->setBrush(Qt::red);
-        point->setFlags(QGraphicsItem::ItemIsMovable); //可以拖动
-        scene()->addItem(point);
+        scene()->addItem(point);					//添加点到场景
         LogItem::getInstance()->appendLog("点已绘制");
 
         m_bDrawPoint = false;//只绘制一次
@@ -95,7 +94,7 @@ void MyGraphicsView::mousePressEvent(QMouseEvent *event)
 //捕获滚轮缩放
 void MyGraphicsView::wheelEvent(QWheelEvent *event)
 {
-    if(m_bCanScale)
+    if(m_nCanScale)
     {
         const double scaleFactor = 1.15; //缩放因子
         if(event->angleDelta().y() > 0)
@@ -116,7 +115,7 @@ void MyGraphicsView::wheelEvent(QWheelEvent *event)
 }
 
 //加载图片
-void MyGraphicsView::showImage()
+void MyGraphicsView::on_m_ppbtnSelectImageclicked()
 {
     QString filename = QFileDialog::getOpenFileName(this, tr("open Image"), "",
                             tr("Image Files (*.png *.jpg *.jpeg *.bmp *.xpm)"));
@@ -155,6 +154,7 @@ void MyGraphicsView::showImage()
 
     pixmapItem->setPos(x,y);
 }
+
 
 
 

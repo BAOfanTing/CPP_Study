@@ -10,17 +10,17 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    gv_view = new MyGraphicsView(this);//获得场景实例
+    m_pgvView = new MyGraphicsView(this);//获得场景实例
     // 放入垂直布局,MyGraphicsView只能够放入布局中
-    ui->verticalLayout_2->addWidget(gv_view);
+    ui->verticalLayout_2->addWidget(m_pgvView);
     //初始让按钮无法使用
-    ui->btn_Line->setEnabled(false);
-    ui->btn_Rect->setEnabled(false);
-    ui->btn_Point->setEnabled(false);
-    ui->btn_Clear->setEnabled(false);
-    ui->cb_item->setEnabled(false);
-    ui->btn_scale->setEnabled(false);
-	ui->btn_Save->setEnabled(false);
+    ui->m_prbtnLine->setEnabled(false);
+    ui->m_prbtnRect->setEnabled(false);
+    ui->m_prbtnPoint->setEnabled(false);
+    ui->m_ppbtnClear->setEnabled(false);
+    ui->m_pcbxSelectItem->setEnabled(false);
+    ui->m_pckxScale->setEnabled(false);
+	ui->m_ppbtnSaveImage->setEnabled(false);
 }
 
 MainWindow::~MainWindow()
@@ -28,32 +28,32 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_btn_Rect_clicked()
+void MainWindow::on_m_prbtnRect_clicked()
 {
     LogItem::getInstance()->appendLog(("框按下"));
-    emit sig_DrawRect(ui->btn_Rect->isChecked());
-    emit sig_DrawLine(ui->btn_Line->isChecked());
-    emit sig_DrawPoint(ui->btn_Point->isChecked());
+    emit sig_DrawRect(ui->m_prbtnRect->isChecked());
+    emit sig_DrawLine(ui->m_prbtnLine->isChecked());
+    emit sig_DrawPoint(ui->m_prbtnPoint->isChecked());
 }
 
-void MainWindow::on_btn_Line_clicked()
+void MainWindow::on_m_prbtnLine_clicked()
 {
     LogItem::getInstance()->appendLog(("线按下"));
-    emit sig_DrawRect(ui->btn_Rect->isChecked());
-    emit sig_DrawLine(ui->btn_Line->isChecked());
-    emit sig_DrawPoint(ui->btn_Point->isChecked());
+    emit sig_DrawRect(ui->m_prbtnRect->isChecked());
+    emit sig_DrawLine(ui->m_prbtnLine->isChecked());
+    emit sig_DrawPoint(ui->m_prbtnPoint->isChecked());
 }
 
-void MainWindow::on_btn_Point_clicked()
+void MainWindow::on_m_prbtnPoint_clicked()
 {
     LogItem::getInstance()->appendLog(("点按下"));
-    emit sig_DrawRect(ui->btn_Rect->isChecked());
-    emit sig_DrawLine(ui->btn_Line->isChecked());
-    emit sig_DrawPoint(ui->btn_Point->isChecked());
+    emit sig_DrawRect(ui->m_prbtnRect->isChecked());
+    emit sig_DrawLine(ui->m_prbtnLine->isChecked());
+    emit sig_DrawPoint(ui->m_prbtnPoint->isChecked());
 }
 
 //保存图片和所有线框,缩放保存的也是原图
-void MainWindow::on_btn_Save_clicked()
+void MainWindow::on_m_ppbtnSaveImage_clicked()
 {
 	LogItem::getInstance()->appendLog("保存图片");
 	//使用文件选择的形式保存
@@ -67,7 +67,7 @@ void MainWindow::on_btn_Save_clicked()
 	}
 
 	//获取场景
-	QGraphicsScene *scene = gv_view->scene();
+	QGraphicsScene *scene = m_pgvView->scene();
 	QRectF sceneRect = scene->itemsBoundingRect(); //计算场景边界
 
 	//生成图片
@@ -75,7 +75,10 @@ void MainWindow::on_btn_Save_clicked()
 
 	//使用render将场景渲染到painter
 	QPainter painter(&image);
+	painter.setRenderHint(QPainter::Antialiasing, true);		//图像抗锯齿
+	painter.setRenderHint(QPainter::TextAntialiasing, true);	//文字抗锯齿
 	scene->render(&painter, QRectF(QPoint(0, 0), sceneRect.size()), sceneRect);
+	
 
 	if (image.save(filePath))
 	{
@@ -87,45 +90,44 @@ void MainWindow::on_btn_Save_clicked()
 		LogItem::getInstance()->appendLog(tr("Failed to save image."));
 		QMessageBox::warning(this, tr("information"), tr("Image Saved Failed！"));
 	}
-
 }
 
 //选择图片加载到场景
-void MainWindow::on_btn_SelectImg_clicked()
+void MainWindow::on_m_ppbtnSelectImage_clicked()
 {
     emit sig_ShowImage();
     //启用按钮
-    ui->btn_Line->setEnabled(true);
-    ui->btn_Rect->setEnabled(true);
-    ui->btn_Point->setEnabled(true);
-    ui->btn_Clear->setEnabled(true);
-    ui->cb_item->setEnabled(true);
-    ui->btn_scale->setEnabled(true);
-	ui->btn_Save->setEnabled(true);
+    ui->m_prbtnLine->setEnabled(true);
+    ui->m_prbtnRect->setEnabled(true);
+    ui->m_prbtnPoint->setEnabled(true);
+    ui->m_ppbtnClear->setEnabled(true);
+    ui->m_pcbxSelectItem->setEnabled(true);
+    ui->m_pckxScale->setEnabled(true);
+	ui->m_ppbtnSaveImage->setEnabled(true);
 }
 
 //清空画的点线框,不清空图片,若是想清空所有，直接调clear
-void MainWindow::on_btn_Clear_clicked()
+void MainWindow::on_m_ppbtnClear_clicked()
 {
-    for (auto item :  gv_view->scene()->items())
+    for (auto item :  m_pgvView->scene()->items())
     {
         if (item->type() == QGraphicsRectItem::Type ||
             item->type() == QGraphicsLineItem::Type ||
             item->type() == QGraphicsEllipseItem::Type)
         {
-             gv_view->scene()->removeItem(item);
+             m_pgvView->scene()->removeItem(item);
         }
     }
 }
 
 //combox的形式选择绘制那个图形
-void MainWindow::on_cb_item_activated(int index)
+void MainWindow::on_m_pcbxSelectItem_activated(int index)
 {
     emit sig_DrawIndex(index);
 }
 
 //是否启用缩放
-void MainWindow::on_btn_scale_stateChanged(int value)
+void MainWindow::on_m_pckxScale_stateChanged(int value)
 {
     sig_CanScale(value);
     LogItem::getInstance()->appendLog(value >0 ? "场景缩放启动" : "场景缩放关闭" );

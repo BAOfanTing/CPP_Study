@@ -31,14 +31,14 @@ public:
     QVBoxLayout *verticalLayout;
     QWidget *widget;
     QHBoxLayout *horizontalLayout;
-    QComboBox *cb_item;
-    QRadioButton *btn_Rect;
-    QRadioButton *btn_Line;
-    QRadioButton *btn_Point;
-    QCheckBox *btn_scale;
-    QPushButton *btn_SelectImg;
-    QPushButton *btn_Clear;
-    QPushButton *btn_Save;
+    QComboBox *m_pcbxSelectItem;
+    QRadioButton *m_prbtnRect;
+    QRadioButton *m_prbtnLine;
+    QRadioButton *m_prbtnPoint;
+    QCheckBox *m_pckxScale;
+    QPushButton *m_ppbtnSelectImage;
+    QPushButton *m_ppbtnClear;
+    QPushButton *m_ppbtnSaveImage;
     QVBoxLayout *verticalLayout_2;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -57,48 +57,48 @@ public:
         widget->setMaximumSize(QSize(16777215, 60));
         horizontalLayout = new QHBoxLayout(widget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        cb_item = new QComboBox(widget);
-        cb_item->addItem(QString());
-        cb_item->addItem(QString());
-        cb_item->addItem(QString());
-        cb_item->setObjectName(QString::fromUtf8("cb_item"));
+        m_pcbxSelectItem = new QComboBox(widget);
+        m_pcbxSelectItem->addItem(QString());
+        m_pcbxSelectItem->addItem(QString());
+        m_pcbxSelectItem->addItem(QString());
+        m_pcbxSelectItem->setObjectName(QString::fromUtf8("m_pcbxSelectItem"));
 
-        horizontalLayout->addWidget(cb_item);
+        horizontalLayout->addWidget(m_pcbxSelectItem);
 
-        btn_Rect = new QRadioButton(widget);
-        btn_Rect->setObjectName(QString::fromUtf8("btn_Rect"));
+        m_prbtnRect = new QRadioButton(widget);
+        m_prbtnRect->setObjectName(QString::fromUtf8("m_prbtnRect"));
 
-        horizontalLayout->addWidget(btn_Rect);
+        horizontalLayout->addWidget(m_prbtnRect);
 
-        btn_Line = new QRadioButton(widget);
-        btn_Line->setObjectName(QString::fromUtf8("btn_Line"));
+        m_prbtnLine = new QRadioButton(widget);
+        m_prbtnLine->setObjectName(QString::fromUtf8("m_prbtnLine"));
 
-        horizontalLayout->addWidget(btn_Line);
+        horizontalLayout->addWidget(m_prbtnLine);
 
-        btn_Point = new QRadioButton(widget);
-        btn_Point->setObjectName(QString::fromUtf8("btn_Point"));
+        m_prbtnPoint = new QRadioButton(widget);
+        m_prbtnPoint->setObjectName(QString::fromUtf8("m_prbtnPoint"));
 
-        horizontalLayout->addWidget(btn_Point);
+        horizontalLayout->addWidget(m_prbtnPoint);
 
-        btn_scale = new QCheckBox(widget);
-        btn_scale->setObjectName(QString::fromUtf8("btn_scale"));
+        m_pckxScale = new QCheckBox(widget);
+        m_pckxScale->setObjectName(QString::fromUtf8("m_pckxScale"));
 
-        horizontalLayout->addWidget(btn_scale);
+        horizontalLayout->addWidget(m_pckxScale);
 
-        btn_SelectImg = new QPushButton(widget);
-        btn_SelectImg->setObjectName(QString::fromUtf8("btn_SelectImg"));
+        m_ppbtnSelectImage = new QPushButton(widget);
+        m_ppbtnSelectImage->setObjectName(QString::fromUtf8("m_ppbtnSelectImage"));
 
-        horizontalLayout->addWidget(btn_SelectImg);
+        horizontalLayout->addWidget(m_ppbtnSelectImage);
 
-        btn_Clear = new QPushButton(widget);
-        btn_Clear->setObjectName(QString::fromUtf8("btn_Clear"));
+        m_ppbtnClear = new QPushButton(widget);
+        m_ppbtnClear->setObjectName(QString::fromUtf8("m_ppbtnClear"));
 
-        horizontalLayout->addWidget(btn_Clear);
+        horizontalLayout->addWidget(m_ppbtnClear);
 
-        btn_Save = new QPushButton(widget);
-        btn_Save->setObjectName(QString::fromUtf8("btn_Save"));
+        m_ppbtnSaveImage = new QPushButton(widget);
+        m_ppbtnSaveImage->setObjectName(QString::fromUtf8("m_ppbtnSaveImage"));
 
-        horizontalLayout->addWidget(btn_Save);
+        horizontalLayout->addWidget(m_ppbtnSaveImage);
 
 
         verticalLayout->addWidget(widget);
@@ -125,17 +125,17 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        cb_item->setItemText(0, QCoreApplication::translate("MainWindow", "Rect", nullptr));
-        cb_item->setItemText(1, QCoreApplication::translate("MainWindow", "Point", nullptr));
-        cb_item->setItemText(2, QCoreApplication::translate("MainWindow", "Line", nullptr));
+        m_pcbxSelectItem->setItemText(0, QCoreApplication::translate("MainWindow", "Rect", nullptr));
+        m_pcbxSelectItem->setItemText(1, QCoreApplication::translate("MainWindow", "Point", nullptr));
+        m_pcbxSelectItem->setItemText(2, QCoreApplication::translate("MainWindow", "Line", nullptr));
 
-        btn_Rect->setText(QCoreApplication::translate("MainWindow", "Rect", nullptr));
-        btn_Line->setText(QCoreApplication::translate("MainWindow", "Line", nullptr));
-        btn_Point->setText(QCoreApplication::translate("MainWindow", "Point", nullptr));
-        btn_scale->setText(QCoreApplication::translate("MainWindow", "Image Scale", nullptr));
-        btn_SelectImg->setText(QCoreApplication::translate("MainWindow", "select image", nullptr));
-        btn_Clear->setText(QCoreApplication::translate("MainWindow", "clear", nullptr));
-        btn_Save->setText(QCoreApplication::translate("MainWindow", "savePic", nullptr));
+        m_prbtnRect->setText(QCoreApplication::translate("MainWindow", "Rect", nullptr));
+        m_prbtnLine->setText(QCoreApplication::translate("MainWindow", "Line", nullptr));
+        m_prbtnPoint->setText(QCoreApplication::translate("MainWindow", "Point", nullptr));
+        m_pckxScale->setText(QCoreApplication::translate("MainWindow", "Image Scale", nullptr));
+        m_ppbtnSelectImage->setText(QCoreApplication::translate("MainWindow", "select image", nullptr));
+        m_ppbtnClear->setText(QCoreApplication::translate("MainWindow", "clear", nullptr));
+        m_ppbtnSaveImage->setText(QCoreApplication::translate("MainWindow", "savePic", nullptr));
     } // retranslateUi
 
 };

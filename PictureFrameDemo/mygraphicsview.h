@@ -15,14 +15,14 @@ public:
 
 
 public slots:
-    void showImage();
+    void on_m_ppbtnSelectImageclicked();
 
 private:
     MainWindow *m_window;
     bool m_bDrawRect = false;
     bool m_bDrawPoint = false;
     bool m_bDrawLine = false;
-    int m_bCanScale = 0;
+    int m_nCanScale = 0;
 
 };
 

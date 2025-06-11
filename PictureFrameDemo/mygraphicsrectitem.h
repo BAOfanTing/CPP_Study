@@ -21,8 +21,8 @@ private:
 
     static int rectCounter;  // 静态计数器
 
-    QGraphicsTextItem *label; //名称
-	QString labelText;		//名称字符串
+    QGraphicsTextItem *m_itmLabel; //名称
+	QString m_strLabelText;		//名称字符串
 };
 
 #endif // MYGRAPHICSRECTITEM_H

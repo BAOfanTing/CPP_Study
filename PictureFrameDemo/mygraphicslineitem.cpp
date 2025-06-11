@@ -2,21 +2,25 @@
 #include <QCursor>
 #include <QGraphicsSceneHoverEvent>
 #include "logitem.h"
+#include "Config.h"
+#include <QPen>
 
 int MyGraphicsLineItem::lineCounter = 1;
 
 MyGraphicsLineItem::MyGraphicsLineItem(const QLineF &line, QGraphicsItem *parent)
     :QGraphicsLineItem(line,parent)
 {
+	setPen(QPen(Config::itemColor, 4));
+	setFlags(QGraphicsItem::ItemIsMovable); //可以拖动
     setAcceptHoverEvents(true);//接收鼠标悬浮
 
     //名称
-    labelText = QString(QObject::tr("Line %1").arg(lineCounter++));
-    m_label = new QGraphicsTextItem(labelText,this);
+    m_strLabelText = QString(QObject::tr("Line %1").arg(lineCounter++));
+	m_itmLabel = new QGraphicsTextItem(m_strLabelText,this);
     //移至中间
     QPointF center = line.center();
-    m_label->setPos(center.x(),center.y()-5);
-    m_label->setDefaultTextColor(Qt::red);
+	m_itmLabel->setPos(center.x(),center.y()-5);
+	m_itmLabel->setDefaultTextColor(Config::textColor);
 }
 
 void MyGraphicsLineItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
@@ -28,7 +32,7 @@ void MyGraphicsLineItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 	QPointF startPoint = this->mapToScene(l.p1());
 	QPointF endPoint = this->mapToScene(l.p2());
 	//日志打印坐标
-	LogItem::getInstance()->appendLog(QString("%1 第一个点(%2,%3),第二个点(%4,%5)").arg(labelText)
+	LogItem::getInstance()->appendLog(QString("%1 第一个点(%2,%3),第二个点(%4,%5)").arg(m_strLabelText)
 																		.arg(startPoint.x()) 
 																		.arg(startPoint.y())
 																		.arg(endPoint.x())
@@ -74,7 +78,7 @@ void MyGraphicsLineItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     QLineF l = line();
     if(m_Left_resizing)
     {
-         QPointF delta = event->pos()-m_lastMousePos;
+         QPointF delta = event->pos()-m_lastMousePos; //两次鼠标位置的差值
          l.setP1(l.p1()+delta);
          setLine(l);  // 更新线段
          m_lastMousePos = event->pos();
@@ -82,7 +86,7 @@ void MyGraphicsLineItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     }
     else if(m_Right_resizing)
     {
-        QPointF delta = event->pos()-m_lastMousePos;
+        QPointF delta = event->pos()-m_lastMousePos; //两次鼠标位置的差值
         l.setP2(l.p2()+delta);
         setLine(l);  // 更新线段
         m_lastMousePos = event->pos();
@@ -106,5 +110,6 @@ void MyGraphicsLineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void MyGraphicsLineItem::updateLabel()
 {
     QPointF center = line().center();
-    m_label->setPos(center.x(), center.y() - 5);
+    m_itmLabel->setPos(center.x(), center.y() - 5);
 }
+

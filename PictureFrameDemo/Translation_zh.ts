@@ -92,7 +92,7 @@
     <message>
         <location filename="mygraphicsview.cpp" line="121"/>
         <source>open Image</source>
-        <translation type="unfinished"></translation>
+        <translation>打开图片</translation>
     </message>
     <message>
         <location filename="mygraphicsview.cpp" line="122"/>
@@ -102,12 +102,12 @@
     <message>
         <location filename="mygraphicsview.cpp" line="129"/>
         <source>error</source>
-        <translation type="unfinished"></translation>
+        <translation>错误</translation>
     </message>
     <message>
         <location filename="mygraphicsview.cpp" line="129"/>
         <source>Can&apos;t load Image: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>不能够加载图片: %1</translation>
     </message>
     <message>
         <source>错误</source>

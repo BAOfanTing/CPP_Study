@@ -25,7 +25,7 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QComboBox" name="cb_item">
+        <widget class="QComboBox" name="m_pcbxSelectItem">
          <item>
           <property name="text">
            <string>Rect</string>
@@ -44,49 +44,49 @@
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="btn_Rect">
+        <widget class="QRadioButton" name="m_prbtnRect">
          <property name="text">
           <string>Rect</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="btn_Line">
+        <widget class="QRadioButton" name="m_prbtnLine">
          <property name="text">
           <string>Line</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="btn_Point">
+        <widget class="QRadioButton" name="m_prbtnPoint">
          <property name="text">
           <string>Point</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="btn_scale">
+        <widget class="QCheckBox" name="m_pckxScale">
          <property name="text">
           <string>Image Scale</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btn_SelectImg">
+        <widget class="QPushButton" name="m_ppbtnSelectImage">
          <property name="text">
           <string>select image</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btn_Clear">
+        <widget class="QPushButton" name="m_ppbtnClear">
          <property name="text">
           <string>clear</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btn_Save">
+        <widget class="QPushButton" name="m_ppbtnSaveImage">
          <property name="text">
           <string>savePic</string>
          </property>

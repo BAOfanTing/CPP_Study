@@ -16,8 +16,8 @@ public:
 
 private:
     static int pointCounter;
-	QString labelText;			//名称字符串
-	QGraphicsTextItem *label;	//名称
+	QString m_strLabelText;			//名称字符串
+	QGraphicsTextItem *m_itmLabel;	//名称
 };
 
 #endif // MYGRAPHICSELLIPSEITEM_H

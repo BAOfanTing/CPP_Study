@@ -17,13 +17,13 @@ public:
     void updateLabel();
 
 private:
-    bool m_Left_resizing = false;
-    bool m_Right_resizing = false;
+    bool m_Left_resizing = false;	//左上角能否缩放
+    bool m_Right_resizing = false;	//右下角能否缩放
     QPointF m_lastMousePos;        // 上一次鼠标位置
 
     static int lineCounter;
-    QGraphicsTextItem *m_label;
-	QString labelText;			//名称字符串
+    QGraphicsTextItem *m_itmLabel;
+	QString m_strLabelText;			//名称字符串
 };
 
 #endif // MYGRAPHICSLINEITEM_H
