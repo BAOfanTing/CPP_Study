@@ -1,4 +1,4 @@
-//È«¾ÖÅäÖÃÎÄ¼ş
+//å…¨å±€é…ç½®æ–‡ä»¶
 #ifndef CONFIG_H
 #define CONFIG_H
 
@@ -6,8 +6,15 @@
 
 namespace Config 
 {
-	const QColor textColor = Qt::red;		//Í¼ĞÎÊôĞÔÃû×Ö
-	const QColor itemColor = Qt::red;		//Í¼ĞÎÑÕÉ«
+	const QColor textColor = Qt::red;		//å›¾å½¢å±æ€§åå­—
+	const QColor itemColor = Qt::red;		//å›¾å½¢é¢œè‰²
+
+	const int lineWidth = 4;				//çº¿å®½
+	const int rectLineWith = 4;					//çŸ©å½¢çº¿å®½
+	const int rectSize = 40;				//çŸ©å½¢é»˜è®¤å¤§å°
+
+	const qreal pointSize = 10;				//ç‚¹å¤§å°
+	
 
 }
 

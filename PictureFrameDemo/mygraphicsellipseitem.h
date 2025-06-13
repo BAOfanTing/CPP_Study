@@ -13,11 +13,13 @@ public:
     MyGraphicsEllipseItem(qreal x, qreal y, qreal w, qreal h, QGraphicsItem *parent = nullptr);
 
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;//重写鼠标悬浮
+	void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;//重写鼠标悬浮离开
 
 private:
     static int pointCounter;
 	QString m_strLabelText;			//名称字符串
 	QGraphicsTextItem *m_itmLabel;	//名称
+	bool m_bFirstEnter;				//鼠标是否首次进入
 };
 
 #endif // MYGRAPHICSELLIPSEITEM_H

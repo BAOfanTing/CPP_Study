@@ -31,5 +31,15 @@ void MyGraphicsEllipseItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 	QPointF sceneCenter = this->mapToScene(localcenter);
 
 	//日志打印坐标
-	LogItem::getInstance()->appendLog(QString("%1 的坐标(%2,%3)").arg(m_strLabelText).arg(sceneCenter.x()).arg(sceneCenter.y()));
+	if (m_bFirstEnter)
+	{
+		LogItem::getInstance()->appendLog(QString("%1 的坐标(%2,%3)").arg(m_strLabelText).arg(sceneCenter.x()).arg(sceneCenter.y()));
+		m_bFirstEnter = false;
+	}
+}
+
+void MyGraphicsEllipseItem::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
+{
+	m_bFirstEnter = true;
+	QGraphicsEllipseItem::hoverLeaveEvent(event);
 }

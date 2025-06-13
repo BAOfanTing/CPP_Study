@@ -9,6 +9,7 @@
 #include <mygraphicslineitem.h>
 #include <mygraphicsrectitem.h>
 #include <logitem.h>
+#include "Config.h"
 
 //view相当于画布的视野,scene相当于画布
 MyGraphicsView::MyGraphicsView(MainWindow *window,QWidget *parent)
@@ -57,7 +58,7 @@ void MyGraphicsView::mousePressEvent(QMouseEvent *event)
     if(m_bDrawRect &&  event->buttons() == Qt::LeftButton)
     {
         QPointF scenePos = mapToScene(event->pos());
-        QRectF rect(scenePos.x()-10,scenePos.y()-10,80,80);//以鼠标中心4040绘制矩形
+        QRectF rect(scenePos.x()-10,scenePos.y()-10,Config::rectSize, Config::rectSize);//以鼠标中心4040绘制矩形
 
         MyGraphicsRectItem *item = new MyGraphicsRectItem(rect);
         this->scene()->addItem(item);
@@ -80,9 +81,8 @@ void MyGraphicsView::mousePressEvent(QMouseEvent *event)
     if(m_bDrawPoint &&  event->buttons() == Qt::LeftButton)
     {
         QPointF scenePos = mapToScene(event->pos());
-        qreal radius = 10;
 		//创建点
-        MyGraphicsEllipseItem *point = new MyGraphicsEllipseItem(scenePos.x(),scenePos.y(),2*radius,2*radius);
+        MyGraphicsEllipseItem *point = new MyGraphicsEllipseItem(scenePos.x(),scenePos.y(),2*Config::pointSize, 2 * Config::pointSize);
         scene()->addItem(point);					//添加点到场景
         LogItem::getInstance()->appendLog("点已绘制");
 
@@ -91,7 +91,14 @@ void MyGraphicsView::mousePressEvent(QMouseEvent *event)
     QGraphicsView::mousePressEvent(event);//保留父类的默认行为
 }
 
-//捕获滚轮缩放
+
+/***********************************************
+ * @功能描述 : 捕获滚轮缩放场景
+ * @创建者   : 石桢楠
+ * @创建时间 : 2025-06-13
+ * @参数     : none
+ * @返回值   : none
+ ***********************************************/
 void MyGraphicsView::wheelEvent(QWheelEvent *event)
 {
     if(m_nCanScale)

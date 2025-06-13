@@ -13,13 +13,16 @@ public:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+	void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;		
 
     void updateLabel();
 
 private:
-    bool m_Left_resizing = false;	//左上角能否缩放
-    bool m_Right_resizing = false;	//右下角能否缩放
+    bool m_bLeftResizing = false;	//左上角能否缩放
+    bool m_bRightResizing = false;	//右下角能否缩放
     QPointF m_lastMousePos;        // 上一次鼠标位置
+	bool m_bFirstEnter;				//鼠标第一次进入
+	
 
     static int lineCounter;
     QGraphicsTextItem *m_itmLabel;

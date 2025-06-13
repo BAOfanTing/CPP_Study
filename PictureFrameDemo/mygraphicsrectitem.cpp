@@ -12,7 +12,7 @@ MyGraphicsRectItem::MyGraphicsRectItem(const QRectF &rect, QGraphicsItem *parent
     :QGraphicsRectItem(rect,parent)
 {
     setAcceptHoverEvents(true);  //允许悬浮事件
-	setPen(QPen(Config::itemColor, 4));
+	setPen(QPen(Config::itemColor, Config::rectLineWith));
 	setBrush(QBrush(Qt::transparent));
 	setFlags(QGraphicsItem::ItemIsMovable); //可以拖动
     //名称
@@ -24,7 +24,13 @@ MyGraphicsRectItem::MyGraphicsRectItem(const QRectF &rect, QGraphicsItem *parent
 	m_itmLabel->setDefaultTextColor(Config::textColor);
 }
 
-//检测鼠标是否靠近右下角
+/***********************************************
+ * @功能描述 : 检测鼠标位置,设置图形是否可拉伸
+ * @创建者   : 石桢楠
+ * @创建时间 : 2025-06-13
+ * @参数     : none
+ * @返回值   : none
+ ***********************************************/
 void MyGraphicsRectItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     QRectF r = rect();     //这个是局部坐标,使用它坐标不会变
@@ -32,32 +38,37 @@ void MyGraphicsRectItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 
 	QRectF rectInScene = this->sceneBoundingRect();			//使用场景坐标,能够随拖动进行变化
 	//日志打印坐标
-	LogItem::getInstance()->appendLog(QString("%1 左上角(%2,%3),右下(%4,%5)").arg(m_strLabelText)
-																			.arg(rectInScene.topLeft().x())
-																			.arg(rectInScene.topLeft().y())
-																			.arg(rectInScene.bottomRight().x())
-																			.arg(rectInScene.bottomRight().y()));
+	if (m_bFirstEnter)
+	{
+		LogItem::getInstance()->appendLog(QString("%1 左上角(%2,%3),右下(%4,%5)")
+			.arg(m_strLabelText)
+			.arg(rectInScene.topLeft().x())
+			.arg(rectInScene.topLeft().y())
+			.arg(rectInScene.bottomRight().x())
+			.arg(rectInScene.bottomRight().y()));
+		m_bFirstEnter = false;
+	}
 
-    bool nearRightBottom = QLineF(event->pos(), r.bottomRight()).length() < edgeMargin;//判断鼠标是否在右下角
-    bool nearLeftTop = QLineF(event->pos(), r.topLeft()).length()  < edgeMargin;  //判断鼠标是否在左上角
+    bool m_bNearRightBottom = QLineF(event->pos(), r.bottomRight()).length() < edgeMargin;//判断鼠标是否在右下角
+    bool m_bNearLeftTop = QLineF(event->pos(), r.topLeft()).length()  < edgeMargin;  //判断鼠标是否在左上角
     //能否进行大小调整
-    if(nearRightBottom)
+    if(m_bNearRightBottom)
     {
         setCursor(QCursor(Qt::SizeFDiagCursor));
-        m_RightResizing = true;
-        m_LeftResizing = false;
+        m_bRightResizing = true;
+        m_bLeftResizing = false;
     }
-    else if(nearLeftTop)
+    else if(m_bNearLeftTop)
     {
         setCursor(QCursor(Qt::SizeFDiagCursor));
-        m_RightResizing = false;
-        m_LeftResizing = true;
+        m_bRightResizing = false;
+        m_bLeftResizing = true;
     }
     else
     {
         setCursor(QCursor(Qt::OpenHandCursor));
-        m_RightResizing = false;
-        m_LeftResizing = false;
+        m_bRightResizing = false;
+        m_bLeftResizing = false;
     }
     QGraphicsRectItem::hoverEnterEvent(event);//保留父类的默认行为
 }
@@ -65,20 +76,28 @@ void MyGraphicsRectItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 void MyGraphicsRectItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     //第一次点击记录位置
-    if(!m_RightResizing && !m_LeftResizing)
+    if(!m_bRightResizing && !m_bLeftResizing)
     {
         QGraphicsRectItem::mousePressEvent(event);//保留父类的默认行为
     }
     m_lastMousePos = event->pos();
 }
 
+
+/***********************************************
+ * @功能描述 : 鼠标按住移动拉伸图形
+ * @创建者   : 石桢楠
+ * @创建时间 : 2025-06-13
+ * @参数     : none
+ * @返回值   : none
+ ***********************************************/
 void MyGraphicsRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     //最小高宽
     const qreal minWidth = 40.0;
     const qreal minHeight = 40.0;
 
-    if(m_RightResizing)//右下角缩放大小,简单
+    if(m_bRightResizing)//右下角缩放大小,简单
     {
         //计算两次鼠标位置差值，扩大边
         QPointF delta = event->pos() - m_lastMousePos;
@@ -96,7 +115,7 @@ void MyGraphicsRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         setRect(r.normalized());
         m_lastMousePos = event->pos();//给下一次事件记录位置
     }
-    else if(m_LeftResizing) //左上角缩放大小,需要考率矩形是以左上角为基点来绘制的
+    else if(m_bLeftResizing) //左上角缩放大小,需要考率矩形是以左上角为基点来绘制的
     {
         //计算两次鼠标位置差值，扩大边
         QPointF delta = event->pos() - m_lastMousePos;
@@ -137,9 +156,15 @@ void MyGraphicsRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void MyGraphicsRectItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    m_RightResizing = false;
-    m_LeftResizing = false;
+    m_bRightResizing = false;
+    m_bLeftResizing = false;
     QGraphicsRectItem::mouseReleaseEvent(event);//保留父类的默认行为
+}
+
+void MyGraphicsRectItem::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
+{
+	m_bFirstEnter = true;
+	QGraphicsRectItem::hoverLeaveEvent(event);	//保留父类
 }
 
 
