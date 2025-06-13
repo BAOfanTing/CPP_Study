@@ -21,6 +21,13 @@ MyGraphicsEllipseItem::MyGraphicsEllipseItem(qreal x, qreal y, qreal w, qreal h,
 	m_itmLabel->setDefaultTextColor(Config::textColor);
 }
 
+/***********************************************
+ * @功能描述 : 鼠标首次进入打印顶点坐标
+ * @创建者   : 石桢楠
+ * @创建时间 : 2025-06-13
+ * @参数     : none
+ * @返回值   : none
+ ***********************************************/
 void MyGraphicsEllipseItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     setCursor(QCursor(Qt::OpenHandCursor));			//设置鼠标样式
@@ -37,7 +44,13 @@ void MyGraphicsEllipseItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 		m_bFirstEnter = false;
 	}
 }
-
+/***********************************************
+ * @功能描述 : 鼠标离开,设置打印日志
+ * @创建者   : 石桢楠
+ * @创建时间 : 2025-06-13
+ * @参数     : none
+ * @返回值   : none
+ ***********************************************/
 void MyGraphicsEllipseItem::hoverLeaveEvent(QGraphicsSceneHoverEvent * event)
 {
 	m_bFirstEnter = true;

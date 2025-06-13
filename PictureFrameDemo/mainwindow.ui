@@ -65,13 +65,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="m_pckxScale">
-         <property name="text">
-          <string>Image Scale</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="m_ppbtnSelectImage">
          <property name="text">
           <string>select image</string>
@@ -98,6 +91,22 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2"/>
     </item>
+    <item>
+     <widget class="QTextEdit" name="m_pteShowLog">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>100</height>
+       </size>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -109,8 +118,23 @@
      <height>26</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>view</string>
+    </property>
+    <addaction name="m_pactShowLog"/>
+   </widget>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="m_pactShowLog">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>showlog</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

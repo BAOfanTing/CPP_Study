@@ -31,7 +31,7 @@ void LogItem::initLogFile()
         newFile.close(); // 立即关闭（此时文件为空）
     }
 
-    if(!m_logFile.open(QIODevice::Append | QIODevice::Text))
+    if(!m_logFile.open(QIODevice::Append | QIODevice::Truncate | QIODevice::Text))
     {
         qWarning()<<"无法打开日志文件"<< m_logFile.fileName();
     }
@@ -45,6 +45,19 @@ void LogItem::initLogFile()
 LogItem *LogItem::getInstance()
 {
     return m_instance;
+}
+
+
+/***********************************************
+ * @功能描述 : 接受主界面传入的textedit
+ * @创建者   : 石桢楠
+ * @创建时间 : 2025-06-13
+ * @参数     : none
+ * @返回值   : none
+ ***********************************************/
+void LogItem::setlogWidget(QTextEdit * logTextEdit)
+{
+	m_pteLog = logTextEdit;
 }
 
 //添加文本到日志文件
@@ -63,6 +76,12 @@ void LogItem::appendLog(const QString &message)
       m_textStream << timeAndMessage <<"\n";
       qDebug()<<timeAndMessage;
       m_textStream.flush();
+
+	  //输出日志到界面
+	  if (m_pteLog)
+	  {
+		  m_pteLog->append(timeAndMessage);
+	  }
     }
 
 }

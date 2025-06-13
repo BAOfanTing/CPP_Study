@@ -15,7 +15,6 @@ namespace Config
 
 	const qreal pointSize = 10;				//点大小
 	
-
 }
 
 

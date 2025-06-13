@@ -28,57 +28,63 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="70"/>
-        <source>Image Scale</source>
-        <translation>图像缩放</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="77"/>
         <source>select image</source>
+        <oldsource>Image Scale</oldsource>
         <translation>选择图片</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="84"/>
+        <location filename="mainwindow.ui" line="77"/>
         <source>clear</source>
         <translation>清空绘图</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="91"/>
+        <location filename="mainwindow.ui" line="84"/>
         <source>savePic</source>
         <translation>保存图片</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="60"/>
+        <location filename="mainwindow.ui" line="123"/>
+        <source>view</source>
+        <translation>视图</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="135"/>
+        <source>showlog</source>
+        <translation>显示日志</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="61"/>
         <source>save image</source>
         <translation>保存图片</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="61"/>
+        <location filename="mainwindow.cpp" line="62"/>
         <source>PNG Images (*.png);;JPEG Images (*.jpg)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="82"/>
+        <location filename="mainwindow.cpp" line="86"/>
         <source>Image saved to %1</source>
         <translation>图片保存至%1</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="83"/>
-        <location filename="mainwindow.cpp" line="88"/>
+        <location filename="mainwindow.cpp" line="87"/>
+        <location filename="mainwindow.cpp" line="92"/>
         <source>information</source>
         <translation>信息</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="83"/>
+        <location filename="mainwindow.cpp" line="87"/>
         <source>Image Saved！</source>
         <translation>图像保存成功</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="87"/>
+        <location filename="mainwindow.cpp" line="91"/>
         <source>Failed to save image.</source>
         <translation>图像保存失败</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="88"/>
+        <location filename="mainwindow.cpp" line="92"/>
         <source>Image Saved Failed！</source>
         <translation>图像保存失败</translation>
     </message>
@@ -121,17 +127,17 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="mygraphicsellipseitem.cpp" line="12"/>
+        <location filename="mygraphicsellipseitem.cpp" line="16"/>
         <source>Point %1</source>
         <translation>点%1</translation>
     </message>
     <message>
-        <location filename="mygraphicslineitem.cpp" line="13"/>
+        <location filename="mygraphicslineitem.cpp" line="18"/>
         <source>Line %1</source>
         <translation>线%1</translation>
     </message>
     <message>
-        <location filename="mygraphicsrectitem.cpp" line="12"/>
+        <location filename="mygraphicsrectitem.cpp" line="19"/>
         <source>Rect %1</source>
         <translation>矩形%1</translation>
     </message>

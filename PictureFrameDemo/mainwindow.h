@@ -36,7 +36,7 @@ private slots:
     void on_m_ppbtnClear_clicked();
 	void on_m_ppbtnSaveImage_clicked();
     void on_m_pcbxSelectItem_activated(int index);
-    void on_m_pckxScale_stateChanged(int arg1);
+	void on_m_pactShowLog_changed();
 
 private:
     Ui::MainWindow *ui; 

@@ -10,15 +10,17 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -27,6 +29,7 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *m_pactShowLog;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
     QWidget *widget;
@@ -35,12 +38,13 @@ public:
     QRadioButton *m_prbtnRect;
     QRadioButton *m_prbtnLine;
     QRadioButton *m_prbtnPoint;
-    QCheckBox *m_pckxScale;
     QPushButton *m_ppbtnSelectImage;
     QPushButton *m_ppbtnClear;
     QPushButton *m_ppbtnSaveImage;
     QVBoxLayout *verticalLayout_2;
+    QTextEdit *m_pteShowLog;
     QMenuBar *menubar;
+    QMenu *menu;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -48,6 +52,9 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(1098, 720);
+        m_pactShowLog = new QAction(MainWindow);
+        m_pactShowLog->setObjectName(QString::fromUtf8("m_pactShowLog"));
+        m_pactShowLog->setCheckable(true);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
@@ -80,11 +87,6 @@ public:
 
         horizontalLayout->addWidget(m_prbtnPoint);
 
-        m_pckxScale = new QCheckBox(widget);
-        m_pckxScale->setObjectName(QString::fromUtf8("m_pckxScale"));
-
-        horizontalLayout->addWidget(m_pckxScale);
-
         m_ppbtnSelectImage = new QPushButton(widget);
         m_ppbtnSelectImage->setObjectName(QString::fromUtf8("m_ppbtnSelectImage"));
 
@@ -108,14 +110,26 @@ public:
 
         verticalLayout->addLayout(verticalLayout_2);
 
+        m_pteShowLog = new QTextEdit(centralwidget);
+        m_pteShowLog->setObjectName(QString::fromUtf8("m_pteShowLog"));
+        m_pteShowLog->setMinimumSize(QSize(0, 100));
+        m_pteShowLog->setMaximumSize(QSize(16777215, 100));
+
+        verticalLayout->addWidget(m_pteShowLog);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
         menubar->setGeometry(QRect(0, 0, 1098, 26));
+        menu = new QMenu(menubar);
+        menu->setObjectName(QString::fromUtf8("menu"));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
+
+        menubar->addAction(menu->menuAction());
+        menu->addAction(m_pactShowLog);
 
         retranslateUi(MainWindow);
 
@@ -125,6 +139,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        m_pactShowLog->setText(QCoreApplication::translate("MainWindow", "showlog", nullptr));
         m_pcbxSelectItem->setItemText(0, QCoreApplication::translate("MainWindow", "Rect", nullptr));
         m_pcbxSelectItem->setItemText(1, QCoreApplication::translate("MainWindow", "Point", nullptr));
         m_pcbxSelectItem->setItemText(2, QCoreApplication::translate("MainWindow", "Line", nullptr));
@@ -132,10 +147,10 @@ public:
         m_prbtnRect->setText(QCoreApplication::translate("MainWindow", "Rect", nullptr));
         m_prbtnLine->setText(QCoreApplication::translate("MainWindow", "Line", nullptr));
         m_prbtnPoint->setText(QCoreApplication::translate("MainWindow", "Point", nullptr));
-        m_pckxScale->setText(QCoreApplication::translate("MainWindow", "Image Scale", nullptr));
         m_ppbtnSelectImage->setText(QCoreApplication::translate("MainWindow", "select image", nullptr));
         m_ppbtnClear->setText(QCoreApplication::translate("MainWindow", "clear", nullptr));
         m_ppbtnSaveImage->setText(QCoreApplication::translate("MainWindow", "savePic", nullptr));
+        menu->setTitle(QCoreApplication::translate("MainWindow", "view", nullptr));
     } // retranslateUi
 
 };

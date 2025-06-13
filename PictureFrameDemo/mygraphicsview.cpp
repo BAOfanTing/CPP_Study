@@ -29,7 +29,6 @@ MyGraphicsView::MyGraphicsView(MainWindow *window,QWidget *parent)
     connect(m_window,&MainWindow::sig_DrawRect,[=](bool bTrue){m_bDrawRect = bTrue;});
     connect(m_window,&MainWindow::sig_DrawLine,[=](bool bTrue){m_bDrawLine = bTrue;});
     connect(m_window,&MainWindow::sig_DrawPoint,[=](bool bTrue){m_bDrawPoint = bTrue;});
-    connect(m_window,&MainWindow::sig_CanScale,[=](int value){m_nCanScale = value;});   //缩放图片
     connect(m_window,&MainWindow::sig_ShowImage,this,&MyGraphicsView::on_m_ppbtnSelectImageclicked);       //展示图片
     connect(m_window,&MainWindow::sig_DrawIndex,[=](int index){switch (index)           //combox形式选择绘制属性
         {
@@ -101,24 +100,19 @@ void MyGraphicsView::mousePressEvent(QMouseEvent *event)
  ***********************************************/
 void MyGraphicsView::wheelEvent(QWheelEvent *event)
 {
-    if(m_nCanScale)
+    const double scaleFactor = 1.15; //缩放因子
+    if(event->angleDelta().y() > 0)
     {
-        const double scaleFactor = 1.15; //缩放因子
-        if(event->angleDelta().y() > 0)
-        {
-            scale(scaleFactor,scaleFactor);  //放大
-            LogItem::getInstance()->appendLog("放大场景");
-        }
-        else
-        {
-            scale(1.0 / scaleFactor,1.0 / scaleFactor); //缩小
-            LogItem::getInstance()->appendLog("缩小场景");
-        }
+        scale(scaleFactor,scaleFactor);  //放大
+        LogItem::getInstance()->appendLog("放大场景");
     }
     else
     {
-        QGraphicsView::wheelEvent(event);//保留父类的默认行为
+        scale(1.0 / scaleFactor,1.0 / scaleFactor); //缩小
+        LogItem::getInstance()->appendLog("缩小场景");
     }
+
+    QGraphicsView::wheelEvent(event);//保留父类的默认行为
 }
 
 //加载图片

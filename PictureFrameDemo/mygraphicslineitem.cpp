@@ -114,6 +114,14 @@ void MyGraphicsLineItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     }
 }
 
+
+/***********************************************
+ * @功能描述 : 鼠标点击释放设置拉伸状态
+ * @创建者   : 石桢楠
+ * @创建时间 : 2025-06-13
+ * @参数     : none
+ * @返回值   : none
+ ***********************************************/
 void MyGraphicsLineItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     m_bLeftResizing = false;

@@ -19,8 +19,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->m_prbtnPoint->setEnabled(false);
     ui->m_ppbtnClear->setEnabled(false);
     ui->m_pcbxSelectItem->setEnabled(false);
-    ui->m_pckxScale->setEnabled(false);
 	ui->m_ppbtnSaveImage->setEnabled(false);
+	ui->m_pteShowLog->setVisible(false);
+	LogItem::getInstance()->setlogWidget(ui->m_pteShowLog);
 }
 
 MainWindow::~MainWindow()
@@ -102,7 +103,6 @@ void MainWindow::on_m_ppbtnSelectImage_clicked()
     ui->m_prbtnPoint->setEnabled(true);
     ui->m_ppbtnClear->setEnabled(true);
     ui->m_pcbxSelectItem->setEnabled(true);
-    ui->m_pckxScale->setEnabled(true);
 	ui->m_ppbtnSaveImage->setEnabled(true);
 }
 
@@ -126,9 +126,25 @@ void MainWindow::on_m_pcbxSelectItem_activated(int index)
     emit sig_DrawIndex(index);
 }
 
-//是否启用缩放
-void MainWindow::on_m_pckxScale_stateChanged(int value)
+
+/***********************************************
+ * @功能描述 : 日志显示与隐藏
+ * @创建者   : 石桢楠
+ * @创建时间 : 2025-06-13
+ * @参数     : none
+ * @返回值   : none
+ ***********************************************/
+void MainWindow::on_m_pactShowLog_changed()
 {
-    sig_CanScale(value);
-    LogItem::getInstance()->appendLog(value >0 ? "场景缩放启动" : "场景缩放关闭" );
+	LogItem::getInstance()->appendLog("显示日志状态变化");
+	if (ui->m_pactShowLog->isChecked())
+	{
+		ui->m_pteShowLog->setVisible(true); //显示日志
+	}
+	else
+	{
+		ui->m_pteShowLog->setVisible(false); //隐藏日志
+	}
 }
+
+

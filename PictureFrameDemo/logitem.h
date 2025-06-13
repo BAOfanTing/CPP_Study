@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QObject>
+#include <QTextEdit>
 
 class LogItem : public QObject
 {
@@ -10,6 +11,7 @@ class LogItem : public QObject
 public:
     static LogItem *getInstance();
 
+	void setlogWidget(QTextEdit *logTextEdit);
     void appendLog(const QString &message);
 
 
@@ -24,6 +26,8 @@ private:
     QFile m_logFile;
     static LogItem* m_instance;
      QTextStream m_textStream;
+
+	 QTextEdit *m_pteLog = nullptr;
 
 };
 

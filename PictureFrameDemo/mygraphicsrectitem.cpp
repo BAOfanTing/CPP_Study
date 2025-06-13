@@ -83,7 +83,6 @@ void MyGraphicsRectItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
     m_lastMousePos = event->pos();
 }
 
-
 /***********************************************
  * @功能描述 : 鼠标按住移动拉伸图形
  * @创建者   : 石桢楠
@@ -138,7 +137,6 @@ void MyGraphicsRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         {
             newTopLeft.setY(bottomRight.y() - minHeight);
         }
-
         QRectF newRect(newTopLeft,bottomRight);
         setRect(newRect.normalized());
 
@@ -151,9 +149,15 @@ void MyGraphicsRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     {
         QGraphicsRectItem::mouseMoveEvent(event);//保留父类的默认行为
     }
-
 }
 
+/***********************************************
+ * @功能描述 : 鼠标点击释放设置拉伸状态
+ * @创建者   : 石桢楠
+ * @创建时间 : 2025-06-13
+ * @参数     : none
+ * @返回值   : none
+ ***********************************************/
 void MyGraphicsRectItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     m_bRightResizing = false;
