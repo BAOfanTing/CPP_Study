@@ -17,12 +17,12 @@ MyGraphicsView::MyGraphicsView(MainWindow *window,QWidget *parent)
 {
     // 先创建并设置一个scene
     QGraphicsScene *scene = new QGraphicsScene(this);
-    this->setScene(scene);
+    setScene(scene);
     QRectF viewRect = this->viewport()->rect();
-    this->scene()->setSceneRect(0,0,viewRect.width(),viewRect.height());
+    scene->setSceneRect(0,0,viewRect.width(),viewRect.height());
 
-	this->setRenderHint(QPainter::Antialiasing, true);		//打开抗锯齿模式
-	this->setDragMode(QGraphicsView::ScrollHandDrag);		//允许拖动场景
+	setRenderHint(QPainter::Antialiasing, true);		//打开抗锯齿模式
+	setDragMode(QGraphicsView::ScrollHandDrag);		//允许拖动场景
 
 	
     //判断绘制属性
@@ -89,7 +89,6 @@ void MyGraphicsView::mousePressEvent(QMouseEvent *event)
     }
     QGraphicsView::mousePressEvent(event);//保留父类的默认行为
 }
-
 
 /***********************************************
  * @功能描述 : 捕获滚轮缩放场景

@@ -16,8 +16,8 @@ public:
 	void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
 private:
-    bool m_bRightResizing = false;
-    bool m_bLeftResizing = false;
+    bool m_bRightResizing = false;		//右下能否缩放
+    bool m_bLeftResizing = false;		//左下能否缩放
 	bool m_bFirstEnter = true;			//鼠标进入首次打印坐标
     QPointF m_lastMousePos;				// 上一次鼠标位置
 

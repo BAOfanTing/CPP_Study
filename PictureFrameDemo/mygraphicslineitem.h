@@ -15,7 +15,7 @@ public:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 	void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;		
 
-    void updateLabel();
+    void updateLabel();			//更新名称位置
 
 private:
     bool m_bLeftResizing = false;	//左上角能否缩放
@@ -24,7 +24,7 @@ private:
 	bool m_bFirstEnter;				//鼠标第一次进入
 	
 
-    static int lineCounter;
+    static int lineCounter;			//线条计数
     QGraphicsTextItem *m_itmLabel;
 	QString m_strLabelText;			//名称字符串
 };

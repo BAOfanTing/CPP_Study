@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     m_pgvView = new MyGraphicsView(this);//获得场景实例
     // 放入垂直布局,MyGraphicsView只能够放入布局中
-    ui->verticalLayout_2->addWidget(m_pgvView);
+    ui->m_pImageVerticalLayout->addWidget(m_pgvView);
     //初始让按钮无法使用
     ui->m_prbtnLine->setEnabled(false);
     ui->m_prbtnRect->setEnabled(false);
@@ -53,7 +53,14 @@ void MainWindow::on_m_prbtnPoint_clicked()
     emit sig_DrawPoint(ui->m_prbtnPoint->isChecked());
 }
 
-//保存图片和所有线框,缩放保存的也是原图
+
+/***********************************************
+ * @功能描述 : 保存图片,缩放的图片保存也是原图
+ * @创建者   : 石桢楠
+ * @创建时间 : 2025-06-13
+ * @参数     : none
+ * @返回值   : none
+ ***********************************************/
 void MainWindow::on_m_ppbtnSaveImage_clicked()
 {
 	LogItem::getInstance()->appendLog("保存图片");
@@ -93,7 +100,13 @@ void MainWindow::on_m_ppbtnSaveImage_clicked()
 	}
 }
 
-//选择图片加载到场景
+/***********************************************
+ * @功能描述 : 选择图片按钮点击,把图片渲染到窗口
+ * @创建者   : 石桢楠
+ * @创建时间 : 2025-06-13
+ * @参数     : none
+ * @返回值   : none
+ ***********************************************/
 void MainWindow::on_m_ppbtnSelectImage_clicked()
 {
     emit sig_ShowImage();
@@ -126,7 +139,6 @@ void MainWindow::on_m_pcbxSelectItem_activated(int index)
     emit sig_DrawIndex(index);
 }
 
-
 /***********************************************
  * @功能描述 : 日志显示与隐藏
  * @创建者   : 石桢楠
@@ -137,12 +149,22 @@ void MainWindow::on_m_pcbxSelectItem_activated(int index)
 void MainWindow::on_m_pactShowLog_changed()
 {
 	LogItem::getInstance()->appendLog("显示日志状态变化");
+	static int originHeight = 0;
 	if (ui->m_pactShowLog->isChecked())
 	{
+		if (originHeight == 0)
+		{
+			originHeight = this->height();
+		}
+		this->resize(this->width(), originHeight + 110);
 		ui->m_pteShowLog->setVisible(true); //显示日志
 	}
 	else
 	{
+		if (originHeight > 0)
+		{
+			this->resize(this->width(), originHeight);
+		}
 		ui->m_pteShowLog->setVisible(false); //隐藏日志
 	}
 }

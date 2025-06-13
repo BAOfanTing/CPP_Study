@@ -89,7 +89,7 @@
      </widget>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_2"/>
+     <layout class="QVBoxLayout" name="m_pImageVerticalLayout"/>
     </item>
     <item>
      <widget class="QTextEdit" name="m_pteShowLog">

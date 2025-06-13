@@ -19,7 +19,7 @@ private:
     static int pointCounter;
 	QString m_strLabelText;			//名称字符串
 	QGraphicsTextItem *m_itmLabel;	//名称
-	bool m_bFirstEnter;				//鼠标是否首次进入
+	bool m_bFirstEnter = true;				//鼠标是否首次进入
 };
 
 #endif // MYGRAPHICSELLIPSEITEM_H

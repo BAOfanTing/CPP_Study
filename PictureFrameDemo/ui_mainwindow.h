@@ -41,7 +41,7 @@ public:
     QPushButton *m_ppbtnSelectImage;
     QPushButton *m_ppbtnClear;
     QPushButton *m_ppbtnSaveImage;
-    QVBoxLayout *verticalLayout_2;
+    QVBoxLayout *m_pImageVerticalLayout;
     QTextEdit *m_pteShowLog;
     QMenuBar *menubar;
     QMenu *menu;
@@ -105,10 +105,10 @@ public:
 
         verticalLayout->addWidget(widget);
 
-        verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        m_pImageVerticalLayout = new QVBoxLayout();
+        m_pImageVerticalLayout->setObjectName(QString::fromUtf8("m_pImageVerticalLayout"));
 
-        verticalLayout->addLayout(verticalLayout_2);
+        verticalLayout->addLayout(m_pImageVerticalLayout);
 
         m_pteShowLog = new QTextEdit(centralwidget);
         m_pteShowLog->setObjectName(QString::fromUtf8("m_pteShowLog"));
